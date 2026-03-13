@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="description" content="Leeza Travels - Unveiling the world's most captivating secrets and stories." />
+  <title>Global Chronicles | Leeza Travels</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>tailwind.config = { theme: { extend: { fontFamily: { outfit: ['Outfit', 'sans-serif'], playfair: ['Playfair Display', 'serif'] }, colors: { primary: '#FF6B35', accent: '#FF6B35', dark: '#111827' } } } }</script>
+  <style>
+    * { font-family: 'Outfit', sans-serif }
+    .glass { background: rgba(255, 255, 255, .08); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, .15) }
+    .glass-dark { background: rgba(15, 23, 42, .7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, .1) }
+    .gtext { color: #FF6B35; background: none; -webkit-text-fill-color: initial; }
+    .nl::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #FF6B35; transition: width .3s }
+    .nl:hover::after { width: 100% }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+
+    /* ── Language Selector ─────────────────────────────── */
+    .lang-btn { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 99px; padding: 8px 14px; cursor: pointer; color: #fff; font-size: 13px; font-weight: 700; transition: all 0.25s ease; backdrop-filter: blur(10px); white-space: nowrap; }
+    .lang-btn:hover { background: rgba(255,107,53,0.15); border-color: rgba(255,107,53,0.4); }
+    .lang-btn .lang-chevron { font-size: 10px; opacity: 0.6; transition: transform 0.3s ease; }
+    .lang-btn.open .lang-chevron { transform: rotate(180deg); }
+    .lang-dropdown { position: absolute; top: calc(100% + 10px); right: 0; width: 220px; background: rgba(15,20,40,0.95); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,107,53,0.08); overflow: hidden; opacity: 0; transform: translateY(-8px) scale(0.97); pointer-events: none; transition: all 0.22s cubic-bezier(0.16,1,0.3,1); z-index: 9999; }
+    .lang-dropdown.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+    .lang-dropdown-header { padding: 12px 16px 8px; font-size: 9px; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px; }
+    .lang-item { display: flex; align-items: center; gap: 10px; padding: 9px 16px; cursor: pointer; transition: background 0.15s ease; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.75); border: none; background: transparent; width: 100%; text-align: left; }
+    .lang-item:hover { background: rgba(255,107,53,0.12); color: #fff; }
+    .lang-item.active { color: #FF6B35; background: rgba(255,107,53,0.1); }
+    .lang-item .lang-flag { font-size: 18px; line-height: 1; }
+    .lang-item .lang-native { font-size: 10px; color: rgba(255,255,255,0.3); margin-left: auto; }
+    .lang-item.active .lang-native { color: rgba(255,107,53,0.6); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeUp {
+      animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes modalZoom {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .animate-modalZoom {
+      animation: modalZoom 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,zh-CN,hi,es,fr,ar,bn,ru,pt,id', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body class="bg-dark text-white overflow-x-hidden pt-20 custom-scrollbar">
+
+  <!-- NAV -->
+  <nav id="nav" class="fixed top-0 inset-x-0 z-[100] glass-dark transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-4">
+        <img src="images/1.png" alt="Leeza Travels Logo" class="w-16 h-16 object-contain" />
+        <span class="text-2xl font-bold gtext">Leeza<span class="text-white font-light"> Travels</span></span>
+      </a>
+      <ul class="hidden md:flex items-center gap-6 text-lg font-bold whitespace-nowrap">
+        <li><a href="index.html" class="nl relative text-white/80 hover:text-white">Home</a></li>
+        <li><a href="index.html#about" class="nl relative text-white/80 hover:text-white">About Us</a></li>
+        <li><a href="tours.html" class="nl relative text-white/80 hover:text-white">Tours</a></li>
+        <li><a href="index.html#pkgs" class="nl relative text-white/80 hover:text-white">Packages</a></li>
+        <li><a href="explore.html" class="nl relative text-white">Explore</a></li>
+        <li><a href="index.html#contact" class="nl relative text-white/80 hover:text-white">Contact Us</a></li>
+      </ul>
+      <div id="nav-actions" class="hidden md:flex items-center gap-6">
+        <button id="signin-btn" onclick="toggleAuthModal()"
+          class="border border-white/20 px-6 py-3 rounded-full text-base font-semibold hover:border-primary transition-all">Sign
+          In</button>
+        <button id="profile-btn" onclick="toggleProfileModal()"
+          class="hidden bg-white/10 px-6 py-3 rounded-full text-base font-semibold hover:bg-white/20 transition-all flex items-center gap-2"><i
+            class="fas fa-user-circle text-primary"></i> <span id="user-display-name">Profile</span></button>
+        <button onclick="openModal()"
+          class="bg-gradient-to-r from-primary to-accent px-6 py-3 rounded-full text-base font-semibold hover:opacity-90 hover:scale-105 transition-all">Book
+          Now</button>
+
+        <!-- Language Selector -->
+        <div class="relative" id="lang-selector-wrap">
+          <button class="lang-btn" id="lang-toggle-btn" onclick="toggleLangDropdown(event)" aria-label="Select Language">
+            <span id="lang-current-flag">🌐</span>
+            <span id="lang-current-label">EN</span>
+            <i class="fas fa-chevron-down lang-chevron"></i>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown">
+            <div class="lang-dropdown-header">
+              <i class="fas fa-globe" style="color:#FF6B35"></i> Select Language
+            </div>
+            <button class="lang-item active" onclick="selectLang('en','🇬🇧','EN')">
+              <span class="lang-flag">🇬🇧</span> English <span class="lang-native">English</span>
+            </button>
+            <button class="lang-item" onclick="selectLang('zh-CN','🇨🇳','ZH')">
+              <span class="lang-flag">🇨🇳</span> Mandarin <span class="lang-native">中文</span>
+            </button>
+            <button class="lang-item" onclick="selectLang('hi','🇮🇳','HI')">
+              <span class="lang-flag">🇮🇳</span> Hindi <span class="lang-native">हिन्दी</span>
+            </button>
+            <button class="lang-item" onclick="selectLang('es','🇪🇸','ES')">
+              <span class="lang-flag">🇪🇸</span> Spanish <span class="lang-native">Español</span>
+            </button>
+            <button class="lang-item" onclick="selectLang('fr','🇫🇷','FR')">
+              <span class="lang-flag">🇫🇷</span> French <span class="lang-native">Français</span>
+            </button>
+            <button class="lang-item" onclick="selectLang('ar','🇸🇦','AR')">
+              <span class="lang-flag">🇸🇦</span> Arabic <span class="lang-native">العربية</span>
+            </button>
+            <button class="lang-item" onclick="selectLang('bn','🇧🇩','BN')">
+              <span class="lang-flag">🇧🇩</span> Bengali <span class="lang-native">বাংলা</span>
+            </button>
+            <button class="lang-item" onclick="selectLang('ru','🇷🇺','RU')">
+              <span class="lang-flag">🇷🇺</span> Russian <span class="lang-native">Русский</span>
+            </button>
+            <button class="lang-item" onclick="selectLang('pt','🇧🇷','PT')">
+              <span class="lang-flag">🇧🇷</span> Portuguese <span class="lang-native">Português</span>
+            </button>
+            <button class="lang-item" onclick="selectLang('id','🇮🇩','ID')">
+              <span class="lang-flag">🇮🇩</span> Indonesian <span class="lang-native">Bahasa</span>
+            </button>
+          </div>
+          <!-- Hidden Google Translate element -->
+          <div id="google_translate_element" style="display:none"></div>
+        </div>
+
+        <!-- Notification Dropdown Container -->
+        <div class="relative" id="nav-dropdown-wrapper" style="display:none">
+          <button onclick="toggleNavNotifications(event)" id="nav-bell-btn"
+            class="relative w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all group">
+            <i class="fas fa-bell text-white/50 group-hover:text-primary transition-colors"></i>
+            <span id="nav-admin-badge" class="nav-badge hidden">0</span>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div id="nav-notifications-dropdown"
+            class="absolute right-0 top-full mt-3 w-80 glass-dark border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden transform origin-top-right transition-all duration-200 scale-95 opacity-0 pointer-events-none z-50">
+            <div class="p-3 border-b border-white/5 flex justify-between items-center bg-white/5">
+              <span class="text-xs font-black text-white uppercase tracking-widest"><i
+                  class="fas fa-bolt text-primary mr-1"></i> Recent Activity</span>
+            </div>
+            <div id="nav-notifications-list" class="max-h-80 overflow-y-auto custom-scrollbar flex flex-col">
+              <!-- JS Populated -->
+            </div>
+            <div class="p-2 border-t border-white/5 bg-white/5 flex gap-2">
+              <button onclick="markAllAsViewed()"
+                class="flex-1 py-2 text-[10px] font-black text-white/50 hover:text-white uppercase tracking-widest transition-colors rounded-xl hover:bg-white/5 border border-white/5">Clear
+                All</button>
+              <button onclick="closeNavNotifications(); showDBViewer('bookings')"
+                class="flex-[2] py-2 text-xs font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors rounded-xl border border-primary/20">All
+                Activity &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- USER Notification Dropdown Container -->
+        <div class="relative hidden" id="user-dropdown-wrapper">
+          <button onclick="toggleUserNotifications(event)" id="user-bell-btn"
+            class="relative w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all group">
+            <i class="fas fa-bell text-white/50 group-hover:text-accent transition-colors"></i>
+            <span id="nav-user-badge"
+              class="nav-badge hidden bg-red-500 text-white shadow-[0_2px_8px_rgba(239,68,68,0.4)]"
+              style="background:#ef4444;">0</span>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div id="user-notifications-dropdown"
+            class="absolute right-0 top-full mt-3 w-80 glass-dark border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden transform origin-top-right transition-all duration-200 scale-95 opacity-0 pointer-events-none z-50">
+            <div class="p-3 border-b border-white/5 flex justify-between items-center bg-white/5">
+              <span class="text-xs font-black text-white uppercase tracking-widest"><i
+                  class="fas fa-bullhorn text-accent mr-1"></i> My Notifications</span>
+            </div>
+            <div id="user-notifications-list" class="max-h-80 overflow-y-auto custom-scrollbar flex flex-col">
+              <!-- JS Populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <button onclick="document.getElementById('mob').classList.toggle('open')" class="md:hidden text-2xl"><i
+          class="fas fa-bars"></i></button>
+    </div>
+    <div id="mob" class="glass-dark md:hidden px-6 transition-all duration-300 max-h-0 overflow-hidden [&.open]:max-h-screen">
+      <ul class="flex flex-col gap-3 py-5 text-sm font-bold">
+        <li><a href="index.html" class="text-white/70">Home</a></li>
+        <li><a href="index.html#about" class="text-white/70">About Us</a></li>
+        <li><a href="tours.html" class="text-white/70">Tours</a></li>
+        <li><a href="index.html#pkgs" class="text-white/70">Packages</a></li>
+        <li><a href="explore.html" class="text-white">Explore</a></li>
+        <li><a href="index.html#contact" class="text-white/70">Contact Us</a></li>
+        <li><button id="mob-signin-btn" onclick="toggleAuthModal()"
+            class="w-full border border-white/20 py-2.5 rounded-full text-sm font-semibold mt-1">Sign In</button></li>
+        <li><button id="mob-profile-btn" onclick="toggleProfileModal()"
+            class="hidden w-full bg-white/10 py-2.5 rounded-full text-sm font-semibold mt-1">My Profile</button></li>
+        <li><button onclick="openModal()"
+            class="w-full bg-gradient-to-r from-primary to-accent py-2.5 rounded-full text-sm font-semibold mt-1">Book
+            Now</button></li>
+        <!-- Mobile Notifications Admin -->
+        <li id="mob-admin-nav-item" class="hidden"><button
+            onclick="document.getElementById('mob').classList.remove('open'); toggleNavNotifications(event);"
+            class="w-full text-left bg-white/5 px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white border border-white/10 mt-1 flex items-center justify-between group">
+            <span class="flex items-center gap-3"><i class="fas fa-bell text-white/30 group-hover:text-primary"></i>
+              Admin Notifications</span>
+            <span id="mob-admin-badge"
+              class="hidden bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">0</span>
+          </button></li>
+        <!-- Mobile Notifications User -->
+        <li id="mob-user-nav-item" class="hidden"><button
+            onclick="document.getElementById('mob').classList.remove('open'); toggleUserNotifications(event);"
+            class="w-full text-left bg-white/5 px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white border border-white/10 mt-1 flex items-center justify-between group">
+            <span class="flex items-center gap-3"><i class="fas fa-bullhorn text-white/30 group-hover:text-accent"></i>
+              My Notifications</span>
+            <span id="mob-user-badge"
+              class="hidden bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">0</span>
+          </button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="py-10 px-6 bg-[#161621] relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center mix-blend-overlay opacity-10"></div>
+    <div class="max-w-7xl mx-auto relative z-10 text-center">
+      <h1 class="text-3xl md:text-5xl font-playfair font-bold mb-3 italic gtext">Global Chronicles</h1>
+      <p class="text-white/70 max-w-lg mx-auto text-sm md:text-base font-light italic leading-relaxed">Discover the world's most beautiful places through our lens. From busy neon cities to quiet mountain peaks, every journey is a new chapter waiting to be told.</p>
+    </div>
+  </section>
+
+  <!-- BLOG CARDS SECTION -->
+  <section class="pb-10 pt-0 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div id="blog-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- JS populated cards -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 pt-14 pb-8 px-6 bg-black">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-10 mb-10">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <img src="images/1.png" alt="Leeza Travels Logo" class="w-14 h-14 object-contain" />
+            <span class="text-lg font-bold gtext">Leeza<span class="text-white font-light"> Travels</span></span>
+          </div>
+          <p class="text-white/80 text-sm mb-5 font-medium">Crafting unforgettable journeys. Your adventure begins with
+            a
+            single step.</p>
+          <div class="flex gap-4">
+            <a href="https://www.facebook.com/share/1CSxCPAnHR/" target="_blank"
+              class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] transition-all group">
+              <i class="fab fa-facebook-f group-hover:scale-110 transition-transform"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank"
+              class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-[#E1306C] hover:text-white hover:border-[#E1306C] transition-all group">
+              <i class="fab fa-instagram group-hover:scale-110 transition-transform"></i>
+            </a>
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/20 hover:text-white transition-all group">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" class="w-4 h-4 group-hover:scale-110 transition-transform"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+            </a>
+            <a href="https://www.tripadvisor.com" target="_blank"
+              class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-[#34E0A1] hover:text-white hover:border-[#34E0A1] transition-all group">
+              <i class="fab fa-tripadvisor group-hover:scale-110 transition-transform"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4 text-xs uppercase tracking-widest text-white/90">Destinations</h4>
+          <ul class="space-y-2 text-sm text-white/70 font-medium">
+            <li><a href="javascript:void(0)" onclick="openDetailModal('Indonesia')" class="hover:text-primary transition-colors">Indonesia</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('Switzerland')" class="hover:text-primary transition-colors">Switzerland</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('Japan')" class="hover:text-primary transition-colors">Japan</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('America')" class="hover:text-primary transition-colors">USA</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('France')" class="hover:text-primary transition-colors">France</a></li>
+            <li><a href="javascript:void(0)" onclick="openDetailModal('Turkey')" class="hover:text-primary transition-colors">Turkey</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4 text-xs uppercase tracking-widest text-white/90">Company</h4>
+          <ul class="space-y-2 text-sm text-white/70 font-medium">
+            <li><a href="javascript:void(0)" onclick="showInfoModal('about')"
+                class="hover:text-primary transition-colors">About Us</a></li>
+            <li><a href="javascript:void(0)" onclick="showInfoModal('team')"
+                class="hover:text-primary transition-colors">Our Team</a></li>
+            <li><a href="javascript:void(0)" onclick="showInfoModal('explore')"
+                class="hover:text-primary transition-colors">Explore</a></li>
+            <li><a href="javascript:void(0)" onclick="showInfoModal('careers')"
+                class="hover:text-primary transition-colors">Careers</a></li>
+            <li><a href="javascript:void(0)" onclick="showInfoModal('privacy')"
+                class="hover:text-primary transition-colors">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4 text-xs uppercase tracking-widest text-white/90">Support</h4>
+          <ul class="space-y-2 text-sm text-white/70 font-medium">
+            <li><a href="javascript:void(0)" onclick="showInfoModal('faqs')"
+                class="hover:text-primary transition-colors">FAQs</a></li>
+            <li><a href="index.html#contact" class="hover:text-primary transition-colors">Contact Us</a></li>
+            <li><a href="javascript:void(0)" onclick="showTrackModal()"
+                class="hover:text-primary transition-colors">Track Booking</a></li>
+            <li><a href="javascript:void(0)" onclick="showInfoModal('cancellation')"
+                class="hover:text-primary transition-colors">Cancellation Policy</a></li>
+          </ul>
+          <div id="db-badge" onclick="showDBViewer()"
+            class="mt-5 text-xs text-white/25 flex items-center gap-1.5 cursor-pointer hover:text-emerald-400 transition-colors group hidden"
+            title="Click to view stored data">
+            <span
+              class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block group-hover:animate-pulse"></span>IndexedDB
+            connected <i class="fas fa-table ml-1 opacity-0 group-hover:opacity-100 transition-opacity text-[9px]"></i>
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-t border-white/10 pt-7 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/60">
+        <span>&copy; 2026 Leezatravels. All rights reserved.</span>
+        <span>Powered by chamod ale</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DETAIL MODAL (Sync with Home) -->
+  <div id="detail-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-2 md:p-6 hidden">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeDetailModal()"></div>
+    <div class="relative glass-dark rounded-[2.5rem] md:rounded-[3.5rem] w-full max-w-[98vw] 2xl:max-w-[1600px] h-[98vh] md:h-[92vh] overflow-hidden z-10 animate-modalZoom flex flex-col border border-white/10 shadow-3xl">
+      <button onclick="closeDetailModal()" class="absolute top-8 right-8 w-14 h-14 rounded-full glass bg-black/20 hover:bg-black/40 flex items-center justify-center text-white/50 hover:text-white text-2xl z-20 transition-all hover:rotate-90"><i class="fas fa-times"></i></button>
+      <div class="flex-1 flex flex-col h-full bg-[#0a0a0a]">
+        <div class="relative h-64 md:h-80 shrink-0">
+          <img id="d-img-complex" src="" class="w-full h-full object-cover" alt="Detail" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
+          <div class="absolute bottom-8 left-10 right-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <span id="d-loc-complex" class="text-[10px] bg-primary/30 text-primary rounded-full px-4 py-1.5 block w-fit mb-3 font-black uppercase tracking-widest">District</span>
+              <h2 id="d-title-complex" class="text-3xl md:text-5xl font-bold font-playfair leading-tight text-white">Destination Name</h2>
+            </div>
+            <div class="flex gap-4">
+              <div class="glass-dark px-6 py-3 rounded-2xl text-center border border-white/10 min-w-[100px] backdrop-blur-xl">
+                <span id="d-days" class="block text-3xl font-black text-primary leading-none">0</span>
+                <span class="text-[10px] uppercase tracking-widest text-white/40 font-bold">Days</span>
+              </div>
+              <div class="glass-dark px-6 py-3 rounded-2xl text-center border border-white/10 min-w-[100px] backdrop-blur-xl">
+                <span id="d-nights" class="block text-3xl font-black text-primary leading-none">0</span>
+                <span class="text-[10px] uppercase tracking-widest text-white/40 font-bold">Nights</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex border-b border-white/5 px-8 pt-8 gap-8">
+          <button onclick="switchTab('overview')" id="tab-btn-overview" class="pb-4 text-sm font-bold border-b-2 border-primary text-primary transition-all flex items-center gap-2">Overview</button>
+          <button onclick="switchTab('itinerary')" id="tab-btn-itinerary" class="pb-4 text-sm font-bold border-b-2 border-transparent text-white/30 hover:text-white transition-all flex items-center gap-2">Itinerary</button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar">
+          <div id="tab-overview" class="tab-content space-y-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+              <div class="space-y-8">
+                <div>
+                  <h4 id="d-about-heading-complex" class="text-primary text-xs font-black uppercase tracking-widest mb-2">About The Tour</h4>
+                  <h3 id="d-full-title" class="text-2xl font-bold text-white mb-4">Tour Title</h3>
+                  <p id="d-long-desc" class="text-white/60 text-base leading-relaxed">Description...</p>
+                </div>
+                <div id="highlights-wrapper"></div>
+              </div>
+              <div class="space-y-6">
+                <h4 class="text-sm font-black uppercase tracking-widest text-white/30">Visual Gallery</h4>
+                <div id="side-gallery" class="grid grid-cols-2 gap-4"></div>
+              </div>
+            </div>
+          </div>
+          <div id="tab-itinerary" class="tab-content hidden space-y-4">
+            <div id="itinerary-list" class="space-y-4"></div>
+          </div>
+        </div>
+        <div class="p-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+              <i class="fas fa-headset text-xl"></i>
+            </div>
+            <div>
+              <p class="text-[10px] font-black text-white/30 uppercase tracking-widest">Questions?</p>
+              <p class="text-sm font-bold text-white">Inquire about <span id="enquiry-trip-name" class="text-primary text-lg">this trip</span></p>
+            </div>
+          </div>
+          <button onclick="closeDetailModal(); document.getElementById('contact').scrollIntoView({behavior:'smooth'});" class="bg-primary text-white px-10 py-4 rounded-2xl font-bold hover:scale-105 transition-all text-sm shadow-xl shadow-primary/20">Check Availability</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div id="auth-modal" class="fixed inset-0 z-[150] items-center justify-center p-4 hidden" style="display:none">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="toggleAuthModal()"></div>
+    <div class="relative glass-dark rounded-[2.5rem] w-full max-w-md overflow-hidden z-10 animate-fadeUp border border-white/10">
+      <div class="p-8 md:p-10">
+        <button onclick="toggleAuthModal()" class="absolute top-6 right-6 text-white/50 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+        <div id="login-form-container">
+          <h2 class="text-2xl font-bold font-playfair mb-2 text-white text-center">Welcome <em class="gtext">Back</em></h2>
+          <p class="text-white/40 text-xs text-center mb-8 italic">Sign in to unlock exclusive features and track your journeys.</p>
+          <form onsubmit="handleAuthSubmit(event, 'login')" class="space-y-4">
+            <div class="relative group">
+              <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors"></i>
+              <input type="email" id="auth-email" placeholder="Email Address" required class="w-full bg-white/5 border border-white/10 rounded-2xl pl-11 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all" />
+            </div>
+            <div class="relative group">
+              <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors"></i>
+              <input type="password" id="auth-pass" placeholder="Password" required class="w-full bg-white/5 border border-white/10 rounded-2xl pl-11 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all" />
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-r from-primary to-accent py-4 rounded-2xl font-bold hover:scale-[1.02] transition-all shadow-lg shadow-primary/20">Sign In</button>
+          </form>
+          <p class="text-center mt-6 text-xs text-white/40 font-medium">New explorer? <button onclick="toggleAuthMode('signup')" class="text-primary font-bold hover:underline">Create an account</button></p>
+        </div>
+        <div id="signup-form-container" class="hidden">
+           <h2 class="text-2xl font-bold font-playfair mb-2 text-white text-center">Join the <em class="gtext">Adventure</em></h2>
+           <p class="text-white/40 text-xs text-center mb-8 italic">Start your personalized journey across Sri Lanka and beyond.</p>
+           <form onsubmit="handleAuthSubmit(event, 'signup')" class="space-y-4">
+             <input type="text" id="reg-name" placeholder="Full Name" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all" />
+             <input type="email" id="reg-email" placeholder="Email Address" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all" />
+             <input type="password" id="reg-pass" placeholder="Create Password" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all" />
+             <button type="submit" class="w-full bg-gradient-to-r from-primary to-accent py-4 rounded-2xl font-bold hover:scale-[1.02] transition-all shadow-lg shadow-primary/20">Join Now</button>
+           </form>
+           <p class="text-center mt-6 text-xs text-white/40 font-medium">Already have an account? <button onclick="toggleAuthMode('login')" class="text-primary font-bold hover:underline">Sign In</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE MODAL -->
+  <div id="profile-modal" class="fixed inset-0 z-[150] items-center justify-center p-4 hidden" style="display:none">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="toggleProfileModal()"></div>
+    <div class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10">
+      <div class="relative h-32 bg-gradient-to-r from-primary/20 to-accent/20">
+        <button onclick="toggleProfileModal()" class="absolute top-6 right-6 text-white/50 hover:text-white text-xl z-20"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="px-8 pb-8 -mt-12 relative z-10 flex flex-col items-center">
+        <div class="w-24 h-24 rounded-full border-4 border-[#0a0a0a] bg-gradient-to-br from-primary to-accent flex items-center justify-center text-3xl font-bold text-white mb-4 shadow-2xl" id="profile-avatar">U</div>
+        <h2 class="text-2xl font-bold text-white mb-1" id="profile-name">User Name</h2>
+        <p class="text-white/40 text-xs mb-6 tracking-widest uppercase font-black" id="profile-email">email@example.com</p>
+        <div class="w-full bg-white/5 rounded-3xl p-6 mb-6 border border-white/5">
+          <div class="flex justify-between items-center mb-4">
+             <h3 class="text-xs font-black uppercase tracking-widest text-white/50">My Travel History</h3>
+             <span class="bg-primary/10 text-primary text-[10px] font-black px-2 py-0.5 rounded-full" id="profile-booking-count">0 Bookings</span>
+          </div>
+          <div id="profile-booking-list" class="space-y-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+             <!-- JS Populated -->
+          </div>
+        </div>
+        <button onclick="logout()" class="w-full glass py-4 rounded-2xl font-bold text-red-400 hover:bg-red-500/10 transition-all text-xs uppercase tracking-widest">Logout from Session</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACK BOOKING MODAL -->
+  <div id="track-modal" class="fixed inset-0 z-[80] items-center justify-center p-4 hidden" style="display:none">
+    <div class="absolute inset-0 bg-black/85 backdrop-blur-lg" onclick="closeTrackModal()"></div>
+    <div class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp">
+      <div class="p-8 md:p-10">
+        <button onclick="closeTrackModal()" class="absolute top-6 right-6 text-white/50 hover:text-white text-xl"><i
+            class="fas fa-times"></i></button>
+        <h2 class="text-2xl font-bold font-playfair mb-2 text-white text-center">Track Your <em
+            class="gtext">Booking</em></h2>
+        <p class="text-white/40 text-xs text-center mb-8">Enter your email to view all your adventure history.</p>
+        <div class="space-y-4 mb-8">
+          <div class="relative">
+            <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-white/20"></i>
+            <input type="email" id="track-email" placeholder="Your Booking Email"
+              class="w-full bg-white/5 border border-white/10 rounded-2xl pl-11 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all">
+          </div>
+          <button onclick="trackBookings()"
+            class="w-full bg-gradient-to-r from-primary to-accent py-4 rounded-2xl font-bold hover:scale-[1.02] transition-all shadow-lg shadow-primary/20">Find
+            My Bookings</button>
+        </div>
+        <div id="track-results" class="space-y-4 max-h-64 overflow-y-auto pr-2 custom-scrollbar hidden">
+          <!-- Results injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DB VIEWER MODAL -->
+  <div id="db-modal" class="fixed inset-0 z-[160] items-center justify-center p-4 hidden" style="display:none">
+    <div class="absolute inset-0 bg-black/95 backdrop-blur-2xl" onclick="closeDBViewer()"></div>
+    <div class="relative glass-dark rounded-[2.5rem] w-full max-w-6xl h-[90vh] overflow-hidden z-10 animate-fadeUp flex flex-col border border-white/10 shadow-3xl">
+      <div class="p-8 md:p-10 shrink-0 border-b border-white/5">
+        <button onclick="closeDBViewer()" class="absolute top-8 right-8 w-12 h-12 rounded-full glass hover:bg-white/10 flex items-center justify-center text-white/50 hover:text-white text-xl transition-all"><i class="fas fa-times"></i></button>
+        <span class="text-emerald-400 text-[10px] font-black uppercase tracking-[0.3em] mb-2 block"><i class="fas fa-database mr-2"></i>Admin Intelligence System</span>
+        <h2 class="text-4xl font-bold font-playfair mb-8 text-white leading-none">Local Database <em class="text-emerald-400">Control Panel</em></h2>
+        <div class="flex gap-2 flex-wrap" id="db-tab-btns">
+          <button onclick="loadDBStore('bookings', this)"
+            class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative">
+            <i class="fas fa-calendar-check text-white/50"></i>Bookings
+            <span id="db-tab-count-bookings"
+              class="ml-2 bg-primary text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+          </button>
+          <button onclick="loadDBStore('messages', this)"
+            class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+            <i class="fas fa-envelope text-white/40"></i>Messages
+            <span id="db-tab-count-messages"
+              class="ml-2 bg-sky-500 text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+          </button>
+          <button onclick="loadDBStore('users', this)"
+            class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+            <i class="fas fa-users text-white/40"></i>Users
+            <span id="db-tab-count-users"
+              class="ml-2 bg-purple-500 text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+          </button>
+          <button onclick="loadDBStore('newsletter', this)"
+            class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+            <i class="fas fa-newspaper text-white/40"></i>Newsletter
+            <span id="db-tab-count-newsletter"
+              class="ml-2 bg-emerald-500 text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+          </button>
+          <button onclick="loadDBStore('admin_activity', this)"
+            class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+            <i class="fas fa-clipboard-list text-white/40"></i>System Logs
+          </button>
+          <div class="flex-1"></div>
+          <button onclick="toast('System Diagnostics: Normal', 'success')"
+            class="px-6 py-3 rounded-xl text-xs font-bold bg-white/5 border border-white/5 hover:bg-white/10 transition-all flex items-center gap-2">
+            <i class="fas fa-shield-halved text-emerald-400"></i>Self-Check
+          </button>
+        </div>
+      </div>
+      <div id="db-viewer-content" class="flex-1 overflow-y-auto p-8 md:p-10 custom-scrollbar bg-black/20">
+        <div class="text-center py-20 text-white/10 transition-opacity">
+          <i class="fas fa-database text-6xl mb-4 block"></i>
+          <p class="text-sm font-bold tracking-widest uppercase">Select a node to begin inspection</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO MODAL (Generic) -->
+  <div id="info-modal" class="fixed inset-0 z-[180] items-center justify-center p-4 hidden" style="display:none">
+    <div class="absolute inset-0 bg-black/85 backdrop-blur-lg" onclick="closeInfoModal()"></div>
+    <div class="relative glass-dark rounded-[2.5rem] w-full max-w-2xl overflow-hidden z-10 animate-fadeUp border border-white/10">
+      <div class="p-8 md:p-12">
+        <button onclick="closeInfoModal()" class="absolute top-6 right-6 text-white/50 hover:text-white text-xl"><i
+            class="fas fa-times"></i></button>
+        <span id="info-tag"
+          class="text-primary text-[10px] font-black uppercase tracking-widest mb-2 block">Information</span>
+        <h2 id="info-title" class="text-3xl font-bold font-playfair mb-6 text-white text-[24px]">Page Title</h2>
+        <div id="info-content"
+          class="text-white/60 text-sm leading-relaxed space-y-4 max-h-[60vh] overflow-y-auto pr-4 custom-scrollbar text-[18px]">
+          <!-- Content injected via JS -->
+        </div>
+        <div class="mt-10">
+          <button onclick="closeInfoModal()"
+            class="w-full glass py-4 rounded-2xl font-bold hover:bg-white/10 transition-all text-sm uppercase tracking-widest">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAIL MODAL (Complex - Restored) -->
+      <div id="detail-modal" class="fixed inset-0 z-[160] flex items-center justify-center p-2 md:p-6 hidden">
+          <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeDetailModal()"></div>
+          <div class="relative glass-dark rounded-[2.5rem] md:rounded-[3.5rem] w-full max-w-[98vw] 2xl:max-w-[1600px] h-[98vh] md:h-[92vh] overflow-hidden z-10 animate-modalZoom flex flex-col border border-white/10 shadow-3xl">
+          <!-- Close button -->
+          <button onclick="closeDetailModal()"
+              class="absolute top-8 right-8 w-14 h-14 rounded-full glass flex items-center justify-center text-white/50 hover:text-white text-2xl z-30 transition-all hover:rotate-90">
+              <i class="fas fa-times"></i>
+          </button>
+
+          <!-- Main Content Container -->
+          <div class="flex-1 flex flex-col h-full bg-[#0a0a0a]">
+              <!-- Modal Top Header Section -->
+              <div class="relative h-64 md:h-80 shrink-0">
+                  <img id="d-img-complex" src="" class="w-full h-full object-cover" alt="Detail" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                  <div class="absolute bottom-8 left-10 right-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                      <div>
+                          <span id="d-loc-complex"
+                              class="text-[10px] bg-primary/30 text-primary rounded-full px-4 py-1.5 block w-fit mb-3 font-black uppercase tracking-widest">District</span>
+                          <h2 id="d-title-complex" class="text-3xl md:text-5xl font-bold font-playfair leading-tight text-white">Destination Name</h2>
+                      </div>
+                      
+                      <!-- Info Badges -->
+                      <div class="flex gap-4">
+                          <div class="glass-dark px-6 py-3 rounded-2xl text-center border border-white/10 min-w-[100px] backdrop-blur-xl">
+                              <span id="d-days" class="block text-3xl font-black text-primary leading-none">0</span>
+                              <span class="text-[10px] uppercase tracking-widest text-white/40 font-bold">Days</span>
+                          </div>
+                          <div class="glass-dark px-6 py-3 rounded-2xl text-center border border-white/10 min-w-[100px] backdrop-blur-xl">
+                              <span id="d-nights" class="block text-3xl font-black text-primary leading-none">0</span>
+                              <span class="text-[10px] uppercase tracking-widest text-white/40 font-bold">Nights</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- Tabs Header -->
+              <div class="flex border-b border-white/5 px-8 pt-8 gap-8">
+                  <button onclick="switchTab('overview')" id="tab-btn-overview"
+                      class="pb-4 text-sm font-bold border-b-2 border-primary text-primary transition-all flex items-center gap-2">
+                      <i class="fas fa-eye text-[10px]"></i> Overview
+                  </button>
+                  <button onclick="switchTab('itinerary')" id="tab-btn-itinerary"
+                      class="pb-4 text-sm font-bold border-b-2 border-transparent text-white/30 hover:text-white transition-all flex items-center gap-2">
+                      <i class="fas fa-route text-[10px]"></i> Itinerary
+                  </button>
+                  <button onclick="switchTab('map')" id="tab-btn-map"
+                      class="pb-4 text-sm font-bold border-b-2 border-transparent text-white/30 hover:text-white transition-all flex items-center gap-2">
+                      <i class="fas fa-map-marked-alt text-[10px]"></i> Map
+                  </button>
+              </div>
+
+              <!-- Tabs Content -->
+              <div class="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar">
+
+                  <div id="tab-overview" class="tab-content animate-fadeIn space-y-12">
+                      <div class="grid lg:grid-cols-2 gap-12 items-start">
+                          <div class="space-y-8">
+                              <div>
+                                  <h4 id="d-about-heading-complex" class="text-primary text-xs font-black uppercase tracking-widest mb-2">About The Tour</h4>
+                                  <h3 id="d-full-title" class="text-2xl font-bold text-white mb-4">Tour Title</h3>
+                                  <p id="d-long-desc" class="text-white/60 text-base leading-relaxed text-[18px]">Description...</p>
+                              </div>
+                              
+                              <!-- Highlights section -->
+                              <div id="highlights-wrapper" class="space-y-4">
+                                  <!-- Dynamic highlights here -->
+                              </div>
+
+                              <!-- Tour Gallery -->
+                              <div class="space-y-6 pt-6 border-t border-white/5">
+                                  <h4 class="text-sm font-black uppercase tracking-widest text-white/30 flex items-center gap-2">
+                                      <i class="fas fa-images text-primary"></i> Tour Gallery
+                                  </h4>
+                                  <div id="side-gallery" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                      <!-- Images dynamically loaded -->
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="glass-dark border border-white/10 rounded-[2.5rem] p-10 shadow-2xl sticky top-0">
+                              <h4 class="text-2xl font-bold mb-3 text-white">Plan Your Journey</h4>
+                              <p class="text-white/40 text-sm mb-8">Send us an enquiry for: <span id="enquiry-trip-name"
+                                      class="text-primary font-black uppercase tracking-wider">Destination</span></p>
+
+                              <button onclick="closeDetailModal(); openModal(document.getElementById('enquiry-trip-name').textContent)"
+                                      class="w-full bg-primary text-black font-black py-4 rounded-2xl hover:opacity-90 transition-all text-base shadow-lg shadow-primary/20">
+                                      Book Now
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Itinerary Tab -->
+                  <div id="tab-itinerary" class="tab-content hidden animate-fadeIn">
+                      <div class="flex items-center justify-between mb-8">
+                          <h3 class="text-xl font-bold">Tour Itinerary</h3>
+                      </div>
+                      <div id="itinerary-list" class="space-y-4 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
+                          <!-- Day items dynamically loaded -->
+                      </div>
+                  </div>
+
+                  <!-- Map Tab -->
+                  <div id="tab-map" class="tab-content hidden animate-fadeIn flex-1 h-full -mx-12 -mb-12 overflow-hidden relative min-h-[500px] bg-black/10 flex items-center justify-center">
+                      <div class="text-center p-12">
+                          <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6">
+                              <i class="fas fa-map-marked-alt text-3xl"></i>
+                          </div>
+                          <h3 class="text-xl font-bold mb-2">Interactive Map Area</h3>
+                          <p class="text-white/40 text-sm max-w-xs mx-auto">This area is reserved for the tour route map. Image has been removed as per request.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="fixed top-24 right-6 z-[200] flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl transition-all translate-x-[150%] pointer-events-none border border-white/10 backdrop-blur-xl">
+    <div id="toast-icon" class="text-white text-lg"></div>
+    <div id="toast-msg" class="text-sm font-bold text-white pr-4">Message goes here</div>
+  </div>
+
+  <!-- BLOG MODAL -->
+  <div id="blogModal" class="fixed inset-0 z-[110] hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeBlog()"></div>
+    <div class="relative glass-dark w-full max-w-5xl h-[85vh] rounded-[2rem] overflow-hidden z-10 flex flex-col border border-white/10">
+      <div class="h-48 md:h-64 shrink-0 relative">
+        <img id="modalBlogImg" src="" class="w-full h-full object-cover" alt="Blog Image">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
+        <button onclick="closeBlog()" class="absolute top-4 right-4 w-9 h-9 rounded-full glass bg-black/20 hover:bg-black/40 flex items-center justify-center text-white/70 z-20"><i class="fas fa-times text-xs"></i></button>
+        <div class="absolute bottom-6 left-6">
+          <span id="modalBlogTag" class="bg-primary/20 text-white text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded mb-1.5 inline-block">Category</span>
+          <h2 id="modalBlogTitle" class="text-[24px] font-bold text-white">Title</h2>
+        </div>
+      </div>
+      <div class="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar bg-[#0a0a0a]">
+        <div class="max-w-3xl mx-auto space-y-8">
+          <div id="modalBlogIntro" class="text-white/70 text-[18px] leading-relaxed font-light first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-3 first-letter:float-left">
+            <!-- Intro text -->
+          </div>
+
+          <div class="space-y-6">
+            <h4 class="text-primary text-[20px] font-black uppercase tracking-widest">Unforgettable Highlights</h4>
+            <ul id="modalPointsList" class="space-y-4 text-[18px] text-white/70 font-medium">
+              <!-- Points injected via JS -->
+            </ul>
+          </div>
+
+          <div id="modalBlogOutro" class="text-white/70 text-[18px] leading-relaxed font-light border-l-4 border-primary/30 pl-8 italic">
+            <!-- Outro text -->
+          </div>
+
+          <div class="pt-8 flex border-t border-white/5">
+            <button onclick="closeBlog()" class="bg-primary text-white px-12 py-3.5 rounded-xl font-bold text-sm hover:scale-105 transition-all shadow-xl">Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── IndexedDB & Global State ─────────────────────────────────
+    let db;
+    let currentUser = null;
+
+    async function initDB() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open('EkeketeDB', 5);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          ['bookings', 'messages', 'searches', 'newsletter', 'users', 'admin_activity'].forEach(s => {
+            if (!db.objectStoreNames.contains(s)) db.createObjectStore(s, { keyPath: 'id', autoIncrement: true });
+          });
+        };
+        req.onsuccess = (e) => { db = e.target.result; resolve(db); };
+        req.onerror = (e) => reject(e.target.error);
+      });
+    }
+
+    async function save(storeName, data) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(storeName, 'readwrite');
+        const req = tx.objectStore(storeName).add(data);
+        req.onsuccess = (e) => { resolve(e.target.result); notifyOtherTabs(); };
+        req.onerror = (e) => reject(e.target.error);
+      });
+    }
+
+    async function loadAll(storeName) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(storeName, 'readonly');
+        const req = tx.objectStore(storeName).getAll();
+        req.onsuccess = (e) => resolve(e.target.result);
+        req.onerror = (e) => reject(e.target.error);
+      });
+    }
+
+    // ── Auth Logic ───────────────────────────────────────────────
+    async function checkAuth() {
+      const saved = localStorage.getItem('ekekete_user');
+      if (saved) {
+        currentUser = JSON.parse(saved);
+        updateAuthUI();
+        if (isUserAdmin()) document.getElementById('nav-dropdown-wrapper').style.display = 'block';
+        checkUserNotifications();
+        checkAdminNotifications();
+      }
+    }
+
+    function toggleAuthModal() {
+      const m = document.getElementById('auth-modal');
+      const isHidden = m.classList.contains('hidden');
+      m.style.display = isHidden ? 'flex' : 'none';
+      m.classList.toggle('hidden');
+      document.body.style.overflow = isHidden ? 'hidden' : '';
+    }
+
+    function toggleAuthMode(mode) {
+      document.getElementById('login-form-container').classList.toggle('hidden', mode === 'signup');
+      document.getElementById('signup-form-container').classList.toggle('hidden', mode === 'login');
+    }
+
+    async function handleAuthSubmit(e, mode) {
+      e.preventDefault();
+      if (mode === 'login') {
+        const email = document.getElementById('auth-email').value;
+        const users = await loadAll('users');
+        const user = users.find(u => u.email === email);
+        if (user) {
+          currentUser = user;
+          localStorage.setItem('ekekete_user', JSON.stringify(user));
+          toast(`Welcome back, ${user.name}! 👋`, 'success');
+          toggleAuthModal();
+          updateAuthUI();
+          location.reload(); 
+        } else {
+          toast('Account not found. Please sign up!', 'error');
+        }
+      } else {
+        const user = { name: document.getElementById('reg-name').value, email: document.getElementById('reg-email').value, isAdmin: false };
+        await save('users', user);
+        currentUser = user;
+        localStorage.setItem('ekekete_user', JSON.stringify(user));
+        toast('Account created! Welcome explorer. 🗺️', 'success');
+        toggleAuthModal();
+        updateAuthUI();
+        location.reload();
+      }
+    }
+
+    function updateAuthUI() {
+      const loggedIn = !!currentUser;
+      const siBtn = document.getElementById('signin-btn');
+      const mSiBtn = document.getElementById('mob-signin-btn');
+      const pBtn = document.getElementById('profile-btn');
+      const mPBtn = document.getElementById('mob-profile-btn');
+      
+      if (siBtn) siBtn.classList.toggle('hidden', loggedIn);
+      if (mSiBtn) mSiBtn.classList.toggle('hidden', loggedIn);
+      if (pBtn) pBtn.classList.toggle('hidden', !loggedIn);
+      if (mPBtn) mPBtn.classList.toggle('hidden', !loggedIn);
+      
+      if (loggedIn) {
+        const dn = document.getElementById('user-display-name');
+        if (dn) dn.textContent = currentUser.name.split(' ')[0];
+        document.getElementById('profile-name').textContent = currentUser.name;
+        document.getElementById('profile-email').textContent = currentUser.email;
+        document.getElementById('profile-avatar').textContent = currentUser.name[0];
+        if (isUserAdmin()) {
+            const dw = document.getElementById('nav-dropdown-wrapper');
+            const man = document.getElementById('mob-admin-nav-item');
+            if (dw) dw.style.display = 'block';
+            if (man) man.classList.remove('hidden');
+        }
+        const udw = document.getElementById('user-dropdown-wrapper');
+        const mun = document.getElementById('mob-user-nav-item');
+        if (udw) udw.classList.remove('hidden');
+        if (mun) mun.classList.remove('hidden');
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('ekekete_user');
+      location.reload();
+    }
+
+    function isUserAdmin() {
+      return currentUser && (currentUser.email === 'nimanthachamod86@gmail.com' || currentUser.isAdmin);
+    }
+
+    // ── Notifications ───────────────────────────────────────────
+    const notificationChannel = new BroadcastChannel('ekekete_notifications');
+    notificationChannel.onmessage = () => {
+      checkAdminNotifications(true);
+      checkUserNotifications();
+    };
+    function notifyOtherTabs() { notificationChannel.postMessage('sync'); }
+
+    async function checkAdminNotifications(silent = false) {
+      if (!isUserAdmin()) return;
+      const stores = ['bookings', 'messages', 'users', 'newsletter'];
+      let total = 0;
+      for (const s of stores) {
+        try {
+            const items = await loadAll(s);
+            total += items.filter(i => !i.viewed).length;
+        } catch(e) {}
+      }
+      const b = document.getElementById('nav-admin-badge');
+      const mb = document.getElementById('mob-admin-badge');
+      if (b) { b.textContent = total; b.classList.toggle('hidden', total === 0); }
+      if (mb) { mb.textContent = total; mb.classList.toggle('hidden', total === 0); }
+    }
+
+    async function checkUserNotifications() {
+      if (!currentUser) return;
+      const stores = ['bookings', 'messages'];
+      let unread = 0;
+      for (const s of stores) {
+        try {
+            const items = await loadAll(s);
+            unread += items.filter(i => i.email === currentUser.email && i.user_unread).length;
+        } catch(e) {}
+      }
+      const b = document.getElementById('nav-user-badge');
+      const mb = document.getElementById('mob-user-badge');
+      if (b) { b.textContent = unread; b.classList.toggle('hidden', unread === 0); }
+      if (mb) { mb.textContent = unread; mb.classList.toggle('hidden', unread === 0); }
+    }
+
+    // ── Nav Dropdowns ──────────────────────────────────────────
+    function toggleNavNotifications(e) {
+      if (e) e.stopPropagation();
+      const dd = document.getElementById('nav-notifications-dropdown');
+      const isOpen = !dd.classList.contains('pointer-events-none');
+      if (isOpen) {
+        dd.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+      } else {
+        dd.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
+        populateNavNotifications();
+      }
+    }
+
+    async function populateNavNotifications() {
+      const list = document.getElementById('nav-notifications-list');
+      list.innerHTML = `<div class="p-6 text-center text-white/20 text-xs italic">Loading activities...</div>`;
+      const stores = ['bookings', 'messages'];
+      let all = [];
+      for (const s of stores) {
+        try {
+            const items = await loadAll(s);
+            items.forEach(i => all.push({ ...i, store: s }));
+        } catch(e) {}
+      }
+      all.sort((a,b) => new Date(b.timestamp || Date.now()) - new Date(a.timestamp || Date.now()));
+      list.innerHTML = all.slice(0,5).map(i => `
+        <div class="p-4 border-b border-white/5 hover:bg-white/5 transition-colors cursor-pointer" onclick="showDBViewer('${i.store}')">
+          <div class="flex justify-between mb-1">
+            <span class="text-[10px] font-black text-primary uppercase tracking-widest">${i.store}</span>
+            <span class="text-[9px] text-white/30">${new Date(i.timestamp || Date.now()).toLocaleDateString()}</span>
+          </div>
+          <p class="text-xs text-white/70 truncate">${i.name || 'Anonymous'}: ${i.destination || i.message || 'New inquiry'}</p>
+        </div>
+      `).join('') || `<div class="p-8 text-center text-white/20 text-xs italic">No activity found.</div>`;
+    }
+
+    function toggleUserNotifications(e) {
+        if (e) e.stopPropagation();
+        const dd = document.getElementById('user-notifications-dropdown');
+        const isOpen = !dd.classList.contains('pointer-events-none');
+        if (isOpen) {
+          dd.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+        } else {
+          dd.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
+          populateUserNotifications();
+        }
+    }
+
+    async function populateUserNotifications() {
+        const list = document.getElementById('user-notifications-list');
+        list.innerHTML = `<div class="p-6 text-center text-white/20 text-xs italic">Checking updates...</div>`;
+        try {
+            const items = await loadAll('bookings');
+            const mine = items.filter(i => i.email === currentUser.email).sort((a,b) => new Date(b.timestamp || Date.now()) - new Date(a.timestamp || Date.now()));
+            list.innerHTML = mine.slice(0,5).map(i => `
+              <div class="p-4 border-b border-white/5 bg-white/5">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-[10px] font-black text-accent uppercase tracking-widest">${i.status}</span>
+                    <span class="text-[9px] text-white/30 font-bold">${new Date(i.timestamp || Date.now()).toLocaleDateString()}</span>
+                </div>
+                <p class="text-xs text-white/80 font-medium">Your trip to ${i.destination} is ${i.status.toLowerCase()}.</p>
+              </div>
+            `).join('') || `<div class="p-8 text-center text-white/20 text-xs italic">No personal alerts.</div>`;
+        } catch(e) { list.innerHTML = `<div class="p-8 text-center text-white/20 text-xs italic">Error loading alerts.</div>`; }
+    }
+
+    // ── Database Viewer ──────────────────────────────────────────
+    function showDBViewer(store = 'bookings') {
+        const m = document.getElementById('db-modal');
+        m.style.display = 'flex';
+        m.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        loadDBStore(store, document.querySelector(`[onclick^="loadDBStore('${store}'"]`));
+    }
+    function closeDBViewer() {
+        const m = document.getElementById('db-modal');
+        m.style.display = 'none';
+        m.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    async function loadDBStore(store, btn) {
+        document.querySelectorAll('.db-tab').forEach(b => b.classList.add('text-white/60'));
+        if (btn) btn.classList.remove('text-white/60');
+        const content = document.getElementById('db-viewer-content');
+        content.innerHTML = `<div class="p-20 text-center text-white/20 italic">Scanning database node...</div>`;
+        try {
+            const data = await loadAll(store);
+            if(!data.length) {
+                content.innerHTML = `<div class="p-20 text-center text-white/20 italic">No records in "${store}" node.</div>`;
+                return;
+            }
+            content.innerHTML = `<div class="space-y-4">` + data.reverse().map(i => `
+                <div class="glass-dark p-6 rounded-3xl border border-white/10 group relative">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-[10px] bg-white/5 px-2 py-0.5 rounded text-white/40 uppercase font-black">Record #${i.id}</span>
+                        <span class="text-[10px] text-white/30 font-bold">${new Date(i.timestamp || Date.now()).toLocaleString()}</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
+                        ${Object.entries(i).map(([k,v]) => k!=='id' && k!=='timestamp' ? `<div><span class="block text-[10px] uppercase tracking-widest text-white/30 mb-1">${k}</span><span class="text-white/80 font-bold">${v}</span></div>` : '').join('')}
+                    </div>
+                </div>
+            `).join('') + `</div>`;
+        } catch(e) { content.innerHTML = `<div class="p-20 text-center text-white/20 italic">Error reading store.</div>`; }
+    }
+
+    // ── Track Bookings ──────────────────────────────────────────
+    function showTrackModal() {
+        const m = document.getElementById('track-modal');
+        m.style.display = 'flex'; m.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('track-results').classList.add('hidden');
+    }
+    function closeTrackModal() {
+        const m = document.getElementById('track-modal');
+        m.style.display = 'none'; m.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+    async function trackBookings() {
+        const email = document.getElementById('track-email').value.trim();
+        if (!email) { toast('Please enter your email!', 'warning'); return; }
+        try {
+            const all = await loadAll('bookings');
+            const mine = all.filter(i => i.email.toLowerCase() === email.toLowerCase());
+            const results = document.getElementById('track-results');
+            results.classList.remove('hidden');
+            if (!mine.length) {
+                results.innerHTML = `<div class="p-6 text-center text-white/30 italic text-xs">No bookings found for this email.</div>`;
+                return;
+            }
+            results.innerHTML = mine.map(i => `
+                <div class="glass p-5 rounded-2xl border border-white/10">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-xs font-bold text-white">${i.destination}</span>
+                        <span class="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded-full font-black uppercase tracking-widest">${i.status}</span>
+                    </div>
+                    <div class="text-[10px] text-white/40 font-medium">Date: ${i.date} | People: ${i.people}</div>
+                </div>
+            `).join('');
+        } catch(e) { toast('Error tracking bookings.', 'error'); }
+    }
+
+    // ── Toast ─────────────────────────────────────────────────────
+    function toast(msg, type = 'info') {
+      const t = document.getElementById('toast');
+      const m = document.getElementById('toast-msg');
+      const i = document.getElementById('toast-icon');
+      const config = {
+        success: { bg: 'rgba(16, 185, 129, 0.95)', icon: 'fa-check-circle' },
+        error: { bg: 'rgba(239, 68, 68, 0.95)', icon: 'fa-exclamation-triangle' },
+        warning: { bg: 'rgba(249, 115, 22, 0.95)', icon: 'fa-exclamation-circle' },
+        info: { bg: 'rgba(14, 165, 233, 0.95)', icon: 'fa-info-circle' }
+      }[type] || { bg: 'rgba(14, 165, 233, 0.95)', icon: 'fa-info-circle' };
+      t.style.background = config.bg;
+      m.textContent = msg;
+      i.innerHTML = `<i class="fas ${config.icon}"></i>`;
+      t.style.transform = 'translateX(0)';
+      setTimeout(() => { t.style.transform = 'translateX(150%)'; }, 4000);
+    }
+
+    // ── Info Modal Logic ──────────────────────────────────────────
+    const infoContent = {
+      about: {
+        title: 'About Leeza Travels',
+        tag: 'Our Story',
+        html: `<p>Leeza Travels was born from a passion for the untamed beauty of Sri Lanka. We believe travel is more than just visiting places; it's about the stories you bring home. From the misty highlands of Ella to the historic ramparts of Galle, we curate experiences that connect you with the soul of our island.</p>
+               <p>Our mission is to provide sustainable, responsible, and deeply personal travel experiences while supporting local communities across Sri Lanka.</p>`
+      },
+      team: {
+        title: 'Meet Our Experts',
+        tag: 'Expertise',
+        html: `<div class="grid grid-cols-1 gap-4 max-w-sm mx-auto">
+                  <div class="glass p-6 pt-16 rounded-3xl text-center border border-white/5 shadow-lg mt-16 relative">
+                    <div class="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden absolute -top-14 left-1/2 -translate-x-1/2 border-4 border-[#0f172a] shadow-2xl shadow-black/60 bg-[#0f172a]">
+                      <img src="images/Kumara.jpg" alt="Mr. Kumara Perera" class="w-full h-full object-cover" style="object-position: center; object-fit: cover;" />
+                    </div>
+                    <div class="font-bold text-white text-xl mb-1">Mr. Kumara Perera</div>
+                    <div class="text-xs text-primary font-black uppercase tracking-widest mb-3">Founder & Lead Explorer</div>
+                    <p class="text-sm text-white/50 leading-relaxed px-4">Mr. Kumara Perera, the visionary founder of Leeza Travels, brings over 15 years of distinguished expertise in Sri Lankan tourism. His journey began with a simple love for the island's hidden trails and has evolved into a mission to share these authentic experiences with the world. Under his leadership, Leeza Travels emphasizes personalized service and a commitment to sustainable travel excellence.</p>
+                    <div class="mt-6 flex justify-center gap-4">
+                      <a href="https://www.facebook.com/share/1CSxCPAnHR/" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-white/30 hover:text-primary border border-white/10 transition-all hover:scale-110"><i class="fab fa-facebook-f"></i></a>
+                      <a href="https://www.instagram.com" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-white/30 hover:text-primary border border-white/10 transition-all hover:scale-110"><i class="fab fa-instagram"></i></a>
+                    </div>
+                  </div>
+               </div>`
+      },
+      explore: {
+        title: 'Explore Our World',
+        tag: 'Wanderlust',
+        html: `<div class="mb-6">
+                 <h4 class="text-xs font-black uppercase tracking-widest text-primary mb-3">Sri Lanka</h4>
+                 <p class="text-[11px] text-white/50 mb-4">Discover the pear of the Indian Ocean, where ancient history meets tropical paradise.</p>
+                 <ul class="space-y-2">
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-certificate text-primary mt-0.5"></i> <span><strong>Ancient Cities:</strong> Explore the ruins of Sigiriya and Anuradhapura.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-certificate text-primary mt-0.5"></i> <span><strong>Misty Highlands:</strong> Experience the tea estates and waterfalls of Ella.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-certificate text-primary mt-0.5"></i> <span><strong>Golden Coast:</strong> Relax on the pristine beaches of Mirissa and Galle.</span></li>
+                 </ul>
+               </div>
+               <div>
+                 <h4 class="text-xs font-black uppercase tracking-widest text-primary mb-3">Global Adventures</h4>
+                 <p class="text-[11px] text-white/50 mb-4">Embark on a journey beyond shores to our handpicked international gems.</p>
+                 <ul class="space-y-2">
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-globe-americas text-primary mt-0.5"></i> <span><strong>Europe:</strong> Experience the romance of France and the majesty of the Swiss Alps.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-globe-asia text-primary mt-0.5"></i> <span><strong>Asia:</strong> Dive into the vibrant culture of Japan and the tropical beauty of Indonesia.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-globe-europe text-primary mt-0.5"></i> <span><strong>Middle East:</strong> Witness the historic cross-roads and stunning landscapes of Turkey.</span></li>
+                 </ul>
+               </div>`
+      },
+      careers: {
+        title: 'Join Our Journey',
+        tag: 'Careers',
+        html: `<div class="text-center py-10">
+                  <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-briefcase text-2xl text-primary"></i>
+                  </div>
+                  <h4 class="text-white text-xl font-bold mb-4">Grow With Leeza Travels</h4>
+                  <p class="text-white/50 text-sm mb-6 leading-relaxed max-w-md mx-auto">
+                    We're not just a team; we're a family of explorers. While we may not have an immediate opening listed today, we are always searching for passionate Sri Lankan travel experts and guides who want to make a difference.
+                  </p>
+                  <p class="text-white/40 text-xs mb-8 italic">
+                    If you have a heart for hospitality and a deep knowledge of our beautiful island, we'd love to hear from you.
+                  </p>
+                  <div class="pt-6 border-t border-white/5">
+                    <p class="text-[10px] text-white/30 uppercase tracking-widest font-black mb-1">Send your portfolio to</p>
+                    <p class="text-primary font-bold text-lg">Leezatravelslk@gmail.com</p>
+                  </div>
+               </div>`
+      },
+      privacy: {
+        title: 'Privacy Policy',
+        tag: 'Security',
+        html: `<p>Your privacy is paramount. At Leeza Travels, we use your data strictly to manage your bookings and enhance your experience. We do not sell your personal information to third parties.</p>
+               <p>We use industry standard encryption to protect your data stored in our local databases and secure transmission for booking and contact forms.</p>`
+      },
+      faqs: {
+        title: 'Frequently Asked Questions',
+        tag: 'Support',
+        html: `<div class="space-y-6">
+                 <div>
+                   <div class="font-bold text-white text-sm mb-1">How do I book a customized tour?</div>
+                   <div class="text-xs text-white/50">Simply use our contact form or the "Other" option in the booking menu, and our experts will call you.</div>
+                 </div>
+                 <div>
+                   <div class="font-bold text-white text-sm mb-1">What is the cancellation policy?</div>
+                   <div class="text-xs text-white/50">Free cancellation up to 48 hours before the tour starts for most packages.</div>
+                 </div>
+                 <div>
+                   <div class="font-bold text-white text-sm mb-1">Are airport transfers included?</div>
+                   <div class="text-xs text-white/50">Yes, most of our comprehensive packages include luxury airport pick-up and drop-off.</div>
+                 </div>
+               </div>`
+      },
+      cancellation: {
+        title: 'Cancellation Policy',
+        tag: 'Flexibility',
+        html: `<p>We understand that plans change. Our goal is to provide maximum flexibility.</p>
+               <ul class="space-y-4">
+                 <li class="glass p-4 rounded-xl">
+                   <div class="font-bold text-primary mb-1">48 Hours Notice</div>
+                   <div class="text-white/50 text-xs">Full refund minus minor processing fees for most standard tours.</div>
+                 </li>
+                 <li class="glass p-4 rounded-xl">
+                   <div class="font-bold text-accent mb-1">Less than 24 Hours</div>
+                   <div class="text-white/50 text-xs">A 50% cancellation fee may apply depending on the booking type.</div>
+                 </li>
+               </ul>`
+      }
+    };
+    function showInfoModal(key) {
+      const data = infoContent[key];
+      if (!data) return;
+      document.getElementById('info-title').textContent = data.title;
+      document.getElementById('info-tag').textContent = data.tag;
+      document.getElementById('info-content').innerHTML = data.html;
+      const m = document.getElementById('info-modal');
+      m.style.display = 'flex'; m.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeInfoModal() {
+      const m = document.getElementById('info-modal');
+      m.style.display = 'none'; m.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // ── Tour Data (Static) ──────────────────────────────────────
+    const tourData = {
+      'America': { loc: 'United States', img: 'images/America.jpg', days: 10, nights: 9, fullTitle: 'Coast to Coast Adventure', desc: 'The United States is a vast country offering an incredible diversity of landscapes...', itinerary: [{day:1,title:'Arrival',content:'...'}], gallery: ['images/America.jpg'], highlightTitle: 'Iconic Landmarks', highlightDesc: '...' },
+      'France': { loc: 'Western Europe', img: 'images/France.jpg', days: 7, nights: 6, fullTitle: 'Lumiere & Elegance', desc: 'France is the epitome of romance, elegance, and cultural refinement...', itinerary: [{day:1,title:'Arrival',content:'...'}], gallery: ['images/France.jpg'], highlightTitle: 'City of Light', highlightDesc: '...' },
+      'Japan': { loc: 'East Asia', img: 'images/Japan.jpg', days: 8, nights: 7, fullTitle: 'Nippon Explorer', desc: 'Japan is a land of fascinating contrasts, where ancient traditions coexist...', itinerary: [{day:1,title:'Arrival',content:'...'}], gallery: ['images/Japan.jpg'], highlightTitle: 'Cultural Fusion', highlightDesc: '...' },
+      'Switzerland': { loc: 'Central Europe', img: 'images/Switzeland_new.jpg', days: 8, nights: 7, fullTitle: 'Alpine Wonders Tour', desc: 'Switzerland is a masterpiece of natural beauty, renowned for its breathtaking alpine...', itinerary: [{day:1,title:'Arrival',content:'...'}], gallery: ['images/Switzeland_new.jpg'], highlightTitle: 'Snowy Peaks', highlightDesc: '...' },
+      'Indonesia': { loc: 'Southeast Asia', img: 'images/Indonisiya.jpg', days: 7, nights: 6, fullTitle: 'Bali & Java Expedition', desc: 'Indonesia is a vast and diverse archipelago of over 17,000 islands...', itinerary: [{day:1,title:'Arrival',content:'...'}], gallery: ['images/Indonisiya.jpg'], highlightTitle: 'Cultural Heartland', highlightDesc: '...' },
+      'Turkey': { loc: 'Transcontinental', img: 'images/Turkey.webp', days: 6, nights: 5, fullTitle: 'Sultan Discovery', desc: 'Turkey is a land where East meets West, offering a rich tapestry of history...', itinerary: [{day:1,title:'Arrival',content:'...'}], gallery: ['images/Turkey.webp'], highlightTitle: 'Crossroads of History', highlightDesc: '...' }
+    };
+
+    function openDetailModal(id) {
+        const data = tourData[id];
+        if(!data) return;
+        document.getElementById('d-img-complex').src = data.img;
+        document.getElementById('d-title-complex').textContent = id;
+        document.getElementById('d-full-title').textContent = data.fullTitle;
+        document.getElementById('d-long-desc').textContent = data.desc;
+        document.getElementById('d-loc-complex').textContent = data.loc;
+        document.getElementById('d-days').textContent = data.days;
+        document.getElementById('d-nights').textContent = data.nights;
+        const m = document.getElementById('detail-modal');
+        m.style.display = 'flex'; m.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeDetailModal() {
+        const m = document.getElementById('detail-modal');
+        m.style.display = 'none'; m.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+    function switchTab(tab) {
+        document.querySelectorAll('#detail-modal .tab-content').forEach(el => el.classList.add('hidden'));
+        document.getElementById(`tab-${tab}`).classList.remove('hidden');
+    }
+
+    // ── Blog Data (Explore Specific) ──────────────────────────────
+    const blogData = [
+      { tag: 'Asia', title: 'Heritage, Eternal Tokyo & Kyoto', img: 'images/blog_japan.jpg', desc: 'Japan is a land of fascinating contrasts, where ancient traditions coexist harmoniously with cutting-edge technology to create a unique and unforgettable cultural experience.', intro: 'Japan is deeply rooted in history while embracing the future. From the serene, meticulously crafted temples of Kyoto to the vibrant, neon-lit streets of Tokyo, the country offers a unique blend of old and new. Every corner reveals a story of cultural mastery, whether it is the delicate art of sushi-making or the magnificent samurai castles.', points: ['Experience the tranquility of a traditional tea ceremony in a historic machiya.', 'Navigate the bustling Shibuya Crossing, the busiest intersection in the world.', 'Wander through the iconic thousands of vermilion torii gates of Fushimi Inari-taisha.', 'Witness the breathtaking beauty of sakura blossoms in spring, painting cities pink.', 'Soak in natural hot springs (onsen) overlooking majestic Mount Fuji.', 'Explore the ancient bamboo groves of Arashiyama in Kyoto.', 'Sample authentic street food and fresh sushi at Tsukiji Outer Market.', 'Discover the neon-lit nightlife and pop culture in vibrant Akihabara.'], outro: 'Japan\'s rich cultural heritage and incredible hospitality (omotenashi) leave a lasting, life-changing impression on every traveler. You will depart with memories of stunning landscapes, incredible culinary feasts, and a profound respect for their balanced way of life.' },
+      { tag: 'North America', title: 'New York City Escape', img: 'images/blog_newyork.jpg', desc: 'The city that never sleeps offers an unbeatable, electrifying mix of culture, diverse food scenes, and awe-inspiring architectural wonders.', intro: 'New York City is a vibrant melting pot of cultures, offering something for everyone. From Broadway shows to world-class museums, the energy of the city is contagious. It is a city defined by its towering skyscrapers, historic neighborhoods, and the relentless drive of its people. As you walk through the boroughs, you\'ll discover distinct communities, each with its own flavor, language, and culinary heritage.', points: ['Walk the High Line park at sunset for stunning, elevated city views.', 'Discover the soulful sounds of authentic Harlem jazz cellars.', 'Marvel at the iconic Midtown Manhattan architecture like the Empire State Building.', 'Grab a slice of classic late-night New York pizza from a legendary parlor.', 'Stroll through the vast, green oasis of Central Park.', 'Take a ferry ride past the magnificent Statue of Liberty at twilight.', 'Experience the dazzling neon lights and energy of Times Square.', 'Explore world-renowned art collections at the Metropolitan Museum of Art.'], outro: 'There\'s truly no place in the world quite like New York, full of limitless possibilities. Whether you are here for the art, the food, or the sheer spectacle of the city, the Big Apple will capture your heart and imagination forever.' },
+      { tag: 'North America', title: 'California Dreamin\'', img: 'images/blog_california.jpg', desc: 'Experience the laid-back lifestyle, stunning pristine beaches, and vibrant cosmopolitan cities of the majestic Golden State.', intro: 'California\'s diverse landscapes range from sun-drenched beaches in the south to towering redwood forests in the north. It\'s a state that invites endless exploration and adventure, boasting world-renowned wine regions, legendary surf towns, and dramatic coastal highways. Beyond its natural wonders, California is home to incredible cultural hubs like Los Angeles and San Francisco.', points: ['Drive along the spectacularly scenic and breathtaking Pacific Coast Highway.', 'Explore the eclectic, hilly neighborhoods and cable cars of San Francisco.', 'Hike through the majestic, granite cliffs of Yosemite National Park.', 'Relax on the beautiful, iconic beaches of sunny Southern California.', 'Visit the glamorous Hollywood Walk of Fame and sunny Los Angeles.', 'Taste world-class wines in the rolling hills of Napa Valley.', 'Witness the magical sunset over the Santa Monica Pier.', 'Marvel at the colossal, ancient trees in the Redwood National and State Parks.'], outro: 'The California dream is very real and waiting to be discovered by adventurous souls. With its perfect weather, endless outdoor activities, and vibrant cities, California offers the ultimate classic American road trip experience that you will treasure for a lifetime.' },
+      { tag: 'Culinary', title: 'A Global Feast', img: 'images/blog_culinary.jpg', desc: 'Embark on a culinary journey around the world, sampling legendary flavors and exotic spices from profoundly diverse cultures.', intro: 'Food is a universal language that brings people together. Exploring global cuisine is one of the most rewarding aspects of travel. From sizzling street food carts in Southeast Asia to Michelin-starred dining rooms in Paris, every meal tells a story of the region\'s history and people. Culinary travel goes far beyond just eating; it is about understanding the traditions and passion behind every dish.', points: ['Savor authentic street food in bustling, vibrant Asian night markets.', 'Indulge in extravagant fine dining experiences in European capitals.', 'Learn traditional, centuries-old cooking techniques from local master chefs.', 'Discover completely unique flavor profiles and exotic, rare ingredients.', 'Participate in a festive local harvest and wine tasting in the countryside.', 'Enjoy a fresh, seafood feast caught directly from the Mediterranean.', 'Navigate bustling Spice Bazaars in the heart of historic Istanbul.', 'Take a hands-on pasta making masterclass in the rustic hills of Tuscany.'], outro: 'A journey of a thousand flavors begins with a single bite: the ultimate cultural immersion. Exploring the world through its cuisine not only satisfies your taste buds but deeply enriches your understanding of humanity and our shared love for gathering around a table.' },
+      { tag: 'Nature', title: 'The Silent Wilderness', img: 'images/blog_wilderness.jpg', desc: 'Disconnect from the modern, chaotic world and immerse yourself completely in the untouched, tranquil beauty of pure nature.', intro: 'There is profound peace to be found in the wilderness. Away from the noise of the city, nature offers a chance to profoundly recharge and reconnect with oneself. Whether it is towering alpine mountains, dense evergreen forests, or silent desert plains, the wild provides the ultimate escape from routine. This journey is about venturing into the last truly untamed regions of the earth.', points: ['Trek through absolutely pristine national parks and protected bio-reserves.', 'Camp under a spectacular canopy of stars far from any city lights.', 'Observe elusive wildlife behaving naturally in their undisturbed habitats.', 'Find deep tranquility beside crystal-clear, mirror-like alpine lakes.', 'Listen only to the sounds of wind rustling through ancient pine trees.', 'Experience the awe of standing before a massive, ancient glacier.', 'Navigate wild, cascading rivers on an exhilarating white-water rafting trip.', 'Photograph breathtaking, untouched panoramas perfectly free of modern civilization.'], outro: 'In the wilderness, you find significantly more than just nature; you truly find yourself. This unforgettable expedition will leave you with a newfound respect for our planet and a deep sense of inner peace that you can carry back into your daily life.' },
+      { tag: 'North America', title: 'Florida\'s Wild Side', img: 'images/blog_florida.jpg', desc: 'Beyond the famous theme parks lies a diverse ecosystem of vast wetlands, unique wildlife, and stunning natural wonders.', intro: 'Florida\'s natural beauty extends far beyond its famous theme parks and sandy beaches. From the vast River of Grass in the Everglades to the hidden, crystal-clear natural springs, the state is an absolute haven for wildlife enthusiasts and nature photographers alike. Venturing off the beaten path, you will discover a completely different side of the Sunshine State.', points: ['Take an exhilarating airboat tour zipping through the swampy Everglades.', 'Spot prehistoric alligators and exotic wading birds in their natural habitat.', 'Kayak quietly through intricate mangrove tunnels and coastal estuaries.', 'Swim alongside gentle, massive manatees in temperate natural springs.', 'Explore beautiful coral reefs while snorkeling in the vibrant Florida Keys.', 'Hike the lush trails of the Ocala National Forest.', 'Collect unique shark teeth and beautiful sea shells on secluded Gulf beaches.', 'Witness spectacular, fiery sunsets over the calm waters of the Gulf of Mexico.'], outro: 'Florida\'s true wild side offers an incredibly unforgettable adventure for all nature lovers. You will realize that the state\'s most magical attractions aren\'t constructed with steel and concrete, but naturally formed by water, sun, and time.' }
+    ];
+
+    function renderBlogs() {
+      const container = document.getElementById('blog-container');
+      if (!container) return;
+      blogData.forEach((blog, index) => {
+        container.innerHTML += `
+          <div class="rounded-2xl overflow-hidden group flex flex-col bg-[#1a1a24] border border-white/5 hover:border-primary/20 transition-all duration-300">
+            <div class="relative h-44 overflow-hidden">
+              <img src="${blog.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="${blog.title}" />
+              <div class="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent"></div>
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-primary/20 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">${blog.tag}</span>
+              </div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col">
+              <h3 class="text-[24px] font-bold text-white mb-2 leading-tight">${blog.title}</h3>
+              <p class="text-white/70 text-[18px] mb-5 leading-relaxed font-light flex-1">${blog.desc}</p>
+              <button onclick="openBlog(${index})" class="w-full py-4 rounded-xl bg-primary hover:bg-primary/80 text-white font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02]">
+                View More <i class="fas fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function openBlog(index) {
+      const data = blogData[index];
+      document.getElementById('modalBlogImg').src = data.img;
+      document.getElementById('modalBlogTag').textContent = data.tag;
+      document.getElementById('modalBlogTitle').textContent = data.title;
+      document.getElementById('modalBlogIntro').textContent = data.intro;
+      const pointsList = document.getElementById('modalPointsList');
+      pointsList.innerHTML = '';
+      data.points.forEach(p => {
+        pointsList.innerHTML += `<li class="flex items-start gap-4 text-white/70 text-[18px] font-medium">
+          <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1"><i class="fas fa-star text-[10px] text-primary"></i></div>
+          <span class="flex-1">${p}</span>
+        </li>`;
+      });
+      document.getElementById('modalBlogOutro').textContent = data.outro;
+      const modal = document.getElementById('blogModal');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBlog() {
+      const modal = document.getElementById('blogModal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
+    }
+
+    // ── Global Event Listeners ──────────────────────────────────
+    document.addEventListener('DOMContentLoaded', async () => {
+      await initDB();
+      await checkAuth();
+      renderBlogs();
+      
+      // Auto-update red badge if admin is active
+      if (isUserAdmin()) {
+        setInterval(() => checkAdminNotifications(true), 30000);
+      }
+    });
+
+    window.onclick = (e) => {
+      if (e.target.closest('#nav-dropdown-wrapper')) return;
+      const ndd = document.getElementById('nav-notifications-dropdown');
+      if (ndd) ndd.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+      if (e.target.closest('#user-dropdown-wrapper')) return;
+      const udd = document.getElementById('user-notifications-dropdown');
+      if (udd) udd.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+    };
+
+    // ── Language Selector ────────────────────────────────────────
+    function toggleLangDropdown(e) {
+      if (e) e.stopPropagation();
+      const btn = document.getElementById('lang-toggle-btn');
+      const dd = document.getElementById('lang-dropdown');
+      const isOpen = dd.classList.contains('open');
+      btn.classList.toggle('open', !isOpen);
+      dd.classList.toggle('open', !isOpen);
+    }
+    function selectLang(langCode, flag, label) {
+      document.getElementById('lang-current-flag').textContent = flag;
+      document.getElementById('lang-current-label').textContent = label;
+      document.querySelectorAll('#lang-dropdown .lang-item').forEach(el => el.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById('lang-toggle-btn').classList.remove('open');
+      document.getElementById('lang-dropdown').classList.remove('open');
+      // Set the Google Translate cookie to persist the change across navigation
+      document.cookie = `googtrans=/en/${langCode}; path=/`;
+      if (window.location.hostname && window.location.hostname !== 'localhost') {
+        document.cookie = `googtrans=/en/${langCode}; domain=${window.location.hostname}; path=/`;
+        document.cookie = `googtrans=/en/${langCode}; domain=.${window.location.hostname}; path=/`;
+      }
+
+      // Trigger line translation
+      const triggerTranslate = () => {
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+          select.value = langCode;
+          select.dispatchEvent(new Event('change'));
+          // Force reload to apply translation reliably
+          setTimeout(() => { window.location.reload(); }, 100);
+        } else {
+          setTimeout(triggerTranslate, 300);
+        }
+      };
+      triggerTranslate();
+    }
+    document.addEventListener('click', function(e) {
+      const wrap = document.getElementById('lang-selector-wrap');
+      if (wrap && !wrap.contains(e.target)) {
+        const btn = document.getElementById('lang-toggle-btn');
+        const dd = document.getElementById('lang-dropdown');
+        if (btn) btn.classList.remove('open');
+        if (dd) dd.classList.remove('open');
+      }
+    });
+  </script>
+
+</body>
+</html>
