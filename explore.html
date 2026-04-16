@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="description" content="Leeza Travels - Unveiling the world's most captivating secrets and stories." />
+  <title>Global Chronicles | Leeza Travels</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="images/1.png">
+  <link rel="apple-touch-icon" href="images/1.png">
+  <meta name="msapplication-TileImage" content="images/1.png">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      font-family: 'Outfit', sans-serif
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-dark {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .gtext {
+      color: #FF6B35;
+      background: none;
+      -webkit-text-fill-color: initial;
+    }
+
+    .nl::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FF6B35;
+      transition: width .3s
+    }
+
+    .nl:hover::after {
+      width: 100%
+    }
+
+    /* ── Language Selector ────────────────────────── */
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 99px;
+      padding: 8px 14px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(10px);
+      white-space: nowrap;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 107, 53, 0.15);
+      border-color: rgba(255, 107, 53, 0.4);
+    }
+
+    .lang-btn .lang-chevron {
+      font-size: 10px;
+      opacity: 0.6;
+      transition: transform 0.3s ease;
+    }
+
+    .lang-btn.open .lang-chevron {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 220px;
+      background: rgba(15, 20, 40, 0.95);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 107, 53, 0.08);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-8px) scale(0.97);
+      pointer-events: none;
+      transition: none;
+      z-index: 9999;
+    }
+
+    .lang-dropdown.open {
+      opacity: 1;
+      transform: none;
+      pointer-events: all;
+    }
+
+    .lang-dropdown-header {
+      padding: 12px 16px 8px;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lang-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.75);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .lang-item:last-child {
+      border-bottom: none;
+    }
+
+    .lang-item:hover {
+      background: rgba(255, 107, 53, 0.12);
+      color: #fff;
+      padding-left: 22px;
+    }
+
+    .lang-item.active {
+      color: #FF6B35;
+      font-weight: 800;
+      background: rgba(255, 107, 53, 0.08);
+    }
+
+    .lang-item .lang-flag {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-item .lang-name {
+      flex: 1;
+    }
+
+    .lang-item.active .lang-check {
+      color: #FF6B35;
+      font-size: 11px;
+    }
+
+    .lang-item:not(.active) .lang-check {
+      display: none;
+    }
+
+    /* ── Photo Gallery Cards ────────────────────────── */
+    .gallery-card {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .gallery-card:hover {
+      border-color: rgba(255, 107, 53, 0.3) !important;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── Video Cards ────────────────────────────────── */
+    .video-card {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ── Destination Blog Cards ─────────────────────── */
+    .blog-card-anim {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .blog-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .reveal-card,
+    .reveal,
+    .text-reveal,
+    .text-reveal span {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+
+    .magnetic-wrap {
+      display: inline-block;
+    }
+
+    /* Floating blobs */
+    .blob {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+      filter: blur(80px);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .blob-1 {
+      top: -100px;
+      right: -100px;
+    }
+
+    .blob-2 {
+      bottom: -100px;
+      left: -100px;
+    }
+
+    /* Animation logic and state restored to default visible */
+
+    .cursor-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    /* Card glare effect */
+    .glare-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glare-effect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .glare-card:hover .glare-effect {
+      opacity: 1;
+    }
+  </style>
+  <!-- Early Cookie Sync -->
+  <script type="text/javascript">
+    try {
+      var savedLang = localStorage.getItem('googtrans_lang');
+      if (savedLang) {
+        document.cookie = 'googtrans=/en/' + savedLang + '; path=/';
+        if (window.location.hostname && window.location.hostname !== 'localhost') {
+          document.cookie = 'googtrans=/en/' + savedLang + '; domain=' + window.location.hostname + '; path=/';
+          document.cookie = 'googtrans=/en/' + savedLang + '; domain=.' + window.location.hostname + '; path=/';
+        }
+      }
+    } catch (e) { }
+  </script>
+  <style>
+    /* ── Google Translate Widget Banner Hidden ──────────────────────── */
+    .goog-te-banner-frame.skiptranslate,
+    .goog-te-banner-frame,
+    .goog-te-balloon-frame,
+    .VIpgJd-ZVi9od-ORHb-OEVmcd,
+    .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+    #goog-gt-tt {
+      display: none !important;
+    }
+
+    body {
+      top: 0 !important;
+      position: static !important;
+    }
+
+    html {
+      top: 0 !important;
+    }
+
+    .goog-te-gadget-icon {
+      display: none !important;
+    }
+
+    * {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .glass-dark {
+      background: rgba(15, 23, 42, .7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .gtext {
+      color: #FF6B35;
+      background: none;
+      -webkit-text-fill-color: initial;
+    }
+
+    .nl::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FF6B35;
+      transition: width .3s;
+    }
+
+    .nl:hover::after {
+      width: 100%;
+    }
+
+    /* FadeUp removed */
+    .toast {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translate(-50%, -60px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      border-radius: 16px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      min-width: 300px;
+      max-width: 90vw;
+      justify-content: center;
+    }
+
+    .toast.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    #toast-msg {
+      white-space: normal !important;
+      line-height: 1.4 !important;
+      text-align: center;
+    }
+
+    .nav-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: #ef4444;
+      color: white;
+      font-size: 9px;
+      font-weight: 800;
+      min-width: 16px;
+      height: 16px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+      border: 2px solid #0f172a;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    }
+
+    .user-badge {
+      background: #0ea5e9;
+      box-shadow: 0 2px 6px rgba(14, 165, 233, 0.4);
+    }
+  </style>
+  <style>
+    /* Vehicle Selection Styling */
+    .vehicle-card.selected {
+      border-color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .vehicle-card.selected span {
+      color: #ffffff !important;
+    }
+
+    .social-sidebar {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .social-link {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      font-size: 20px;
+      transition: none;
+      position: relative;
+      text-decoration: none;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .social-link:hover {
+      transform: scale(1.15) translateX(5px);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .social-call {
+      color: #FF6B35;
+    }
+
+    .social-whatsapp {
+      color: #25D366;
+    }
+
+    .social-facebook {
+      color: #0866FF;
+    }
+
+    .social-instagram {
+      color: #E1306C;
+    }
+
+    .social-tiktok {
+      color: #ffffff;
+    }
+
+    .social-message {
+      color: #ffffff;
+    }
+
+    .social-link span {
+      position: absolute;
+      left: calc(100% + 15px);
+      background: #FF6B35;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      transform: translateX(-10px);
+    }
+
+    .social-link:hover span {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .ta-badge {
+      position: fixed;
+      right: 25px;
+      bottom: 30px;
+      z-index: 9991;
+      background: #00af87;
+      border-radius: 50%;
+      width: 125px;
+      height: 125px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0px;
+      box-shadow: 0 10px 30px rgba(0, 175, 135, 0.4);
+      text-decoration: none;
+      border: 4px solid #fff;
+      transform: none;
+      overflow: hidden;
+      color: white;
+    }
+
+    .ta-badge:hover {
+      transform: scale(1.1) rotate(8deg);
+    }
+
+    .ta-badge-logo {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      clip-path: circle(32% at 50% 48%);
+      margin-bottom: -16px;
+      margin-top: -12px;
+    }
+
+    .brand-name {
+      font-size: 9px;
+      font-weight: 800;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .star-90 {
+      background: linear-gradient(90deg, #FFD700 85%, rgba(255, 255, 255, 0.3) 15%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .ta-badge-label {
+      background: #fff;
+      color: #000;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 2px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .social-sidebar {
+        left: 10px;
+        gap: 8px;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+
+      .social-link span {
+        display: none;
+      }
+
+      .ta-badge {
+        right: 10px;
+        bottom: 20px;
+        width: 98px;
+        height: 98px;
+      }
+
+      .ta-badge-logo {
+        width: 62px;
+      }
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { outfit: ['Outfit', 'sans-serif'], playfair: ['Playfair Display', 'serif'] },
+          colors: { primary: '#FF6B35', accent: '#FF6B35', dark: '#0a0b14' }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-dark text-white">
+  <div id="toast" class="toast glass-dark">
+    <div id="toast-icon"></div>
+    <div id="toast-msg"></div>
+  </div>
+  <!-- TRACK BOOKING MODAL -->
+  <div id="track-modal" class="fixed inset-0 z-[1000] items-center justify-center p-4 hidden" style="display:none">
+    <div class="absolute inset-0 bg-black/85 backdrop-blur-lg" onclick="closeTrackModal()"></div>
+    <div
+      class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10 shadow-2xl">
+      <div class="p-8 md:p-10">
+        <button onclick="closeTrackModal()" class="absolute top-6 right-6 text-white/50 hover:text-white text-xl"><i
+            class="fas fa-times"></i></button>
+        <div class="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+          <i class="fas fa-search-location text-primary text-xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold font-playfair mb-2 text-white text-center">Track Your <em
+            class="gtext">Booking</em></h2>
+        <p class="text-white/40 text-xs text-center mb-8">Enter your Email to view all your adventure history.
+        </p>
+        <div class="space-y-4 mb-8">
+          <div class="relative">
+            <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-white/20"></i>
+            <input type="email" id="track-email" placeholder="Enter Your Email"
+              class="w-full bg-white/5 border border-white/10 rounded-2xl pl-11 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all">
+          </div>
+          <div class="relative">
+            <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-white/20"></i>
+            <input type="password" id="track-password" placeholder="Enter Your Password"
+              class="w-full bg-white/5 border border-white/10 rounded-2xl pl-11 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all">
+          </div>
+          <button onclick="trackBookings()"
+            class="w-full bg-gradient-to-r from-primary to-accent py-4 rounded-2xl font-bold hover:scale-[1.02] transition-all shadow-lg shadow-primary/20">Find
+            My Bookings</button>
+        </div>
+        <div id="track-results" class="space-y-4 max-h-64 overflow-y-auto pr-2 custom-scrollbar hidden">
+          <!-- Results injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- INFO MODAL -->
+  <div id="info-modal" class="fixed inset-0 z-[1000] items-center justify-center p-4 hidden" style="display:none">
+    <div class="absolute inset-0 bg-black/85 backdrop-blur-lg" onclick="closeInfoModal()"></div>
+    <div
+      class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10 shadow-2xl">
+      <div class="p-8 md:p-12">
+        <button onclick="closeInfoModal()" class="absolute top-6 right-6 text-white/50 hover:text-white text-xl"><i
+            class="fas fa-times"></i></button>
+        <h2 id="info-title" class="text-3xl font-bold font-playfair mb-6 gtext">Page Title</h2>
+        <div id="info-content"
+          class="text-white/60 text-sm leading-relaxed space-y-4 max-h-[60vh] overflow-y-auto pr-4 custom-scrollbar">
+          <!-- Content injected via JS -->
+        </div>
+        <div class="mt-10">
+          <button onclick="closeInfoModal()"
+            class="w-full bg-gradient-to-r from-primary to-accent py-4 rounded-2xl font-bold hover:opacity-90 hover:scale-[1.02] transition-all text-sm shadow-lg shadow-primary/20">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="dest-info-modal" class="fixed inset-0 z-[1000] hidden items-center justify-center p-4"
+    style="background:rgba(0,0,0,0.90);backdrop-filter:blur(16px);">
+    <div
+      class="relative max-w-2xl w-full glass-dark rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 animate-modalZoom flex flex-col max-h-[90vh]">
+      <!-- Close Button -->
+      <button onclick="closeDestInfoModal()"
+        class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-primary/30 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
+        <i class="fas fa-times text-white"></i>
+      </button>
+      <!-- Hero Image -->
+      <div class="h-64 overflow-hidden relative shrink-0">
+        <img id="di-img" src="" alt="" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0b14] via-[#0a0b14]/30 to-transparent"></div>
+        <div class="absolute bottom-4 left-6">
+          <span id="di-tag"
+            class="text-primary text-[9px] font-black uppercase tracking-[0.25em] bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-primary/30 block mb-1"></span>
+          <h2 id="di-name" class="text-white text-3xl font-bold font-playfair"></h2>
+          <p id="di-province"
+            class="text-white/50 text-[10px] uppercase tracking-widest font-bold flex items-center gap-1 mt-0.5">
+            <i class="fas fa-map-marker-alt text-primary text-[8px]"></i> <span></span>
+          </p>
+        </div>
+      </div>
+      <!-- Scrollable Content -->
+      <div class="overflow-y-auto custom-scrollbar p-8 flex flex-col gap-6">
+        <!-- Description -->
+        <p id="di-desc" class="text-white/70 text-sm leading-relaxed"></p>
+        <!-- Stats Row -->
+        <div class="grid grid-cols-3 gap-3">
+          <div class="bg-white/5 rounded-2xl p-4 border border-white/10 text-center">
+            <i class="fas fa-sun text-primary text-lg mb-2 block"></i>
+            <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Best Time</p>
+            <p id="di-best-time" class="text-white text-[10px] font-bold leading-tight"></p>
+          </div>
+          <div class="bg-white/5 rounded-2xl p-4 border border-white/10 text-center">
+            <i class="fas fa-thermometer-half text-primary text-lg mb-2 block"></i>
+            <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Climate</p>
+            <p id="di-climate" class="text-white text-[10px] font-bold leading-tight"></p>
+          </div>
+          <div class="bg-white/5 rounded-2xl p-4 border border-white/10 text-center">
+            <i class="fas fa-tag text-primary text-lg mb-2 block"></i>
+            <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Type</p>
+            <p id="di-tag2" class="text-white text-[10px] font-bold leading-tight"></p>
+          </div>
+        </div>
+        <!-- Highlights -->
+        <div>
+          <h4 class="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+            <i class="fas fa-star text-primary"></i> Top Attractions
+          </h4>
+          <ul id="di-highlights" class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6"></ul>
+        </div>
+        <!-- CTA Buttons -->
+        <div class="flex gap-3 pt-2">
+          <button id="di-book-btn"
+            class="flex-1 py-4 rounded-xl bg-gradient-to-r from-primary to-orange-500 text-white font-bold uppercase tracking-widest hover:opacity-90 hover:scale-[1.02] transition-all shadow-lg shadow-primary/30 flex items-center justify-center gap-2 text-sm">
+            <i class="fas fa-paper-plane"></i> Book This Destination
+          </button>
+          <button onclick="closeDestInfoModal()"
+            class="px-6 py-4 rounded-xl border border-white/15 text-white/60 hover:text-white hover:border-white/40 transition-all text-sm font-semibold">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- AUTH MODAL -->
+  <div id="auth-modal" class="fixed inset-0 z-[1000] items-center justify-center p-4 hidden">
+    <div class="absolute inset-0 bg-black/95 backdrop-blur-2xl" onclick="toggleAuthModal()"></div>
+    <div
+      class="relative glass-dark rounded-[2.5rem] w-full max-w-md overflow-hidden z-10 animate-modalZoom border border-white/10 shadow-3xl">
+      <div class="p-8 md:p-10">
+        <button onclick="toggleAuthModal()"
+          class="absolute top-8 right-8 text-white/40 hover:text-white text-xl transition-all hover:rotate-90"><i
+            class="fas fa-times"></i></button>
+        <div class="flex gap-6 mb-8 border-b border-white/10">
+          <button onclick="switchAuthTab('login')" id="tab-login"
+            class="pb-3 text-sm font-bold border-b-2 border-primary text-white">Login</button>
+          <button onclick="switchAuthTab('signup')" id="tab-signup"
+            class="pb-3 text-sm font-bold border-b-2 border-transparent text-white/50 hover:text-white transition-all">Sign
+            Up</button>
+        </div>
+        <form id="auth-form" onsubmit="handleAuth(event)" class="space-y-4" novalidate>
+          <div id="signup-fields" class="hidden space-y-4">
+            <input id="a-name" type="text" placeholder="Full Name"
+              class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+            <input id="a-phone" type="tel" placeholder="Phone Number"
+              class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+          </div>
+          <input id="a-email" type="email" placeholder="Email Address" required
+            class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+          <div id="login-pass-container" class="space-y-4">
+            <input id="a-pass" type="password" placeholder="Password" required
+              class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+            <div id="forgot-pass-container" class="w-full text-right mt-1">
+              <a href="javascript:void(0)" onclick="handleForgotPass()"
+                class="text-[10px] text-primary hover:underline font-bold">Forgot Password?</a>
+            </div>
+          </div>
+          <!-- OTP & Reset Password Flow -->
+          <div id="reset-step-1" class="hidden space-y-4">
+            <p class="text-xs text-white/60 italic text-center">We've sent a 4-digit code to your email address.
+            </p>
+            <input id="a-otp" type="text" placeholder="Enter 4-digit OTP" maxlength="4"
+              class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-center text-lg font-black tracking-[1em] text-primary placeholder-white/20 focus:outline-none focus:border-primary" />
+            <button type="button" onclick="handleVerifyOTP()"
+              class="w-full bg-white/10 border border-white/20 rounded-xl py-3 text-sm font-bold hover:bg-white/20 transition-all">Verify
+              Code</button>
+          </div>
+          <div id="reset-step-2" class="hidden space-y-4">
+            <input id="a-new-pass" type="password" placeholder="New Password"
+              class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+            <input id="a-confirm-pass" type="password" placeholder="Confirm New Password"
+              class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+            <button type="button" onclick="handleResetPassword()"
+              class="w-full bg-gradient-to-r from-primary to-accent rounded-xl py-3.5 font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20">Reset
+              Password</button>
+          </div>
+          <div id="reset-back-btn" class="hidden text-center">
+            <a href="javascript:void(0)" onclick="cancelReset()"
+              class="text-[10px] text-white/40 hover:text-white underline">Back to Login</a>
+          </div>
+          <button type="submit" id="auth-submit-btn"
+            class="w-full bg-gradient-to-r from-primary to-accent rounded-xl py-3.5 font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20 mt-4">Login</button>
+        </form>
+        <p id="auth-switch-text" class="text-center text-xs text-white/40 mt-6">Don't have an account? <a
+            href="javascript:void(0)" onclick="switchAuthTab('signup')" class="text-primary hover:underline">Sign Up</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- END_AUTH_MODAL -->
+  <!-- NAV -->
+  <nav id="nav"
+    class="fixed top-0 inset-x-0 z-[150] bg-[#1b2a41] backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+    <div class="max-w-[90rem] mx-auto px-4 lg:px-8 py-3 lg:py-4 flex items-center justify-between">
+      <a href="#" onclick="closeAllModals();" class="flex items-center gap-3 shrink-0">
+        <img src="images/1.png" alt="Leeza Travels Logo" class="w-12 h-12 lg:w-16 lg:h-16 object-contain" />
+        <span class="text-xl lg:text-[1.7rem] font-bold gtext whitespace-nowrap">Leeza<span
+            class="text-white font-light"> Travels</span></span>
+      </a>
+      <ul class="hidden lg:flex items-center gap-6 lg:gap-10 text-lg lg:text-[20px] font-bold whitespace-nowrap">
+        <li><a href="index.html" onclick="closeAllModals();"
+            class="nl relative text-white/80 transition-colors hover:text-white">Home</a></li>
+        <li><a href="index.html#about" onclick="closeAllModals();"
+            class="nl relative text-white/80 transition-colors hover:text-white">About Us</a></li>
+        <li><a href="trips.html" class="nl relative text-white/80 transition-colors hover:text-white">Tours</a>
+        </li>
+        <li><a href="index.html#gallery" onclick="closeAllModals();"
+            class="nl relative text-white/80 transition-colors hover:text-white">Gallery</a></li>
+        <li><a href="explore.html" class="nl relative text-white/80 transition-colors hover:text-white">Explore</a>
+        </li>
+        <li><a href="index.html#contact" onclick="closeAllModals();"
+            class="nl relative text-white/80 transition-colors hover:text-white">Contact Us</a></li>
+      </ul>
+      <div id="nav-actions" class="flex items-center gap-3 lg:gap-4 shrink-0">
+        <button id="signin-btn" onclick="toggleAuthModal()"
+          class="border border-white/20 px-5 py-2.5 rounded-full text-[15px] font-semibold hover:border-primary transition-all whitespace-nowrap">Sign
+          In</button>
+        <button id="profile-btn" onclick="toggleProfileModal()"
+          class="hidden bg-white/10 px-5 py-2.5 rounded-full text-[15px] font-semibold hover:bg-white/20 transition-all flex items-center gap-2 whitespace-nowrap"><i
+            class="fas fa-user-circle text-primary"></i> <span id="user-display-name">Profile</span></button>
+        <button onclick="openModal()"
+          class="bg-gradient-to-r from-primary to-accent px-6 py-2.5 rounded-full text-[15px] font-semibold hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_15px_rgba(255,107,53,0.3)] whitespace-nowrap">Book
+          Now</button>
+        <!-- Google Translate hidden trigger -->
+        <div id="google_translate_element"
+          style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;">
+        </div>
+        <!-- Custom Language Selector -->
+        <div class="relative flex-none" id="lang-selector-wrapper">
+          <button id="lang-toggle-btn" class="lang-btn" onclick="toggleLangDropdown(event)">
+            <span id="lang-current-flag" style="font-size:17px;">🇺🇸</span>
+            <span id="lang-current-label" style="font-size:15px;">English</span>
+            <i class="fas fa-chevron-down lang-chevron"></i>
+          </button>
+          <div id="lang-dropdown" class="lang-dropdown">
+            <div class="lang-dropdown-header"><i class="fas fa-globe"></i> Select Language</div>
+            <div id="lang-list" style="max-height:320px;overflow-y:auto;">
+              <div class="lang-item active" onclick="selectLang('en','🇺🇸','English',this)">
+                <span class="lang-flag">🇺🇸</span><span class="lang-name">English</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('zh-CN','🇨🇳','Chinese',this)">
+                <span class="lang-flag">🇨🇳</span><span class="lang-name">Chinese</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('hi','🇮🇳','Hindi',this)">
+                <span class="lang-flag">🇮🇳</span><span class="lang-name">Hindi</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('es','🇪🇸','Spanish',this)">
+                <span class="lang-flag">🇪🇸</span><span class="lang-name">Spanish</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('fr','🇫🇷','French',this)">
+                <span class="lang-flag">🇫🇷</span><span class="lang-name">French</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('ar','🇦🇪','Arabic',this)">
+                <span class="lang-flag">🇦🇪</span><span class="lang-name">Arabic</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('de','🇩🇪','German',this)">
+                <span class="lang-flag">🇩🇪</span><span class="lang-name">German</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('ru','🇷🇺','Russian',this)">
+                <span class="lang-flag">🇷🇺</span><span class="lang-name">Russian</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('pt','🇵🇹','Portuguese',this)">
+                <span class="lang-flag">🇵🇹</span><span class="lang-name">Portuguese</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('id','🇮🇩','Indonesian',this)">
+                <span class="lang-flag">🇮🇩</span><span class="lang-name">Indonesian</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('ja','🇯🇵','Japanese',this)">
+                <span class="lang-flag">🇯🇵</span><span class="lang-name">Japanese</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+              <div class="lang-item" onclick="selectLang('ko','🇰🇷','Korean',this)">
+                <span class="lang-flag">🇰🇷</span><span class="lang-name">Korean</span><i
+                  class="fas fa-check lang-check"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Notification Dropdown Container -->
+        <div class="relative" id="nav-dropdown-wrapper" style="display:none">
+          <button onclick="toggleNavNotifications(event)" id="nav-bell-btn"
+            class="relative w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all group">
+            <i class="fas fa-bell text-white/50 group-hover:text-primary transition-colors"></i>
+            <span id="nav-admin-badge" class="nav-badge hidden">0</span>
+          </button>
+          <!-- Dropdown Menu -->
+          <div id="nav-notifications-dropdown"
+            class="absolute right-0 top-full mt-3 w-80 glass-dark border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden transform origin-top-right transition-all duration-200 scale-95 opacity-0 pointer-events-none z-50">
+            <div class="p-3 border-b border-white/5 flex justify-between items-center bg-white/5">
+              <span class="text-xs font-black text-white uppercase tracking-widest"><i
+                  class="fas fa-bolt text-primary mr-1"></i> Recent Activity</span>
+              <span class="text-[8px] text-white/30 uppercase font-black tracking-widest">Scroll</span>
+            </div>
+            <div id="nav-notifications-list" class="max-h-80 overflow-y-auto custom-scrollbar flex flex-col">
+              <!-- JS Populated -->
+            </div>
+            <div class="p-2 border-t border-white/5 bg-white/5 flex gap-2">
+              <button onclick="markAllAsViewed()"
+                class="flex-1 py-2 text-[10px] font-black text-white/50 hover:text-white uppercase tracking-widest transition-colors rounded-xl hover:bg-white/5 border border-white/5">Clear
+                All</button>
+              <button onclick="closeNavNotifications(); showDBViewer('bookings')"
+                class="flex-[2] py-2 text-xs font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors rounded-xl border border-primary/20">All
+                Activity &rarr;</button>
+            </div>
+          </div>
+        </div>
+        <!-- USER Notification Dropdown Container -->
+        <div class="relative hidden" id="user-dropdown-wrapper">
+          <button onclick="toggleUserNotifications(event)" id="user-bell-btn"
+            class="relative w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all group">
+            <i class="fas fa-bell text-white/50 group-hover:text-accent transition-colors"></i>
+            <span id="nav-user-badge"
+              class="nav-badge hidden bg-red-500 text-white shadow-[0_2px_8px_rgba(239,68,68,0.4)]"
+              style="background:#ef4444;">0</span>
+          </button>
+          <!-- Dropdown Menu -->
+          <div id="user-notifications-dropdown"
+            class="absolute right-0 top-full mt-3 w-80 glass-dark border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden transform origin-top-right transition-all duration-200 scale-95 opacity-0 pointer-events-none z-50">
+            <div class="p-3 border-b border-white/5 flex justify-between items-center bg-white/5">
+              <span class="text-xs font-black text-white uppercase tracking-widest"><i
+                  class="fas fa-bullhorn text-accent mr-1"></i> My Notifications</span>
+              <span class="text-[8px] text-white/30 uppercase font-black tracking-widest">Scroll</span>
+            </div>
+            <div id="user-notifications-list" class="max-h-80 overflow-y-auto custom-scrollbar flex flex-col">
+              <!-- JS Populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <button onclick="document.getElementById('mob').classList.toggle('open')" class="lg:hidden text-2xl"><i
+          class="fas fa-bars"></i></button>
+    </div>
+    <div id="mob"
+      class="glass-dark lg:hidden px-6 transition-all duration-300 max-h-0 overflow-hidden [&.open]:max-h-screen">
+      <ul class="flex flex-col gap-3 py-5 text-sm">
+        <li><a href="index.html" onclick="closeAllModals(); toggleMobMenu();" class="text-white/70">Home</a></li>
+        <li><a href="index.html#about" onclick="closeAllModals(); toggleMobMenu();" class="text-white/70">About Us</a>
+        </li>
+        <li><a href="trips.html" onclick="toggleMobMenu();" class="text-white/70">Tours</a></li>
+        <li><a href="index.html#gallery" onclick="closeAllModals(); toggleMobMenu();" class="text-white/70">Gallery</a>
+        </li>
+        <li><a href="explore.html" onclick="toggleMobMenu();" class="text-white/70">Explore</a></li>
+        <li><a href="index.html#contact" onclick="closeAllModals(); toggleMobMenu();" class="text-white/70">Contact
+            Us</a></li>
+        <li><button id="mob-signin-btn" onclick="toggleAuthModal()"
+            class="w-full border border-white/20 py-2.5 rounded-full text-sm font-semibold mt-1">Sign
+            In</button></li>
+        <li><button id="mob-profile-btn" onclick="toggleProfileModal()"
+            class="hidden w-full bg-white/10 py-2.5 rounded-full text-sm font-semibold mt-1">My
+            Profile</button></li>
+        <li><button onclick="openModal()"
+            class="w-full bg-gradient-to-r from-primary to-accent py-2.5 rounded-full text-sm font-semibold mt-1">Book
+            Now</button></li>
+        <!-- Mobile Notifications Admin -->
+        <li id="mob-admin-nav-item" class="hidden"><button
+            onclick="document.getElementById('mob').classList.remove('open'); toggleNavNotifications(event);"
+            class="w-full text-left bg-white/5 px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white border border-white/10 mt-1 flex items-center justify-between group">
+            <span class="flex items-center gap-3"><i class="fas fa-bell text-white/30 group-hover:text-primary"></i>
+              Admin Notifications</span>
+            <span id="mob-admin-badge"
+              class="hidden bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">0</span>
+          </button></li>
+        <!-- Mobile Notifications User -->
+        <li id="mob-user-nav-item" class="hidden"><button
+            onclick="document.getElementById('mob').classList.remove('open'); toggleUserNotifications(event);"
+            class="w-full text-left bg-white/5 px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white border border-white/10 mt-1 flex items-center justify-between group">
+            <span class="flex items-center gap-3"><i class="fas fa-bullhorn text-white/30 group-hover:text-accent"></i>
+              My Notifications</span>
+            <span id="mob-user-badge"
+              class="hidden bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">0</span>
+          </button></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- HERO SECTION -->
+  <section class="pt-36 pb-10 px-6 bg-[#0a0b14] relative overflow-hidden">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div
+      class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center mix-blend-soft-light opacity-20">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0a0b14]/60 via-transparent to-[#0a0b14]"></div>
+    <div class="max-w-4xl mx-auto relative z-10 text-center">
+      <span
+        class="inline-block text-primary text-[10px] font-black uppercase tracking-[0.35em] mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm">
+        <i class="fas fa-globe-asia mr-1.5"></i>Uncover the Island
+      </span>
+      <h1 class="text-5xl md:text-7xl font-bold font-playfair mb-4 text-white leading-tight">
+        Exploring <em class="gtext not-italic">Sri Lanka</em>
+      </h1>
+      <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-4"></div>
+      <p class="text-white/55 text-sm md:text-base max-w-xl mx-auto font-light leading-relaxed">
+        Step into a land of golden beaches, ancient temples, and mist-covered mountains. Discover the soul of the Indian
+        Ocean through our lens.
+      </p>
+    </div>
+  </section>
+  <!-- TOUR PHOTOS GALLERY -->
+  <section id="tour-photos" class="pt-0 pb-2 px-6 bg-[#0a0b14] relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center mb-9">
+        <span class="text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-2 block">Captured Moments</span>
+        <h2 class="text-4xl md:text-5xl font-bold font-playfair mb-3 text-white italic">Photos we <em
+            class="gtext">took</em></h2>
+        <p class="text-xl md:text-2xl font-black text-white/80 uppercase tracking-widest mt-2">Kandy Temple</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 mb-10">
+        <!-- Photo 1 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-1">
+          <img src="images/Kandy 1/WhatsApp Image 2026-03-30 at 07.58.451.jpeg" alt="Kandy Temple Photo 1"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 2 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-2">
+          <img src="images/Kandy 1/WhatsApp Image 2026-03-30 at 07.59.443.jpeg" alt="Kandy Temple Photo 2"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 3 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-3">
+          <img src="images/Kandy 1/WhatsApp Image 2026-03-30 at 08.15.48.jpeg" alt="Kandy Temple Photo 3"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 4 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-4">
+          <img src="images/Kandy 1/WhatsApp Image 2026-03-30 at 07.58.44.jpeg" alt="Kandy Temple Photo 4"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 5 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-1">
+          <img src="images/Kandy 1/WhatsApp Image 2026-03-30 at 07.59.445.jpeg" alt="Kandy Temple Photo 5"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 6 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-2">
+          <img src="images/Kandy 1/WhatsApp Image 2026-03-30 at 07.59.446.jpeg" alt="Kandy Temple Photo 6"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 7 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-3">
+          <img src="images/Kandy 1/WhatsApp Image 2026-03-30 at 08.03.16.jpeg" alt="Kandy Temple Photo 7"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 8 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-4">
+          <img src="images/Kandy 1/WhatsApp Image 2026-03-30 at 07.59.431.jpeg" alt="Kandy Temple Photo 8"
+            class="w-full h-full object-cover" />
+        </div>
+      </div>
+      <!-- GALLE SECTION -->
+      <div class="text-center mb-9">
+        <p class="text-xl md:text-2xl font-black text-white/80 uppercase tracking-widest">Galle Fort</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 mb-10">
+        <!-- Photo 1 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-1">
+          <img src="images/Galle/WhatsApp Image 2026-03-30 at 07.48.3.jpeg" alt="Galle Photo 1"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 2 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-2">
+          <img src="images/Galle/WhatsApp Image 2026-03-30 at 07.48.33.jpeg" alt="Galle Photo 2"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 3 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-3">
+          <img src="images/Galle/WhatsApp Image 2026-03-30 at 07.48.34.jpeg" alt="Galle Photo 3"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 4 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-4">
+          <img src="images/Galle/WhatsApp Image 2026-03-30 at 07.48.35.jpeg" alt="Galle Photo 4"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 5 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-1">
+          <img src="images/Galle/WhatsApp Image 2026-03-30 at 07.48.350.jpeg" alt="Galle Photo 1"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 6 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-2">
+          <img src="images/Galle/WhatsApp Image 2026-03-30 at 07.48.352.jpeg" alt="Galle Photo 2"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 7 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-3">
+          <img src="images/Galle/WhatsApp Image 2026-03-30 at 07.48.jpeg" alt="Galle Photo 3"
+            class="w-full h-full object-cover" />
+        </div>
+        <!-- Photo 8 -->
+        <div
+          class="gallery-card grad-border-hover group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl reveal reveal-delay-4">
+          <img src="images/Galle/WhatsApp Image 2026-03-30 at 07.48.351.jpeg" alt="Galle Photo 4"
+            class="w-full h-full object-cover" />
+        </div>
+      </div>
+      <div class="text-center mb-9">
+        <p class="text-xl md:text-2xl font-black text-white/80 uppercase tracking-widest">Horton Plains</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 mb-10">
+        <!-- Photo 1 -->
+        <div
+          class="group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl transition-all hover:scale-[1.03] hover:shadow-primary/10">
+          <img src="images/Horton/WhatsApp Image 2026-03-30 at 08.17.51.jpeg" alt="Galle Photo 1"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex items-end">
+            <span class="text-[9px] font-black text-white/50 uppercase tracking-widest">Lighthouse</span>
+          </div>
+        </div>
+        <!-- Photo 2 -->
+        <div
+          class="group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl transition-all hover:scale-[1.03] hover:shadow-primary/10">
+          <img src="images/Horton/WhatsApp Image 2026-03-30 at 08.17.52.jpeg" alt="Galle Photo 2"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        </div>
+        <!-- Photo 3 -->
+        <div
+          class="group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl transition-all hover:scale-[1.03] hover:shadow-primary/10">
+          <img src="images/Horton/WhatsApp Image 2026-03-30 at 08.17.502.jpeg" alt="Galle Photo 3"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        </div>
+        <!-- Photo 4 -->
+        <div
+          class="group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl transition-all hover:scale-[1.03] hover:shadow-primary/10">
+          <img src="images/Horton/WhatsApp Image 2026-03-30 at 08.17.505.jpeg" alt="Galle Photo 4"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        </div>
+        <!-- Photo 5 -->
+        <div
+          class="group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl transition-all hover:scale-[1.03] hover:shadow-primary/10">
+          <img src="images/Horton/WhatsApp Image 2026-03-30 at 08.17.512.jpeg" alt="Galle Photo 1"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex items-end">
+            <span class="text-[9px] font-black text-white/50 uppercase tracking-widest">Lighthouse</span>
+          </div>
+        </div>
+        <!-- Photo 6 -->
+        <div
+          class="group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl transition-all hover:scale-[1.03] hover:shadow-primary/10">
+          <img src="images/Horton/WhatsApp Image 2026-03-30 at 08.17.521.jpeg" alt="Galle Photo 2"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        </div>
+        <!-- Photo 7 -->
+        <div
+          class="group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl transition-all hover:scale-[1.03] hover:shadow-primary/10">
+          <img src="images/Horton/WhatsApp Image 2026-03-30 at 08.17.523.Jpeg" alt="Galle Photo 3"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        </div>
+        <!-- Photo 8 -->
+        <div
+          class="group relative overflow-hidden rounded-[2rem] aspect-square border border-white/10 shadow-xl transition-all hover:scale-[1.03] hover:shadow-primary/10">
+          <img src="images/Horton/WhatsApp Image 2026-03-30 at 08.17.5055.jpeg" alt="Galle Photo 4"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- TOUR HIGHLIGHTS VIDEOS -->
+  <section id="tour-videos" class="pt-0 pb-10 px-6 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center mb-12">
+        <span class="text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-2 block">Our
+          Journeys</span>
+        <h2 class="text-4xl md:text-5xl font-bold font-playfair mb-3 text-white italic">Videos we took while <em
+            class="gtext">going on tours</em></h2>
+        <p class="text-white/40 text-sm max-w-md mx-auto italic">Experience the raw beauty of Sri Lanka through
+          the
+          lens of our explorers.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Video 1: Bentota -->
+        <div
+          class="video-card grad-border-hover glass-dark rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group reveal reveal-delay-1">
+          <div class="relative aspect-video overflow-hidden">
+            <video controls preload="metadata" class="w-full h-full object-cover">
+              <source src="images/Explore Video/Bentota Beach.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              <span class="text-[10px] font-black text-white/30 uppercase tracking-widest">Coastal
+                Adventure</span>
+            </div>
+            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Bentota: Sun, Sand
+              &
+              Serenity</h4>
+          </div>
+        </div>
+        <!-- Video 2: Galle -->
+        <div
+          class="video-card grad-border-hover glass-dark rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group reveal reveal-delay-3">
+          <div class="relative aspect-video overflow-hidden">
+            <video controls preload="metadata" class="w-full h-full object-cover">
+              <source src="images/Explore Video/Galle Port.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              <span class="text-[10px] font-black text-white/30 uppercase tracking-widest">Historical Heritage</span>
+            </div>
+            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Galle Fort: Whisper of
+              the Ramparts</h4>
+          </div>
+        </div>
+        <!-- Video 3: Nine Arch -->
+        <div
+          class="video-card grad-border-hover glass-dark rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group reveal reveal-delay-5">
+          <div class="relative aspect-video overflow-hidden">
+            <video controls preload="metadata" class="w-full h-full object-cover">
+              <source src="images/Explore Video/Nine Arch Bridge.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              <span class="text-[10px] font-black text-white/30 uppercase tracking-widest">Highland Railway</span>
+            </div>
+            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Ella: The Iconic
+              Nine Arch Bridge</h4>
+          </div>
+        </div>
+      </div>
+  </section>
+  <!-- ISLAND WONDERS SECTION -->
+  <section id="wonders" class="py-12 px-6 relative overflow-hidden border-t border-white/5">
+    <!-- Background orbs for wonders section -->
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center mb-10 reveal">
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-6 badge-pop">
+          <i class="fas fa-gem"></i> Our Tropical Paradise
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold font-playfair mb-3 text-white italic">Island <em
+            class="gtext">Wonders</em></h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-8"></div>
+        <p class="text-white/40 text-sm max-w-md mx-auto italic">
+          Embark on a visual journey through Sri Lanka's most breathtaking destinations.
+          From ancient ruins to golden shores, discover the soul of our island.
+        </p>
+      </div>
+      <div id="blog-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        <!-- Dynamically populated by JS -->
+      </div>
+    </div>
+  </section>
+  <!-- DETAIL MODAL (Sync with Home) -->
+  <div id="detail-modal" class="fixed inset-0 z-[1000] grid place-items-center p-4 md:p-8 hidden">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeDetailModal()"></div>
+    <div
+      class="relative glass-dark rounded-[2.5rem] md:rounded-[3.5rem] w-full max-w-7xl h-[90vh] overflow-hidden z-10 animate-modalZoom flex flex-col border border-white/10 shadow-3xl mx-auto">
+      <button onclick="closeDetailModal()"
+        class="absolute top-8 right-8 w-14 h-14 rounded-full glass bg-black/20 hover:bg-black/40 flex items-center justify-center text-white/50 hover:text-white text-2xl z-20 transition-all hover:rotate-90"><i
+          class="fas fa-times"></i></button>
+      <div class="flex-1 flex flex-col h-full bg-[#0a0a0a]">
+        <div class="relative h-64 md:h-80 shrink-0">
+          <img id="d-img-complex" src="" class="w-full h-full object-cover" alt="Detail" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
+          <div class="absolute bottom-8 left-10 right-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <span id="d-loc-complex"
+                class="text-[10px] bg-primary/30 text-primary rounded-full px-4 py-1.5 block w-fit mb-3 font-black uppercase tracking-widest">District</span>
+              <h2 id="d-title-complex" class="text-3xl md:text-5xl font-bold font-playfair leading-tight text-white">
+                Destination Name
+              </h2>
+            </div>
+            <div class="flex gap-4">
+              <div
+                class="glass-dark px-6 py-3 rounded-2xl text-center border border-white/10 min-w-[100px] backdrop-blur-xl">
+                <span id="d-days" class="block text-3xl font-black text-primary leading-none">0</span>
+                <span class="text-[10px] uppercase tracking-widest text-white/40 font-bold">Days</span>
+              </div>
+              <div
+                class="glass-dark px-6 py-3 rounded-2xl text-center border border-white/10 min-w-[100px] backdrop-blur-xl">
+                <span id="d-nights" class="block text-3xl font-black text-primary leading-none">0</span>
+                <span class="text-[10px] uppercase tracking-widest text-white/40 font-bold">Nights</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex border-b border-white/5 px-8 pt-8 gap-8">
+          <button onclick="switchTab('overview')" id="tab-btn-overview"
+            class="pb-4 text-sm font-bold border-b-2 border-primary text-primary transition-all flex items-center gap-2">Overview</button>
+          <button onclick="switchTab('itinerary')" id="tab-btn-itinerary"
+            class="pb-4 text-sm font-bold border-b-2 border-transparent text-white/30 hover:text-white transition-all flex items-center gap-2">Itinerary</button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar">
+          <div id="tab-overview" class="tab-content space-y-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+              <div class="space-y-8">
+                <div>
+                  <h4 id="d-about-heading-complex"
+                    class="text-primary text-xs font-black uppercase tracking-widest mb-2">About The Tour</h4>
+                  <h3 id="d-full-title" class="text-2xl font-bold text-white mb-4">Tour Title</h3>
+                  <p id="d-long-desc" class="text-white/60 text-base leading-relaxed">Description...</p>
+                </div>
+                <div id="highlights-wrapper"></div>
+              </div>
+              <div class="space-y-6">
+                <h4 class="text-sm font-black uppercase tracking-widest text-white/30">Visual Gallery</h4>
+                <div id="side-gallery" class="grid grid-cols-2 gap-4"></div>
+              </div>
+            </div>
+          </div>
+          <div id="tab-itinerary" class="tab-content hidden space-y-4">
+            <div id="itinerary-list" class="space-y-4"></div>
+          </div>
+        </div>
+        <div class="p-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+              <i class="fas fa-headset text-xl"></i>
+            </div>
+            <div>
+              <p class="text-[10px] font-black text-white/30 uppercase tracking-widest">Questions?</p>
+              <p class="text-sm font-bold text-white">Inquire about <span id="enquiry-trip-name"
+                  class="text-primary text-lg">this trip</span></p>
+            </div>
+          </div>
+          <button onclick="closeDetailModal(); openModal(document.getElementById('enquiry-trip-name').textContent);"
+            class="bg-primary text-white px-10 py-4 rounded-2xl font-bold hover:scale-105 transition-all text-sm shadow-xl shadow-primary/20">Book
+            Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- PROFILE MODAL -->
+  <div id="profile-modal" class="fixed inset-0 z-[210] items-center justify-center p-4 hidden">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="toggleProfileModal()"></div>
+    <div
+      class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10">
+      <div class="relative h-32 bg-gradient-to-r from-primary/20 to-accent/20">
+        <button onclick="toggleProfileModal()"
+          class="absolute top-6 right-6 text-white/50 hover:text-white text-xl z-20 transition-all hover:rotate-90">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="px-8 pb-8 -mt-12 relative z-10 flex flex-col items-center">
+        <div
+          class="w-24 h-24 rounded-full border-4 border-[#0a0a0a] bg-gradient-to-br from-primary to-accent flex items-center justify-center text-3xl font-bold text-white mb-4 shadow-2xl"
+          id="profile-avatar">U</div>
+        <h2 class="text-2xl font-bold text-white mb-1" id="profile-name">User Name</h2>
+        <p class="text-white/40 text-xs mb-6 tracking-widest uppercase font-black" id="profile-email">
+          email@example.com</p>
+        <!-- Phone Info -->
+        <div class="w-full bg-white/5 rounded-2xl p-4 mb-4 border border-white/5 flex items-center gap-4">
+          <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div>
+            <p class="text-[9px] font-black uppercase tracking-widest text-white/30">Phone Number</p>
+            <p class="text-sm font-bold text-white" id="profile-phone">Not Provided</p>
+          </div>
+        </div>
+        <div class="w-full bg-white/5 rounded-3xl p-6 mb-6 border border-white/5">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xs font-black uppercase tracking-widest text-white/50">My Travel History</h3>
+            <span class="bg-primary/10 text-primary text-[10px] font-black px-2 py-0.5 rounded-full"
+              id="profile-booking-count">0 Bookings</span>
+          </div>
+          <div id="profile-booking-list" class="space-y-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+            <!-- JS Populated -->
+          </div>
+          <div class="mt-4 text-center">
+            <span class="text-[10px] text-white/30 uppercase font-black tracking-widest">Scroll to view all</span>
+          </div>
+        </div>
+        <button onclick="logout()"
+          class="w-full glass py-4 rounded-2xl font-bold text-rose-500 hover:bg-rose-500/10 transition-all text-xs uppercase tracking-widest border border-rose-500/20">Logout
+          from Session</button>
+      </div>
+    </div>
+  </div>
+  <!-- DB VIEWER MODAL -->
+  <div id="db-modal" class="fixed inset-0 z-[210] items-center justify-center p-4 hidden">
+    <div class="absolute inset-0 bg-black/95 backdrop-blur-2xl" onclick="closeDBViewer()"></div>
+    <div
+      class="relative glass-dark rounded-[2.5rem] w-full max-w-6xl h-[90vh] overflow-hidden z-10 animate-fadeUp flex flex-col border border-white/10 shadow-3xl">
+      <div class="p-8 md:p-10 shrink-0 border-b border-white/5">
+        <button onclick="closeDBViewer()"
+          class="absolute top-8 right-8 w-12 h-12 rounded-full glass hover:bg-white/10 flex items-center justify-center text-white/50 hover:text-white text-xl transition-all"><i
+            class="fas fa-times"></i></button>
+        <span class="text-emerald-400 text-[10px] font-black uppercase tracking-[0.3em] mb-2 block"><i
+            class="fas fa-database mr-2"></i>Admin Intelligence System</span>
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-4xl font-bold font-playfair text-white leading-none">Local Database <em
+              class="text-emerald-400">Control Panel</em></h2>
+          <div class="flex items-center gap-3">
+            <button id="db-delete-all-btn" onclick="deleteAllActiveStore()" style="display:none;"
+              class="bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white text-[10px] px-3 py-1.5 rounded-lg font-bold uppercase tracking-widest transition-all"><i
+                class="fas fa-trash-alt mr-1"></i>Delete All</button>
+            <span class="text-[10px] text-white/30 uppercase font-black tracking-widest hidden md:block">Scroll to
+              view all</span>
+          </div>
+        </div>
+        <div class="flex gap-2 flex-wrap" id="db-tab-btns">
+          <button onclick="loadDBStore('bookings', this)"
+            class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative">
+            <i class="fas fa-calendar-check text-white/50"></i>Bookings
+            <span id="db-tab-count-bookings"
+              class="ml-2 bg-primary text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+          </button>
+          <button onclick="loadDBStore('messages', this)"
+            class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+            <i class="fas fa-envelope text-white/40"></i>Messages
+            <span id="db-tab-count-messages"
+              class="ml-2 bg-sky-500 text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+          </button>
+          <button onclick="loadDBStore('users', this)"
+            class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+            <i class="fas fa-users text-white/40"></i>Users
+            <span id="db-tab-count-users"
+              class="ml-2 bg-purple-500 text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+          </button>
+          <button onclick="loadDBStore('newsletter', this)"
+            class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+            <i class="fas fa-newspaper text-white/40"></i>Newsletter
+            <span id="db-tab-count-newsletter"
+              class="ml-2 bg-emerald-500 text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+          </button>
+          <button onclick="loadDBStore('admin_activity', this)"
+            class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+            <i class="fas fa-clipboard-list text-white/40"></i>System Logs
+          </button>
+          <div class="flex-1"></div>
+          <button onclick="toast('System Diagnostics: Normal', 'success')"
+            class="px-6 py-3 rounded-xl text-xs font-bold bg-white/5 border border-white/5 hover:bg-white/10 transition-all flex items-center gap-2">
+            <i class="fas fa-shield-halved text-emerald-400"></i>Self-Check
+          </button>
+        </div>
+      </div>
+      <div id="db-viewer-content" class="flex-1 overflow-y-auto p-8 md:p-10 custom-scrollbar bg-black/20">
+        <div class="text-center py-20 text-white/10 transition-opacity">
+          <i class="fas fa-database text-6xl mb-4 block"></i>
+          <p class="text-sm font-bold tracking-widest uppercase">Select a node to begin inspection</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- BOOKING MODAL -->
+  <div id="booking-modal" class="fixed inset-0 z-[99999] flex items-center justify-center p-4 hidden"
+    style="background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);">
+    <div id="booking-modal-box"
+      class="relative w-full max-w-2xl glass-dark rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden animate-modalZoom custom-scrollbar"
+      style="max-height:90vh;overflow-y:auto;">
+      <!-- Header -->
+      <div class="px-8 pt-8 pb-6 border-b border-white/10 flex items-center justify-between">
+        <div>
+          <div class="text-xs font-black uppercase tracking-widest text-primary mb-1">
+            <i class="fas fa-calendar-check mr-2"></i>Book Your Journey
+          </div>
+          <h2 class="text-2xl font-bold text-white">Reserve Your Tour</h2>
+          <p class="text-white/40 text-sm mt-1">Fill in your details and we'll get back to you within 24
+            hours.</p>
+        </div>
+        <button onclick="closeModal()"
+          class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/60 hover:text-white transition-all flex-shrink-0 ml-4">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <!-- Form -->
+      <form id="booking-form" onsubmit="submitBooking(event)" class="px-8 py-6 space-y-5">
+        <!-- Name + Email -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+              <i class="fas fa-user text-primary mr-1"></i> Full Name *
+            </label>
+            <input type="text" id="bk-name" required placeholder="Your full name"
+              class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-primary/60 transition-all" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+              <i class="fas fa-envelope text-primary mr-1"></i> Email *
+            </label>
+            <input type="email" id="bk-email" required placeholder="your@email.com"
+              class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-primary/60 transition-all" />
+          </div>
+        </div>
+        <!-- Phone + Guests -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+              <i class="fas fa-phone text-primary mr-1"></i> Phone Number *
+            </label>
+            <input type="tel" id="bk-phone" required placeholder="+94 77 XXX XXXX"
+              class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-primary/60 transition-all" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+              <i class="fas fa-users text-primary mr-1"></i> No. of Guests *
+            </label>
+            <input type="number" id="bk-guests" required min="1" max="100" placeholder="e.g. 4"
+              class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-primary/60 transition-all" />
+          </div>
+        </div>
+        <!-- Tour Selection -->
+        <div class="mb-2">
+          <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+            <i class="fas fa-map-marker-alt text-primary mr-1"></i> SELECT YOUR DESTINATION *
+          </label>
+          <div class="relative">
+            <select id="bk-destination" name="destination" required
+              class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-primary/60 transition-all appearance-none cursor-pointer pr-10">
+              <option value="" disabled selected class="bg-dark">Select a Tour / Package</option>
+              <option value="2 Nights 3 Days Sri Lanka Holiday Tour" class="bg-dark">2 Nights 3 Days Sri
+                Lanka Holiday Tour</option>
+              <option value="3 Nights 4 Days Sri Lanka Holiday Tour" class="bg-dark">3 Nights 4 Days Sri
+                Lanka Holiday Tour</option>
+              <option value="4 Nights 5 Days Sri Lanka Holiday Tour" class="bg-dark">4 Nights 5 Days Sri
+                Lanka Holiday Tour</option>
+              <option value="6 Nights 7 Days Sri Lanka Holiday Tour" class="bg-dark">6 Nights 7 Days Sri
+                Lanka Holiday Tour</option>
+              <option value="7 Nights 8 Days Sri Lanka Holiday Tour" class="bg-dark">7 Nights 8 Days Sri
+                Lanka Holiday Tour</option>
+              <option value="9 Nights 10 Days Sri Lanka Holiday Tour" class="bg-dark">9 Nights 10 Days Sri
+                Lanka Holiday Tour</option>
+              <option value="Other / Custom Trip" class="bg-dark">Other / Custom Trip</option>
+            </select>
+            <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">
+              <i class="fas fa-chevron-down text-xs"></i>
+            </div>
+          </div>
+        </div>
+        <!-- Arrival + Departure -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+              <i class="fas fa-plane-arrival text-primary mr-1"></i> Arrival Date *
+            </label>
+            <input type="date" id="bk-arrival" required
+              class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-primary/60 transition-all" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+              <i class="fas fa-plane-departure text-primary mr-1"></i> Departure Date *
+            </label>
+            <input type="date" id="bk-departure" required
+              class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-primary/60 transition-all" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">
+            <i class="fas fa-car text-primary mr-1"></i> SELECT VEHICLE
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"
+            id="vehicle-selection-bk">
+            <div onclick="selectVehicle('bk-vehicle', '4 pax with 3 luggage', this)"
+              class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+              <div class="relative h-28 overflow-hidden rounded-xl">
+                <img src="images/Vehicles/4 pax with 3 luggage.jpeg" alt="Vehicle"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              </div>
+              <span class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">4
+                pax with 3 luggage</span>
+            </div>
+            <div onclick="selectVehicle('bk-vehicle', 'Honda shuttle (4pax with 4 baggage)', this)"
+              class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+              <div class="relative h-28 overflow-hidden rounded-xl">
+                <img src="images/Vehicles/Honda shuttle (4pax with 4 baggage).jpg" alt="Vehicle"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              </div>
+              <span class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">Honda
+                shuttle (4pax with 4 baggage)</span>
+            </div>
+            <div onclick="selectVehicle('bk-vehicle', 'Honda shuttle (4 pax with 6 suitcase)', this)"
+              class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+              <div class="relative h-28 overflow-hidden rounded-xl">
+                <img src="images/Vehicles/Honda shuttle (4 pax with 6 suitcase.jpeg" alt="Vehicle"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              </div>
+              <span class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">Honda
+                shuttle (4 pax with 6 suitcase)</span>
+            </div>
+            <div onclick="selectVehicle('bk-vehicle', 'Toyota KDH van (5 to 6 pax with luggage)', this)"
+              class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+              <div class="relative h-28 overflow-hidden rounded-xl">
+                <img src="images/Vehicles/Toyota KDH van (5 to 6 pax with luggage).jpeg" alt="Vehicle"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              </div>
+              <span class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">Toyota
+                KDH van (5 to 6 pax with luggage)</span>
+            </div>
+            <div onclick="selectVehicle('bk-vehicle', '10 pax with luggage', this)"
+              class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+              <div class="relative h-28 overflow-hidden rounded-xl">
+                <img src="images/Vehicles/10 pax with luggage.jpeg" alt="Vehicle"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              </div>
+              <span class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">10
+                pax with luggage</span>
+            </div>
+            <div onclick="selectVehicle('bk-vehicle', '16 pax with luggage', this)"
+              class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+              <div class="relative h-28 overflow-hidden rounded-xl">
+                <img src="images/Vehicles/16 pax with luggage.jpeg" alt="Vehicle"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              </div>
+              <span class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">16
+                pax with luggage</span>
+            </div>
+          </div>
+          <input type="hidden" id="bk-vehicle" value="">
+        </div>
+        <!-- Message -->
+        <div>
+          <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+            <i class="fas fa-comment text-primary mr-1"></i> Special Requests
+          </label>
+          <textarea id="bk-message" rows="3"
+            placeholder="Any special requirements or destinations you'd like to visit..."
+            class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-primary/60 transition-all resize-none"></textarea>
+        </div>
+        <!-- Submit -->
+        <button type="submit" id="bk-submit-btn"
+          class="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-orange-500 text-white font-bold text-sm uppercase tracking-widest hover:opacity-90 hover:scale-[1.02] transition-all shadow-lg shadow-primary/30 flex items-center justify-center gap-2">
+          <i class="fas fa-paper-plane"></i> Send Booking Request
+        </button>
+        <p class="text-center text-white/30 text-xs">
+          <i class="fas fa-shield-alt text-primary mr-1"></i>
+          Your information is 100% secure and will never be shared.
+        </p>
+      </form>
+    </div>
+  </div>
+  </div>
+  <!-- BROADCAST MODAL -->
+  <div id="broadcast-modal" class="fixed inset-0 z-[210] flex items-center justify-center p-4 hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeBroadcastModal()"></div>
+    <div class="glass-dark border border-white/10 rounded-2xl p-8 relative z-10 w-full max-w-lg shadow-2xl">
+      <button type="button" onclick="closeBroadcastModal()"
+        class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fas fa-times"></i></button>
+      <h3 class="text-xl font-bold mb-4">Broadcast Email</h3>
+      <p class="text-sm text-white/50 mb-4">Send an email broadcast to ALL newsletter subscribers.</p>
+      <textarea id="broadcast-msg"
+        class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white text-sm focus:outline-none focus:border-primary min-h-[120px]"
+        placeholder="Type your broadcast message..."></textarea>
+      <button onclick="sendBroadcast()" id="broadcast-btn"
+        class="w-full bg-primary text-black font-bold py-3 rounded-xl mt-4 hover:opacity-90 transition-all">Send
+        Broadcast</button>
+    </div>
+  </div>
+  <!-- BLOG MODAL -->
+  <div id="blogModal"
+    class="fixed inset-0 z-[210] hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeBlog()"></div>
+    <div
+      class="relative glass-dark w-full max-w-5xl h-[85vh] rounded-[2rem] overflow-hidden z-10 flex flex-col border border-white/10">
+      <div class="h-48 md:h-64 shrink-0 relative">
+        <img id="modalBlogImg" src="" class="w-full h-full object-cover" alt="Blog Image">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
+        <button onclick="closeBlog()"
+          class="absolute top-4 right-4 w-9 h-9 rounded-full glass bg-black/20 hover:bg-black/40 flex items-center justify-center text-white/70 z-20"><i
+            class="fas fa-times"></i></button>
+        <div class="absolute bottom-6 left-6">
+          <span id="modalBlogTag"
+            class="bg-primary/20 text-white text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded mb-1.5 inline-block">Category</span>
+          <h2 id="modalBlogTitle" class="text-[24px] font-bold text-white">Title</h2>
+        </div>
+      </div>
+      <div class="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar bg-[#0a0a0a]">
+        <div class="max-w-3xl mx-auto space-y-8">
+          <div id="modalBlogIntro"
+            class="text-white/70 text-[18px] leading-relaxed font-light first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-3 first-letter:float-left">
+            <!-- Intro text -->
+          </div>
+          <div class="space-y-6">
+            <h4 class="text-primary text-[20px] font-black uppercase tracking-widest">Unforgettable Highlights</h4>
+            <ul id="modalPointsList" class="space-y-4 text-[18px] text-white/70 font-medium">
+              <!-- Points injected via JS -->
+            </ul>
+          </div>
+          <div id="modalBlogOutro"
+            class="text-white/70 text-[18px] leading-relaxed font-light border-l-4 border-primary/30 pl-8 italic">
+            <!-- Outro text -->
+          </div>
+          <div class="pt-8 flex flex-wrap gap-4 border-t border-white/5">
+            <button onclick="closeBlog()"
+              class="bg-white/10 text-white px-8 py-3.5 rounded-xl font-bold text-sm hover:bg-white/20 transition-all">Back
+              to Wonders</button>
+            <button
+              onclick="closeBlog(); openModal('Plan My Trip to ' + document.getElementById('modalBlogTitle').textContent.split(':')[0])"
+              class="bg-primary text-white px-12 py-3.5 rounded-xl font-bold text-sm hover:scale-105 transition-all shadow-xl shadow-primary/20 flex items-center gap-2">
+              <i class="fas fa-calendar-check text-[10px]"></i> Plan My Trip
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // ── Database Viewer ──────────────────────────────────────────
+    function showDBViewer(store = 'bookings') {
+      const m = document.getElementById('db-modal');
+      m.style.display = 'flex';
+      m.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      loadDBStore(store, document.querySelector(`[onclick^="loadDBStore('${store}'"]`));
+    }
+    function closeDBViewer() {
+      const m = document.getElementById('db-modal');
+      m.style.display = 'none';
+      m.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    async function loadDBStore(store, btn) {
+      document.querySelectorAll('.db-tab').forEach(b => b.classList.add('text-white/60'));
+      if (btn) btn.classList.remove('text-white/60');
+      const content = document.getElementById('db-viewer-content');
+      content.innerHTML = `<div class="p-20 text-center text-white/20 italic">Scanning database node...</div>`;
+      try {
+        const data = await loadAll(store);
+        if (!data.length) {
+          content.innerHTML = `<div class="p-20 text-center text-white/20 italic">No records in "${store}" node.</div>`;
+          return;
+        }
+
+        if (store === 'newsletter' && isUserAdmin()) {
+          content.innerHTML = '<div class="flex justify-end mb-4"><button onclick="showBroadcastModal()" class="bg-primary hover:bg-white text-black transition-colors px-4 py-2 rounded-xl font-bold text-xs"><i class="fas fa-paper-plane mr-2"></i> Broadcast Email</button></div>' + content.innerHTML;
+        }
+        content.innerHTML += `<div class="space-y-4">` + data.reverse().map(i => `
+                <div class="glass-dark p-6 rounded-3xl border border-white/10 group relative">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-[10px] bg-white/5 px-2 py-0.5 rounded text-white/40 uppercase font-black">Record #${i.id}</span>
+                        <span class="text-[10px] text-white/30 font-bold">${new Date(i.timestamp || Date.now()).toLocaleString()}</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
+                        ${Object.entries(i).map(([k, v]) => k !== 'id' && k !== 'timestamp' ? `<div><span class="block text-[10px] uppercase tracking-widest text-white/30 mb-1">${k}</span><span class="text-white/80 font-bold">${v}</span></div>` : '').join('')}
+                    </div>
+                </div>
+            `).join('') + `</div>`;
+      } catch (e) { content.innerHTML = `<div class="p-20 text-center text-white/20 italic">Error reading store.</div>`; }
+    }
+
+    // ── Broadcast Logic ──────────────────────────────────────────
+    function showBroadcastModal() {
+      const m = document.getElementById('broadcast-modal');
+      m.style.display = 'flex'; m.classList.remove('hidden');
+      document.getElementById('broadcast-msg').value = '';
+    }
+    function closeBroadcastModal() {
+      const m = document.getElementById('broadcast-modal');
+      m.style.display = 'none'; m.classList.add('hidden');
+    }
+    async function sendBroadcast() {
+      const msg = document.getElementById('broadcast-msg').value.trim();
+      if (!msg) { toast('Please enter a message', 'warning'); return; }
+      const btn = document.getElementById('broadcast-btn');
+      btn.disabled = true; btn.textContent = 'Sending...';
+
+      try {
+        const subs = await loadAll('newsletter');
+        if (!subs.length) { toast('No subscribers found.', 'error'); btn.disabled = false; btn.textContent = 'Send Broadcast'; return; }
+
+        console.group('--- Inline Newsletter Broadcast ---');
+        let sentCount = 0;
+        let failedCount = 0;
+        const promises = subs.map(sub => {
+          if (sub.email) {
+            // --- DOUBLE TRY FALLBACK ---
+            const params = {
+              name: 'Subscriber',
+              user_name: 'Subscriber',
+              from_name: 'Leeza Travels',
+              from_email: 'Leezatravelslk@gmail.com',
+              to_email: sub.email,
+              email: sub.email,
+              // Match exact template variable names
+              broadcast_subject: 'Leeza Travels Update',
+              broadcast_message: msg,
+              // Fallback variables
+              subject: 'Leeza Travels Update',
+              title: 'Leeza Travels Update',
+              message: msg,
+              msg: msg,
+              body: msg,
+              content: msg,
+              timestamp: new Date().toLocaleString()
+            };
+
+            return emailjs.send('service_cqv30sa', 'template_mhs62hl', params, 'tRG6iOeYylZBAVmsa')
+              .then(res => {
+                console.log(`✅ Sent to ${sub.email}:`, res);
+                sentCount++;
+              }).catch(e => {
+                console.error(`❌ Failed for ${sub.email}:`, e);
+                failedCount++;
+              });
+          }
+        });
+
+        await Promise.all(promises);
+        console.log(`Broadcast Finished! Sent: ${sentCount}, Failed: ${failedCount}`);
+        console.groupEnd();
+
+        if (sentCount > 0) {
+          toast(`Broadcast finished! Sent: ${sentCount}, Failed: ${failedCount} 📧`, sentCount === subs.length ? 'success' : 'warning');
+          closeBroadcastModal();
+        } else {
+          toast(`Broadcast failed for all ${failedCount} subscribers.`, 'error');
+          btn.disabled = false; btn.textContent = 'Send Broadcast';
+        }
+        toast(`Sent broadcast to ${sentCount} subscribers!`, 'success');
+        closeBroadcastModal();
+      } catch (e) {
+        toast('Failed to fetch subscribers.', 'error');
+      }
+      btn.disabled = false; btn.textContent = 'Send Broadcast';
+    }
+
+    // ── Info Modal Logic ──────────────────────────────────────────
+    const infoContent = {
+      about: {
+        title: 'About Leeza Travels',
+        tag: 'Our Story',
+        html: `<p>Leeza Travels was born from a passion for the untamed beauty of Sri Lanka. We believe travel is more than just visiting places; it's about the stories you bring home. From the misty highlands of Ella to the historic ramparts of Galle, we curate experiences that connect you with the soul of our island.</p>
+               <p>Our mission is to provide sustainable, responsible, and deeply personal travel experiences while supporting local communities across Sri Lanka.</p>`
+      },
+      team: {
+        title: 'Meet Our Experts',
+        tag: 'Expertise',
+        html: `<div class="grid grid-cols-1 gap-4 max-w-sm mx-auto">
+                  <div class="glass p-6 pt-16 rounded-3xl text-center border border-white/5 shadow-lg mt-16 relative">
+                    <div class="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden absolute -top-14 left-1/2 -translate-x-1/2 border-4 border-[#0f172a] shadow-2xl shadow-black/60 bg-[#0f172a]">
+                      <img src="images/Kumara.jpg" alt="Mr. Kumara Perera" class="w-full h-full object-cover" style="object-position: center; object-fit: cover;" />
+                    </div>
+                    <div class="font-bold text-white text-xl mb-1">Mr. Kumara Perera</div>
+                    <div class="text-xs text-primary font-black uppercase tracking-widest mb-3">Founder & Lead Explorer</div>
+                    <p class="text-sm text-white/50 leading-relaxed px-4">Mr. Kumara Perera, the visionary founder of Leeza Travels, brings over 15 years of distinguished expertise in Sri Lankan tourism. His journey began with a simple love for the island's hidden trails and has evolved into a mission to share these authentic experiences with the world. Under his leadership, Leeza Travels emphasizes personalized service and a commitment to sustainable travel excellence.</p>
+                    <div class="mt-6 flex justify-center gap-4">
+                      <a href="https://www.facebook.com/share/1CSxCPAnHR/" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-white/30 hover:text-primary border border-white/10 transition-all hover:scale-110"><i class="fab fa-facebook-f"></i></a>
+                      <a href="https://www.instagram.com" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-white/30 hover:text-primary border border-white/10 transition-all hover:scale-110"><i class="fab fa-instagram"></i></a>
+                    </div>
+                  </div>
+               </div>`
+      },
+      explore: {
+        title: 'Explore Our World',
+        tag: 'Wanderlust',
+        html: `<div class="mb-6">
+                 <h4 class="text-xs font-black uppercase tracking-widest text-primary mb-3">Sri Lanka</h4>
+                 <p class="text-[11px] text-white/50 mb-4">Discover the pear of the Indian Ocean, where ancient history meets tropical paradise.</p>
+                 <ul class="space-y-2">
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-certificate text-primary mt-0.5"></i> <span><strong>Ancient Cities:</strong> Explore the ruins of Sigiriya and Anuradhapura.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-certificate text-primary mt-0.5"></i> <span><strong>Misty Highlands:</strong> Experience the tea estates and waterfalls of Ella.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-certificate text-primary mt-0.5"></i> <span><strong>Golden Coast:</strong> Relax on the pristine beaches of Mirissa and Galle.</span></li>
+                 </ul>
+               </div>
+               <div>
+                 <h4 class="text-xs font-black uppercase tracking-widest text-primary mb-3">Global Adventures</h4>
+                 <p class="text-[11px] text-white/50 mb-4">Embark on a journey beyond shores to our handpicked international gems.</p>
+                 <ul class="space-y-2">
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-globe-americas text-primary mt-0.5"></i> <span><strong>Europe:</strong> Experience the romance of France and the majesty of the Swiss Alps.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-globe-asia text-primary mt-0.5"></i> <span><strong>Asia:</strong> Dive into the vibrant culture of Japan and the tropical beauty of Indonesia.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-globe-europe text-primary mt-0.5"></i> <span><strong>Middle East:</strong> Witness the historic cross-roads and stunning landscapes of Turkey.</span></li>
+                 </ul>
+               </div>`
+      },
+      careers: {
+        title: 'Join Our Journey',
+        tag: 'Careers',
+        html: `<div class="text-center py-10">
+                  <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-briefcase text-2xl text-primary"></i>
+                  </div>
+                  <h4 class="text-white text-xl font-bold mb-4">Grow With Leeza Travels</h4>
+                  <p class="text-white/50 text-sm mb-6 leading-relaxed max-w-md mx-auto">
+                    We're not just a team; we're a family of explorers. While we may not have an immediate opening listed today, we are always searching for passionate Sri Lankan travel experts and guides who want to make a difference.
+                  </p>
+                  <p class="text-white/40 text-xs mb-8 italic">
+                    If you have a heart for hospitality and a deep knowledge of our beautiful island, we'd love to hear from you.
+                  </p>
+                  <div class="pt-6 border-t border-white/5">
+                    <p class="text-[10px] text-white/30 uppercase tracking-widest font-black mb-1">Send your portfolio to</p>
+                    <p class="text-primary font-bold text-lg">Leezatravelslk@gmail.com</p>
+                  </div>
+               </div>`
+      },
+      privacy: {
+        title: 'Privacy Policy',
+        tag: 'Security',
+        html: `<p>Your privacy is paramount. At Leeza Travels, we use your data strictly to manage your bookings and enhance your experience. We do not sell your personal information to third parties.</p>
+               <p>We use industry standard encryption to protect your data stored in our local databases and secure transmission for booking and contact forms.</p>`
+      },
+      faqs: {
+        title: 'Frequently Asked Questions',
+        tag: 'Support',
+        html: `<div class="space-y-6">
+                 <div>
+                   <div class="font-bold text-white text-sm mb-1">How do I book a customized tour?</div>
+                   <div class="text-xs text-white/50">Simply use our contact form or the "Other" option in the booking menu, and our experts will call you.</div>
+                 </div>
+                 <div>
+                   <div class="font-bold text-white text-sm mb-1">What is the cancellation policy?</div>
+                   <div class="text-xs text-white/50">Free cancellation up to 48 hours before the tour starts for most packages.</div>
+                 </div>
+                 <div>
+                   <div class="font-bold text-white text-sm mb-1">Are airport transfers included?</div>
+                   <div class="text-xs text-white/50">Yes, most of our comprehensive packages include luxury airport pick-up and drop-off.</div>
+                 </div>
+               </div>`
+      },
+      cancellation: {
+        title: 'Cancellation Policy',
+        tag: 'Flexibility',
+        html: `<p class="mb-6">We understand that plans change. Our goal is to provide maximum flexibility.</p>
+               <ul class="space-y-4">
+                 <li class="bg-white/5 p-5 rounded-2xl border border-white/10 shadow-xl">
+                   <div class="font-bold text-primary mb-1">48 Hours Notice</div>
+                   <div class="text-white/50 text-xs text-left leading-relaxed">Full refund minus minor processing fees for most standard tours.</div>
+                 </li>
+                 <li class="bg-white/5 p-5 rounded-2xl border border-white/10 shadow-xl">
+                   <div class="font-bold text-accent mb-1">Less than 24 Hours</div>
+                   <div class="text-white/50 text-xs text-left leading-relaxed">A 50% cancellation fee may apply depending on the booking type.</div>
+                 </li>
+               </ul>`
+      }
+    };
+
+    function openDetailModal(id) {
+      const data = tourData[id];
+      if (!data) return;
+      document.getElementById('d-img-complex').src = data.img;
+      document.getElementById('d-title-complex').textContent = id;
+      document.getElementById('d-full-title').textContent = data.fullTitle;
+      document.getElementById('d-long-desc').textContent = data.desc;
+      document.getElementById('d-loc-complex').textContent = data.loc;
+      document.getElementById('d-days').textContent = data.days;
+      document.getElementById('d-nights').textContent = data.nights;
+      const m = document.getElementById('detail-modal');
+      m.style.display = 'grid'; m.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDetailModal() {
+      const m = document.getElementById('detail-modal');
+      m.style.display = 'none'; m.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    function switchTab(tab) {
+      document.querySelectorAll('#detail-modal .tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`tab-${tab}`).classList.remove('hidden');
+    }
+
+    // ── Blog Data (Explore Specific) ──────────────────────────────
+    const blogData = [
+      {
+        tag: 'Heritage',
+        title: 'Sigiriya: The Lion Rock',
+        img: 'images/sigiriya_new.png',
+        desc: 'Rising dramatically from the central plains, this 5th-century rock fortress is a masterpiece of ancient urban planning and artistic brilliance.',
+        intro: 'Sigiriya, or Lion Rock, is perhaps Sri Lanka\'s most iconic sight. Once a royal citadel built by King Kasyapa, it remains a marvel of engineering and art. The climb to the summit takes you through beautifully landscaped water gardens, past the famous "Mirror Wall" and the colorful Sigiri Apsara frescoes, finally reaching the massive lion\'s paws that guard the stairway to the sky.',
+        points: ['Climb the 1,200 steps to the summit for breathtaking 360-degree views.', 'Marvel at the ancient frescoes (Sigiri Apsaras) preserved in a rock pocket.', 'Explore the symmetrical water gardens, some of the oldest in the world.', 'Wander through the boulder and terrace gardens at the foot of the rock.', 'See the remains of the Royal Palace and throne at the summit.'],
+        outro: 'Standing atop Sigiriya, you feel the weight of history and the grandeur of an ancient civilization. It is an experience that stays with you long after the descent.'
+      },
+      {
+        tag: 'Spiritual',
+        title: 'Kandy: Temple of the Tooth',
+        img: 'images/kandy_new.png',
+        desc: 'Housed in a golden-roofed temple, the sacred tooth relic of Lord Buddha makes Kandy the spiritual heart of the island.',
+        intro: 'The Temple of the Sacred Tooth Relic (Sri Dalada Maligawa) is situated in the royal palace complex of the former Kingdom of Kandy. As a UNESCO World Heritage site, it is a primary place of worship and a symbol of Sri Lankan identity. The temple is a beautiful example of Kandyan architecture, featuring intricate wood carvings, painted ceilings, and silver-decorated doors.',
+        points: ['Witness the vibrant evening "Puja" ceremony with traditional drumming.', 'Observe the intricate Kandyan architecture and ivory carvings.', 'Visit the Royal Palace complex and the International Buddhist Museum.', 'Take a peaceful walk around the scenic Kandy Lake at sunset.', 'Explore the lush Udawattakele Forest Reserve located just behind the temple.'],
+        outro: 'Kandy offers a deep dive into Sri Lankan culture and spirituality. The serene atmosphere of the temple, combined with the city\'s misty mountain backdrop, creates a truly magical experience.'
+      },
+      {
+        tag: 'Ancient Art',
+        title: 'Dambulla Cave Temple',
+        img: 'images/dambulla_new.png',
+        desc: 'Five majestic caves carved into a massive rock, containing over 150 Buddha statues and vibrant, centuries-old murals.',
+        intro: 'Dambulla Golden Cave Temple is the largest and best-preserved cave temple complex in Sri Lanka. The caves were used by King Valagamba as a refuge in the 1st century BC and were later converted into magnificent temples. Each of the five caves has its own unique character, filled with statues and paintings that depict the life and teachings of the Buddha.',
+        points: ['Marvel at the massive 14-meter reclining Buddha statue carved from rock.', 'Admire the vibrant ceiling murals that cover every inch of the cave roofs.', 'See the different styles of Buddha statues across five distinct caves.', 'Enjoy panoramic views of the surrounding countryside from the rock plateau.', 'Visit the Golden Temple at the foot of the rock with its massive golden Buddha.'],
+        outro: 'Dambulla is a testament to the enduring faith and artistic skill of ancient Sri Lankans. The silence within the caves and the vibrant colors on the walls create a profound sense of awe.'
+      },
+      {
+        tag: 'Wildlife',
+        title: 'Yala: The Leopard Capital',
+        img: 'images/yala_new.png',
+        desc: 'Sri Lanka\'s premier wildlife destination, Yala National Park offers the world\'s highest density of leopards and a diverse ecosystem.',
+        intro: 'Yala National Park is a world-renowned destination for wildlife enthusiasts. Spanning over 900 square kilometers, it features a variety of ecosystems including moist monsoon forests, dry monsoon forests, thorn forests, grasslands, freshwater and marine wetlands, and sandy beaches. While leopards are the main attraction, the park is also home to elephants, sloth bears, water buffalo, and a stunning array of birds.',
+        points: ['Embark on a thrilling morning or evening jeep safari.', 'Spot the elusive Sri Lankan Leopard in its natural habitat.', 'Watch herds of wild elephants gathering at the park\'s water holes.', 'Observe diverse birdlife including peacocks, eagles, and storks.', 'Experience the unique coastal wilderness where the forest meets the sea.'],
+        outro: 'An adventure in Yala is unpredictable and exhilarating. It provides a rare glimpse into the wild heart of Sri Lanka and the magnificent creatures that call it home.'
+      },
+      {
+        tag: 'History',
+        title: 'Galle Fort: Colonial Legacy',
+        img: 'images/galle_new.png',
+        desc: 'A charming seaside fortress where 17th-century Dutch colonial architecture blends seamlessly with the vibrant rhythm of local life.',
+        intro: 'Galle Fort is a living heritage site. Originally built by the Portuguese and later extensively fortified by the Dutch, the fort remains remarkably well-preserved. Today, its narrow cobblestone streets are lined with boutique hotels, art galleries, and cafes. Walking along the ramparts at sunset, with the Indian Ocean on one side and the old clock tower on the other, is a quintessential Sri Lankan experience.',
+        points: ['Walk along the historic ramparts for spectacular ocean views.', 'Visit the iconic white Galle Lighthouse, the oldest in Sri Lanka.', 'Explore the Dutch Reformed Church and the Maritime Museum.', 'Wander through the narrow lanes to find antiques and handmade lace.', 'Enjoy a sunset dinner at one of the many premium boutique restaurants.'],
+        outro: 'Galle Fort is a place where time seems to slow down. Its blend of European architectural style and South Asian atmosphere makes it one of the most charming spots on the island.'
+      },
+      {
+        tag: 'Nature',
+        title: 'Ella: Nine Arch Bridge',
+        img: 'images/ella.jpg',
+        desc: 'An architectural marvel hidden in the lush green hills, the Nine Arch Bridge is one of the most Instagrammable spots in Sri Lanka.',
+        intro: 'The Nine Arch Bridge in Ella, also called the Bridge in the Sky, is a viaduct bridge in Sri Lanka. It is one of the best examples of colonial-era railway construction in the country. Standing 24 meters high, the bridge was built using only bricks, stone, and cement—without a single piece of steel. It is surrounded by lush tea plantations and overlooks a deep valley, creating a breathtaking scene.',
+        points: ['Walk along the tracks of the bridge (check train times first!) for a unique experience.', 'Find the best viewpoints in the surrounding tea plantations for perfect photos.', 'Witness the iconic colonial-era train crossing the bridge.', 'Trek through the jungle and tea estates to reach the bridge from Ella town.', 'Enjoy a fresh coconut or tea at a nearby cafe overlooking the arches.'],
+        outro: 'The Nine Arch Bridge is more than just a railway crossing; it is a symbol of Ella\'s rustic charm and the engineering marvels of the past. A must-visit for every traveler.'
+      },
+      {
+        tag: 'Highlands',
+        title: 'Nuwara Eliya: Little England',
+        img: 'images/nuwara eliya 1.jpeg',
+        desc: 'Known for its cool climate and colonial charm, Nuwara Eliya is the heart of Sri Lanka\'s world-famous tea country.',
+        intro: 'Nuwara Eliya, nestled in the central highlands, is often called "Little England" due to its cool climate, colonial-style bungalows, and well-manicured gardens. Founded by the British in the 19th century, it became a popular retreat for plantation owners. Today, it is the primary hub for Ceylon tea production, with emerald tea bushes covering every hillside as far as the eye can see.',
+        points: ['Take a guided tour of a historic tea factory and learn about tea production.', 'Stroll through Victoria Park, one of the best-maintained city parks in South Asia.', 'Enjoy horse racing or a round of golf at the century-old Nuwara Eliya Golf Club.', 'Relax by the scenic Gregory Lake with a boat ride or pony trek.', 'Hike to World\'s End in Horton Plains National Park for a stunning 870m drop view.'],
+        outro: 'Nuwara Eliya offers a refreshing escape from the tropical heat. Its misty hills and colonial elegance provide a unique and tranquil experience in the island\'s interior.'
+      },
+      {
+        tag: 'Ocean',
+        title: 'Mirissa: Whale Watching Hub',
+        img: 'images/mirissa 1.jpg',
+        desc: 'A tropical paradise famous for its crescent beaches, turquoise waters, and as the best place to witness Blue Whales.',
+        intro: 'Mirissa is a small, vibrant beach town on the southern coast of Sri Lanka. It has transformed from a quiet fishing village into one of the island\'s most popular coastal destinations. Famous for its beautiful beaches like Secret Beach and Coconut Tree Hill, Mirissa is world-renowned as one of the best locations for whale watching, where you can see Blue Whales, Sperm Whales, and Dolphins.',
+        points: ['Embark on an early morning whale watching safari in the deep sea.', 'Visit Coconut Tree Hill for a panoramic view of the coastline at sunset.', 'Relax on the golden sands of Mirissa Beach and watch the surfers.', 'Take a boat trip to Parrot Rock for a unique viewpoint of the bay.', 'Enjoy the vibrant nightlife at the many beachside bars and seafood restaurants.'],
+        outro: 'Mirissa perfectly captures the laid-back, sun-soaked essence of a Sri Lankan summer. Whether you are seeking adventure on the waves or relaxation on the sand, it never fails to impress.'
+      },
+      {
+        tag: 'Coasts',
+        title: 'Bentota: Tropical Paradise',
+        img: 'images/bentota.jpg',
+        desc: 'A premier resort destination where golden sands meet the azure waters of the Indian Ocean, offering the perfect blend of luxury and adventure.',
+        intro: 'Bentota is a coastal jewel located on the southwest coast of Sri Lanka. Famous for its wide, pristine beaches and calm river lagoons, it is the ultimate destination for luxury resorts and water sports. The area is also rich in culture and nature, featuring the historic Galapatha Raja Maha Viharaya temple and the beautiful Brief Garden designed by Bevis Bawa.',
+        points: ['Indulge in thrilling water sports like jet skiing, windsurfing, and banana boat rides.', 'Take a scenic boat safari on the Bentota River through dense mangrove forests.', 'Relax on the sprawling golden beaches and enjoy a tropical sunset.', 'Visit the many sea turtle hatcheries dedicated to conservation efforts.', 'Explore the lush botanical gardens of Brief Garden and Lunuganga.'],
+        outro: 'Bentota is the embodiment of a tropical dream. Its mix of high-end indulgence and natural beauty makes it an essential stop for any traveler seeking the best of Sri Lanka.'
+      }
+    ];
+
+    function renderBlogs() {
+      const container = document.getElementById('blog-container');
+      if (!container) return;
+      container.innerHTML = '';
+      blogData.forEach((blog, index) => {
+        const delays = ['d1', 'd2', 'd3', 'd1', 'd2', 'd3', 'd1', 'd2', 'd3'];
+        const dirs = ['reveal-left', 'reveal-up', 'reveal-right', 'reveal-left', 'reveal-up', 'reveal-right', 'reveal-left', 'reveal-up', 'reveal-right'];
+
+        const card = document.createElement('div');
+        card.className = `group flex flex-col glass-dark rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:border-primary/30 reveal ${dirs[index] || 'reveal-up'} ${delays[index] || 'd1'}`;
+
+        card.innerHTML = `
+            <div class="relative h-60 overflow-hidden shrink-0">
+              <img src="${blog.img}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt="${blog.title}" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              <div class="absolute top-5 left-5">
+                <span class="bg-primary/90 text-white text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 ring-1 ring-white/20">${blog.tag}</span>
+              </div>
+              <div class="absolute bottom-5 left-6 right-6">
+                <h3 class="text-white text-2xl font-bold font-playfair mb-1 drop-shadow-lg">${blog.title}</h3>
+                <div class="flex items-center gap-1.5 text-[9px] text-white/60 font-black uppercase tracking-widest">
+                   <i class="fas fa-map-marker-alt text-primary"></i> Sri Lanka
+                </div>
+              </div>
+            </div>
+            <div class="p-8 flex-1 flex flex-col bg-gradient-to-b from-transparent to-black/20">
+              <p class="text-white/60 text-sm leading-relaxed mb-8 flex-1 font-light italic">
+                ${blog.desc}
+              </p>
+              <button onclick="openBlog(${index})" class="w-full py-4 rounded-2xl bg-gray-100 text-gray-900 font-black text-[10px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 shadow-xl shadow-black/10 hover:bg-white hover:scale-[1.02] group/btn">
+                <span>Explore More</span>
+                <i class="fas fa-arrow-right text-[10px] group-hover/btn:translate-x-1 transition-transform"></i>
+              </button>
+            </div>
+          `;
+        container.appendChild(card);
+      });
+
+      // Re-trigger reveal observer if present
+      if (typeof initReveal === 'function') initReveal();
+    }
+
+    function openBlog(index) {
+      const data = blogData[index];
+      document.getElementById('modalBlogImg').src = data.img;
+      document.getElementById('modalBlogTag').textContent = data.tag;
+      document.getElementById('modalBlogTitle').textContent = data.title;
+      document.getElementById('modalBlogIntro').textContent = data.intro;
+      const pointsList = document.getElementById('modalPointsList');
+      pointsList.innerHTML = '';
+      data.points.forEach(p => {
+        pointsList.innerHTML += `<li class="flex items-start gap-4 text-white/70 text-[18px] font-medium">
+          <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1"><i class="fas fa-star text-[10px] text-primary"></i></div>
+          <span class="flex-1">${p}</span>
+        </li>`;
+      });
+      document.getElementById('modalBlogOutro').textContent = data.outro;
+      const modal = document.getElementById('blogModal');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBlog() {
+      const modal = document.getElementById('blogModal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
+    }
+
+    // ── Global Event Listeners ──────────────────────────────────
+    document.addEventListener('DOMContentLoaded', async () => {
+      await initDB();
+      await checkAuth();
+      renderBlogs();
+
+      // Auto-update red badge if admin is active
+      if (isUserAdmin()) {
+        setInterval(() => checkAdminNotifications(true), 30000);
+      }
+    });
+
+    window.onclick = (e) => {
+      if (e.target.closest('#nav-dropdown-wrapper')) return;
+      const ndd = document.getElementById('nav-notifications-dropdown');
+      if (ndd) ndd.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+      if (e.target.closest('#user-dropdown-wrapper')) return;
+      const udd = document.getElementById('user-notifications-dropdown');
+      if (udd) udd.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof syncLanguageUI === 'function') syncLanguageUI();
+    });
+  </script>
+  <!-- FLOATING SOCIAL SIDEBAR -->
+  <div class="social-sidebar">
+    <a href="tel:0779741834" class="social-link social-call">
+      <i class="fas fa-phone"></i>
+      <span>Call Us</span>
+    </a>
+    <a href="https://wa.me/94779741834" target="_blank" class="social-link social-whatsapp">
+      <i class="fab fa-whatsapp"></i>
+      <span>WhatsApp</span>
+    </a>
+    <a href="sms:0779741834" target="_blank" class="social-link social-message">
+      <i class="far fa-comment-dots"></i>
+      <span>Message</span>
+    </a>
+    <a href="https://web.facebook.com/share/r/18SjNMG5PM/" target="_blank" class="social-link social-facebook">
+      <i class="fab fa-facebook-f"></i>
+      <span>Facebook</span>
+    </a>
+    <a href="https://www.instagram.com/leezatravelssrilanka?igsh=MWFja3F3NGpyZ2Q3aA==" target="_blank"
+      class="social-link social-instagram">
+      <i class="fab fa-instagram"></i>
+      <span>Instagram</span>
+    </a>
+    <a href="https://www.tiktok.com/@leeza_travels?_r=1" target="_blank" class="social-link social-tiktok">
+      <i class="fab fa-tiktok"></i>
+      <span>TikTok</span>
+    </a>
+  </div>
+  <!-- LARGE TRIPADVISOR REVIEW BADGE -->
+  <a href="https://www.tripadvisor.com.sg/Attraction_Review-g297897-d20931273-Reviews-Leeza_travel-Negombo_Western_Province.html"
+    target="_blank" class="ta-badge" title="VISIT our TripAdvisor page">
+    <img src="images/4267x4267.png" alt="TripAdvisor" class="ta-badge-logo" />
+    <div class="brand-name">TripAdvisor</div>
+    <div class="flex gap-0.5 mb-0.5">
+      <i class="fas fa-star text-[10px] text-[#FFD700]"></i>
+      <i class="fas fa-star text-[10px] text-[#FFD700]"></i>
+      <i class="fas fa-star text-[10px] text-[#FFD700]"></i>
+      <i class="fas fa-star text-[10px] text-[#FFD700]"></i>
+      <i class="fas fa-star text-[10px] star-90"></i>
+    </div>
+    <div class="text-[10px] font-black text-white mb-1.5 drop-shadow-md">4.9 / 5.0</div>
+    <div class="ta-badge-label">VISIT</div>
+  </a>
+  <!-- FOOTER -->
+  <footer id="main-footer"
+    class="border-t border-white/10 pt-16 pb-10 px-6 bg-[#080808] relative z-[50] pointer-events-auto block w-full">
+    <div class="max-w-7xl mx-auto w-full">
+      <div class="grid md:grid-cols-4 gap-10 mb-10">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <img src="images/1.png" alt="Leeza Travels Logo" class="w-14 h-14 object-contain" />
+            <span class="text-lg font-bold gtext">Leeza<span class="text-white font-light">
+                Travels</span></span>
+          </div>
+          <p class="text-white/80 text-sm mb-5 font-medium">Crafting unforgettable journeys. Your
+            adventure
+            begins with
+            a
+            single step.</p>
+          <div class="flex gap-4">
+            <a href="https://web.facebook.com/share/r/18SjNMG5PM/" target="_blank"
+              class="w-10 h-10 rounded-full bg-[#1877F2] border border-[#1877F2] flex items-center justify-center text-white transition-all group shadow-[0_4px_12px_rgba(24,119,242,0.3)]">
+              <i class="fab fa-facebook-f group-hover:scale-110 transition-transform"></i>
+            </a>
+            <a href="https://www.instagram.com/leezatravelssrilanka?igsh=MWFja3F3NGpyZ2Q3aA==" target="_blank"
+              class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center text-white border-none transition-all group shadow-lg shadow-pink-500/20 hover:scale-110">
+              <i class="fab fa-instagram transition-transform"></i>
+            </a>
+            <a href="#" target="_blank"
+              class="w-10 h-10 rounded-full bg-black border border-white/20 flex items-center justify-center text-white transition-all group shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+              <i class="fab fa-x-twitter group-hover:scale-110 transition-transform"></i>
+            </a>
+            <a href="https://www.tiktok.com/@leeza_travels?_r=1&_d=f2l0ab20gee10i&sec_uid=MS4wLjABAAAAee91_zFo1AWjcWAt37lITpgCS8ZKKEiK-hGlpz4azUF2KxvFIvG6IMR9qsklV5Bh&share_author_id=7624058210085782545&sharer_language=en&source=h5_m&u_code=f2kf36j90158hf&timestamp=1775717726&user_id=7624058210085782545&sec_user_id=MS4wLjABAAAAee91_zFo1AWjcWAt37lITpgCS8ZKKEiK-hGlpz4azUF2KxvFIvG6IMR9qsklV5Bh&item_author_type=1&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7624405161733048081&share_link_id=dcab7481-1766-48dd-9a5e-8114416f60d9&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb7360&social_share_type=5&enable_checksum=1"
+              target="_blank"
+              class="w-10 h-10 rounded-full bg-black border border-white/20 flex items-center justify-center text-white transition-all group hover:scale-110 shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+              <i class="fab fa-tiktok transition-transform group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,1)]"
+                style="filter: drop-shadow(2px 2px 0px #FE2C55) drop-shadow(0 0 4px #FE2C55);"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4 text-xs uppercase tracking-widest text-white/90">Destinations</h4>
+          <ul class="space-y-2 text-sm text-white/70 font-medium">
+            <li><a href="javascript:void(0)" onclick="openDestInfoModal('colombo')"
+                class="hover:text-primary transition-colors">Colombo</a></li>
+            <li><a href="javascript:void(0)" onclick="openDestInfoModal('kandy')"
+                class="hover:text-primary transition-colors">Kandy</a></li>
+            <li><a href="javascript:void(0)" onclick="openDestInfoModal('dambulla')"
+                class="hover:text-primary transition-colors">Dambulla</a></li>
+            <li><a href="javascript:void(0)" onclick="openDestInfoModal('nuwaraeliya')"
+                class="hover:text-primary transition-colors">Nuwara Eliya</a></li>
+            <li><a href="javascript:void(0)" onclick="openDestInfoModal('galle')"
+                class="hover:text-primary transition-colors">Galle</a></li>
+            <li><a href="javascript:void(0)" onclick="openDestInfoModal('mirissa')"
+                class="hover:text-primary transition-colors">Mirissa</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4 text-xs uppercase tracking-widest text-white/90">Company</h4>
+          <ul class="space-y-2 text-sm text-white/70 font-medium">
+            <li><a href="index.html#about" class="hover:text-primary transition-colors">About Us</a>
+            </li>
+            <li><a href="javascript:void(0)" onclick="showInfoModal('team')"
+                class="hover:text-primary transition-colors">Our Team</a></li>
+            <li><a href="explore.html" class="hover:text-primary transition-colors">Explore</a></li>
+            <li><a href="javascript:void(0)" onclick="showInfoModal('careers')"
+                class="hover:text-primary transition-colors">Careers</a></li>
+            <li><a href="javascript:void(0)" onclick="showInfoModal('privacy')"
+                class="hover:text-primary transition-colors">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4 text-xs uppercase tracking-widest text-white/90">Support</h4>
+          <ul class="space-y-2 text-sm text-white/70 font-medium">
+            <li><a href="javascript:void(0)" onclick="showInfoModal('faqs')"
+                class="hover:text-primary transition-colors">FAQs</a></li>
+            <li><a href="index.html#contact" class="hover:text-primary transition-colors">Contact Us</a>
+            </li>
+            <li><a href="javascript:void(0)" onclick="showTrackModal()"
+                class="hover:text-primary transition-colors">Track Booking</a></li>
+            <li><a href="javascript:void(0)" onclick="showInfoModal('cancellation')"
+                class="hover:text-primary transition-colors">Cancellation Policy</a></li>
+          </ul>
+          <div id="db-badge" onclick="showDBViewer()"
+            class="hidden mt-5 text-xs text-white/25 flex items-center gap-1.5 cursor-pointer hover:text-emerald-400 transition-colors group"
+            title="Click to view stored data">
+            <span
+              class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block group-hover:animate-pulse"></span>IndexedDB
+            connected <i class="fas fa-table ml-1 opacity-0 group-hover:opacity-100 transition-opacity text-[9px]"></i>
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-t border-white/10 pt-7 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/60 w-full">
+        <span>&copy; 2026 Leezatravels. All rights reserved.</span>
+        <span>Website by C Tech Solution</span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Tour Filter Logic
+    window.selectedDurations = new Set();
+
+    window.toggleDuration = function (val) {
+      const v = String(val);
+      if (window.selectedDurations.has(v)) {
+        window.selectedDurations.clear();
+      } else {
+        window.selectedDurations.clear();
+        window.selectedDurations.add(v);
+      }
+      updateDurationButtons();
+      filterTours();
+    };
+
+    window.clearAllFilters = function () {
+      const input = document.getElementById('tour-search');
+      if (input) input.value = '';
+      window.selectedDurations.clear();
+      updateDurationButtons();
+      filterTours();
+    };
+
+    window.updateDurationButtons = function () {
+      document.querySelectorAll('[data-duration-btn]').forEach(btn => {
+        const val = btn.getAttribute('data-duration-btn');
+        if (window.selectedDurations.has(val)) {
+          btn.style.borderColor = '#FF6B35';
+          btn.style.color = '#FF6B35';
+          btn.style.background = 'rgba(255,107,53,0.1)';
+        } else {
+          btn.style.borderColor = '';
+          btn.style.color = '';
+          btn.style.background = '';
+        }
+      });
+    };
+
+    window.filterTours = function () {
+      const searchVal = (document.getElementById('tour-search')?.value || '').toLowerCase().trim();
+      const grid = document.getElementById('tours-grid');
+      if (!grid) return;
+
+      const cards = grid.querySelectorAll(':scope > div');
+      cards.forEach(card => {
+        const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
+        const duration = card.getAttribute('data-duration');
+
+        const durationOk = window.selectedDurations.size === 0 || window.selectedDurations.has(duration);
+        const searchOk = !searchVal || title.includes(searchVal);
+
+        if (durationOk && searchOk) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      filterTours();
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init('tRG6iOeYylZBAVmsa');
+      }
+    });
+  </script>
+  <div class="cursor-glow" id="cursor-glow"></div>
+  <!-- Animation logic removed -->
+  <div id="google_translate_element_trigger" style="display:none"></div>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,zh-CN,hi,es,fr,ar,de,ru,pt,id,ja,ko',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      function forceSync() {
+        if (typeof syncLanguageUI === 'function') syncLanguageUI();
+        else setTimeout(forceSync, 200);
+      }
+      window.addEventListener('load', forceSync);
+      setTimeout(forceSync, 500);
+    })();
+  </script>
+</body>
+
+</html>
