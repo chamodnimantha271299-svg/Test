@@ -1,0 +1,2356 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="Leeza Travels - Browse our exclusive Sri Lankan tour packages." />
+    <title>Tours | Leeza Travels</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="images/1.png">
+    <link rel="apple-touch-icon" href="images/1.png">
+    <meta name="msapplication-TileImage" content="images/1.png">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script>tailwind.config = { theme: { extend: { fontFamily: { outfit: ['Outfit', 'sans-serif'], playfair: ['Playfair Display', 'serif'] }, colors: { primary: '#FF6B35', accent: '#FF6B35', dark: '#0a0b14' } } } }</script>
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --accent: #FF6B35;
+            --dark: #0a0b14;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0a0b14;
+        }
+
+        .gtext {
+            color: #FF6B35;
+            background: none;
+            -webkit-text-fill-color: initial;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-dark.border-primary {
+            border: 2px solid var(--primary) !important;
+        }
+
+        .active-nav {
+            color: white !important;
+            opacity: 1 !important;
+        }
+
+        .active-nav::after {
+            width: 100% !important;
+        }
+
+        /* Global Custom Scrollbar Styling (Matches Home Page) */
+        #page-scroll-wrap {
+            position: fixed;
+            top: 96px;
+            /* Desktop navbar height */
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 10;
+        }
+
+        @media (max-width: 1023px) {
+            #page-scroll-wrap {
+                top: 72px;
+                /* Mobile navbar height */
+            }
+        }
+
+        /* ── Reveal Animations ────────────────────────────── */
+        .reveal {
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+
+        .reveal-up {
+            transform: translateY(60px);
+        }
+
+        .reveal-down {
+            transform: translateY(-60px);
+        }
+
+        .reveal-left {
+            transform: translateX(-60px);
+        }
+
+        .reveal-right {
+            transform: translateX(60px);
+        }
+
+        .reveal-zoom {
+            transform: scale(0.9);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) !important;
+        }
+
+        .d5 {
+            transition-delay: 0.5s;
+        }
+
+        /* ── Floating Social Sidebar ─────────────────────── */
+        @keyframes floatSidebar {
+
+            0%,
+            100% {
+                transform: translateY(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateY(-50%) translateY(-15px);
+            }
+        }
+
+        .social-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            animation: floatSidebar 1.5s ease-in-out infinite;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            font-size: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            text-decoration: none;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-link:hover {
+            transform: scale(1.15) translateX(5px);
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .social-call {
+            color: #FF6B35;
+        }
+
+        .social-whatsapp {
+            color: #25D366;
+        }
+
+        .social-facebook {
+            color: #0866FF;
+        }
+
+        .social-instagram {
+            color: #E1306C;
+        }
+
+        .social-tiktok {
+            color: #ffffff;
+        }
+
+        .social-link span {
+            position: absolute;
+            left: calc(100% + 15px);
+            background: #FF6B35;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            transform: translateX(-10px);
+        }
+
+        .social-link:hover span {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ── Large TripAdvisor Badge (Right Side) ────────────── */
+        @keyframes floatBadge {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #FF6B35 rgba(255, 255, 255, 0.02);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            margin: 2px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #FF6B35, #e55a2b);
+            border-radius: 10px;
+            border: 3px solid #0a0b14;
+        }
+
+        .ta-badge {
+            position: fixed;
+            right: 25px;
+            bottom: 30px;
+            z-index: 9991;
+            background: #00af87;
+            border-radius: 50%;
+            width: 125px;
+            height: 125px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0px;
+            box-shadow: 0 10px 30px rgba(0, 175, 135, 0.4);
+            text-decoration: none;
+            border: 4px solid #fff;
+            animation: floatBadge 1.5s ease-in-out infinite;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            color: white;
+            pointer-events: auto;
+        }
+
+        .ta-badge:hover {
+            transform: scale(1.1) rotate(8deg);
+        }
+
+        .ta-badge-logo {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            clip-path: circle(32% at 50% 48%);
+            margin-bottom: -16px;
+            margin-top: -12px;
+        }
+
+        .brand-name {
+            font-size: 9px;
+            font-weight: 800;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .star-90 {
+            background: linear-gradient(90deg, #FFD700 85%, rgba(255, 255, 255, 0.3) 15%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .ta-badge-label {
+            background: #fff;
+            color: #000;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .social-sidebar {
+                left: 10px;
+                gap: 8px;
+            }
+
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .social-link span {
+                display: none;
+            }
+
+            .ta-badge {
+                width: 98px;
+                height: 98px;
+                right: 15px;
+                bottom: 15px;
+            }
+
+            .ta-badge-logo {
+                width: 62px;
+            }
+        }
+
+        .nl::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FF6B35;
+            transition: width .3s
+        }
+
+        .nl:hover::after {
+            width: 100%
+        }
+
+        input[type="range"] {
+            accent-color: #FF6B35;
+        }
+
+        /* ── Language Selector ────────────────────────────── */
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 99px;
+            padding: 8px 14px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 107, 53, 0.15);
+            border-color: rgba(255, 107, 53, 0.4);
+        }
+
+        .lang-btn .lang-chevron {
+            font-size: 10px;
+            opacity: 0.6;
+            transition: transform 0.3s ease;
+        }
+
+        .lang-btn.open .lang-chevron {
+            transform: rotate(180deg);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 220px;
+            background: rgba(15, 20, 40, 0.95);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 107, 53, 0.08);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-8px) scale(0.97);
+            pointer-events: none;
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 9999;
+        }
+
+        .lang-dropdown.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: all;
+        }
+
+        .lang-dropdown-header {
+            padding: 12px 16px 8px;
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.75);
+            cursor: pointer;
+            transition: all 0.18s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .lang-item:last-child {
+            border-bottom: none;
+        }
+
+        .lang-item:hover {
+            background: rgba(255, 107, 53, 0.12);
+            color: #fff;
+            padding-left: 22px;
+        }
+
+        .lang-item.active {
+            color: #FF6B35;
+            font-weight: 800;
+            background: rgba(255, 107, 53, 0.08);
+        }
+
+        .lang-item .lang-flag {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .lang-item .lang-name {
+            flex: 1;
+        }
+
+        .lang-item.active .lang-check {
+            color: #FF6B35;
+            font-size: 11px;
+        }
+
+        .lang-item:not(.active) .lang-check {
+            display: none;
+        }
+
+        /* ── Language Selector ─────────────────────────────── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeUp {
+            animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes modalZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .animate-modalZoom {
+            animation: modalZoom 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* ── Vehicle Selection & Toast Notifications ── */
+        .vehicle-card.selected {
+            border-color: var(--primary) !important;
+            background: rgba(255, 107, 53, 0.15) !important;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+        }
+
+        .nav-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #ef4444;
+            color: white;
+            font-size: 9px;
+            font-weight: 800;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 99px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            border: 2px solid #0f172a;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+        }
+
+        .user-badge {
+            background: #0ea5e9;
+            box-shadow: 0 2px 6px rgba(14, 165, 233, 0.4);
+        }
+
+        .toast {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translate(-50%, -5rem);
+            z-index: 100000;
+            padding: 1rem 2rem;
+            border-radius: 99px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.875rem;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            min-width: 320px;
+            max-width: 90vw;
+            justify-content: center;
+            backdrop-filter: blur(16px);
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+        }
+
+        #toast-msg {
+            white-space: normal !important;
+            line-height: 1.4 !important;
+            text-align: center;
+        }
+
+        .save-trip-btn:hover {
+            transform: scale(1.15);
+            border-color: rgba(255, 107, 53, 0.5);
+            color: #FF6B35;
+            background: rgba(255, 107, 53, 0.15);
+        }
+
+        .save-trip-btn.saved-trip-btn-active {
+            color: #FF6B35;
+            border-color: rgba(255, 107, 53, 0.6);
+            background: rgba(255, 107, 53, 0.15);
+        }
+
+        /* ── Mobile Nav Cleanup ─────────────────────────────── */
+        @media (max-width: 1023px) {
+            #signin-btn, #profile-btn, .mob-book-hidden { display: none !important; }
+        }
+
+        #mob {
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        #mob.open {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+        }
+
+        .mob-nav-link {
+            position: relative;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mob-nav-link:hover,
+        .mob-nav-link.active {
+            color: white;
+            padding-left: 8px;
+        }
+
+        .mob-nav-link i {
+            font-size: 0.9rem;
+            color: #FF6B35;
+            opacity: 0.5;
+        }
+
+        .mob-nav-item {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.4s ease;
+        }
+
+        #mob.open .mob-nav-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+    <style>
+        /* ── Google Translate Widget Banner Hidden ──────────────────────── */
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-banner-frame,
+        .goog-te-balloon-frame,
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+        #goog-gt-tt {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+            position: static !important;
+        }
+
+        html {
+            top: 0 !important;
+        }
+
+        .goog-te-gadget-icon {
+            display: none !important;
+        }
+    </style>
+    <!-- Early Cookie Sync -->
+    <script type="text/javascript">
+        try {
+            var savedLang = localStorage.getItem('googtrans_lang');
+            if (savedLang) {
+                document.cookie = 'googtrans=/en/' + savedLang + '; path=/';
+                if (window.location.hostname && window.location.hostname !== 'localhost') {
+                    document.cookie = 'googtrans=/en/' + savedLang + '; domain=' + window.location.hostname + '; path=/';
+                    document.cookie = 'googtrans=/en/' + savedLang + '; domain=.' + window.location.hostname + '; path=/';
+                }
+            }
+        } catch (e) { }
+    </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,zh-CN,hi,es,fr,ar,de,ru,pt,id,ja,ko',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body class="bg-dark text-white overflow-hidden">
+    <!-- TOAST (body-level so it always appears above modals) -->
+    <div id="toast" class="toast glass-dark">
+        <div id="toast-icon"></div>
+        <div id="toast-msg"></div>
+    </div>
+    <!-- NAV -->
+    <nav id="nav"
+        class="fixed top-0 inset-x-0 z-[150] bg-[#1b2a41] backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+        <div class="max-w-[90rem] mx-auto px-4 lg:px-8 py-3 lg:py-4 flex items-center justify-between">
+            <a href="index.html" onclick="closeAllModals();" class="flex items-center gap-3 shrink-0">
+                <img src="images/1.png" alt="Leeza Travels Logo" class="w-12 h-12 lg:w-16 lg:h-16 object-contain" />
+                <span class="text-xl lg:text-[1.7rem] font-bold gtext whitespace-nowrap">Leeza<span
+                        class="text-white font-light"> Travels</span></span>
+            </a>
+            <ul class="hidden lg:flex items-center gap-6 lg:gap-10 text-lg lg:text-[20px] font-bold whitespace-nowrap">
+                <li><a href="index.html" onclick="closeAllModals();"
+                        class="nl relative text-white/80 transition-colors hover:text-white">Home</a></li>
+                <li><a href="index.html#about" onclick="closeAllModals();"
+                        class="nl relative text-white/80 transition-colors hover:text-white">About Us</a></li>
+                <li><a href="trips.html"
+                        class="nl relative text-white/80 transition-colors hover:text-white active-nav">Tours</a>
+                </li>
+                <li><a href="index.html#gallery" onclick="closeAllModals();"
+                        class="nl relative text-white/80 transition-colors hover:text-white">Gallery</a></li>
+                <li><a href="explore.html"
+                        class="nl relative text-white/80 transition-colors hover:text-white">Explore</a></li>
+                <li><a href="index.html#contact" onclick="closeAllModals();"
+                        class="nl relative text-white/80 transition-colors hover:text-white">Contact Us</a></li>
+            </ul>
+            <div id="nav-actions" class="flex items-center gap-3 lg:gap-4 shrink-0">
+                <button id="signin-btn" onclick="toggleAuthModal()"
+                    class="border border-white/20 px-5 py-2.5 rounded-full text-[15px] font-semibold hover:border-primary transition-all whitespace-nowrap">Sign
+                    In</button>
+                <button id="profile-btn" onclick="toggleProfileModal()"
+                    class="hidden bg-white/10 px-5 py-2.5 rounded-full text-[15px] font-semibold hover:bg-white/20 transition-all flex items-center gap-2 whitespace-nowrap"><i
+                        class="fas fa-user-circle text-primary"></i> <span
+                        id="user-display-name">Profile</span></button>
+                <button onclick="openModal()"
+                    class="mob-book-hidden bg-gradient-to-r from-primary to-accent px-6 py-2.5 rounded-full text-[15px] font-semibold hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_15px_rgba(255,107,53,0.3)] whitespace-nowrap">Book
+                    Now</button>
+                <!-- Google Translate hidden trigger -->
+                <div id="google_translate_element"
+                    style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;">
+                </div> <!-- Custom Language Selector -->
+                <div class="relative flex-none" id="lang-selector-wrapper">
+                    <button id="lang-toggle-btn" class="lang-btn" onclick="toggleLangDropdown(event)">
+                        <span id="lang-current-flag" style="font-size:17px;">🇺🇸</span>
+                        <span id="lang-current-label" class="hidden lg:inline" style="font-size:15px;">English</span>
+                        <i class="fas fa-chevron-down lang-chevron"></i>
+                    </button>
+                    <div id="lang-dropdown" class="lang-dropdown">
+                        <div class="lang-dropdown-header"><i class="fas fa-globe"></i> Select Language</div>
+                        <div id="lang-list" style="max-height:320px;overflow-y:auto;">
+                            <div class="lang-item active" onclick="selectLang('en','🇺🇸','English',this)">
+                                <span class="lang-flag">🇺🇸</span><span class="lang-name">English</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('zh-CN','🇨🇳','Chinese',this)">
+                                <span class="lang-flag">🇨🇳</span><span class="lang-name">Chinese</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('hi','🇮🇳','Hindi',this)">
+                                <span class="lang-flag">🇮🇳</span><span class="lang-name">Hindi</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('es','🇪🇸','Spanish',this)">
+                                <span class="lang-flag">🇪🇸</span><span class="lang-name">Spanish</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('fr','🇫🇷','French',this)">
+                                <span class="lang-flag">🇫🇷</span><span class="lang-name">French</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('ar','🇦🇪','Arabic',this)">
+                                <span class="lang-flag">🇦🇪</span><span class="lang-name">Arabic</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('de','🇩🇪','German',this)">
+                                <span class="lang-flag">🇩🇪</span><span class="lang-name">German</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('ru','🇷🇺','Russian',this)">
+                                <span class="lang-flag">🇷🇺</span><span class="lang-name">Russian</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('pt','🇵🇹','Portuguese',this)">
+                                <span class="lang-flag">🇵🇹</span><span class="lang-name">Portuguese</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('id','🇮🇩','Indonesian',this)">
+                                <span class="lang-flag">🇮🇩</span><span class="lang-name">Indonesian</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('ja','🇯🇵','Japanese',this)">
+                                <span class="lang-flag">🇯🇵</span><span class="lang-name">Japanese</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                            <div class="lang-item" onclick="selectLang('ko','🇰🇷','Korean',this)">
+                                <span class="lang-flag">🇰🇷</span><span class="lang-name">Korean</span><i
+                                    class="fas fa-check lang-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Notification Dropdown Container -->
+                <div class="relative" id="nav-dropdown-wrapper" style="display:none">
+                    <button onclick="toggleNavNotifications(event)" id="nav-bell-btn"
+                        class="relative w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all group">
+                        <i class="fas fa-bell text-white/50 group-hover:text-primary transition-colors"></i>
+                        <span id="nav-admin-badge" class="nav-badge hidden">0</span>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div id="nav-notifications-dropdown"
+                        class="absolute right-0 top-full mt-3 w-80 glass-dark border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden transform origin-top-right transition-all duration-200 scale-95 opacity-0 pointer-events-none z-50">
+                        <div class="p-3 border-b border-white/5 flex justify-between items-center bg-white/5">
+                            <span class="text-xs font-black text-white uppercase tracking-widest"><i
+                                    class="fas fa-bolt text-primary mr-1"></i> Recent Activity</span>
+                            <span class="text-[8px] text-white/30 uppercase font-black tracking-widest">Scroll</span>
+                        </div>
+                        <div id="nav-notifications-list"
+                            class="max-h-80 overflow-y-auto custom-scrollbar flex flex-col">
+                            <!-- JS Populated -->
+                        </div>
+                        <div class="p-2 border-t border-white/5 bg-white/5 flex gap-2">
+                            <button onclick="markAllAsViewed()"
+                                class="flex-1 py-2 text-[10px] font-black text-white/50 hover:text-white uppercase tracking-widest transition-colors rounded-xl hover:bg-white/5 border border-white/5">Clear
+                                All</button>
+                            <button onclick="closeNavNotifications(); showDBViewer('bookings')"
+                                class="flex-[2] py-2 text-xs font-bold bg-primary/10 text-primary hover:bg-primary/20 transition-colors rounded-xl border border-primary/20">All
+                                Activity &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- USER Notification Dropdown Container -->
+                <div class="relative hidden" id="user-dropdown-wrapper">
+                    <button onclick="toggleUserNotifications(event)" id="user-bell-btn"
+                        class="relative w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all group">
+                        <i class="fas fa-bell text-white/50 group-hover:text-accent transition-colors"></i>
+                        <span id="nav-user-badge"
+                            class="nav-badge hidden bg-red-500 text-white shadow-[0_2px_8px_rgba(239,68,68,0.4)]"
+                            style="background:#ef4444;">0</span>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div id="user-notifications-dropdown"
+                        class="absolute right-0 top-full mt-3 w-80 glass-dark border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden transform origin-top-right transition-all duration-200 scale-95 opacity-0 pointer-events-none z-50">
+                        <div class="p-3 border-b border-white/5 flex justify-between items-center bg-white/5">
+                            <span class="text-xs font-black text-white uppercase tracking-widest"><i
+                                    class="fas fa-bullhorn text-accent mr-1"></i> My Notifications</span>
+                            <span class="text-[8px] text-white/30 uppercase font-black tracking-widest">Scroll</span>
+                        </div>
+                        <div id="user-notifications-list"
+                            class="max-h-80 overflow-y-auto custom-scrollbar flex flex-col">
+                            <!-- JS Populated -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="mob-burger-btn" onclick="handleMobMenu(event)"
+                class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all text-lg flex-shrink-0"><i
+                    class="fas fa-bars"></i></button>
+        </div>
+        </div>
+    </nav>
+    <!-- Scroll Wrapper: starts below navbar so scrollbar begins after nav -->
+    <div id="page-scroll-wrap" class="custom-scrollbar">
+        <main class="max-w-7xl mx-auto px-6 py-12">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- SIDEBAR FILTERS (Modern Premium Design) -->
+                <aside class="w-full lg:w-72 shrink-0">
+                    <!-- Header: Trips + Filter By -->
+                    <div class="pb-6 mb-6 border-b border-white/10">
+                        <h1 class="text-4xl font-black text-white leading-tight mb-4 tracking-tight">Trips</h1>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-7 h-7 rounded-lg bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-sliders-h text-primary text-xs"></i>
+                                </div>
+                                <span class="text-base font-bold text-white">Filter By</span>
+                            </div>
+                            <button onclick="clearAllFilters()"
+                                class="text-[11px] font-black tracking-widest text-primary/70 hover:text-primary transition-all uppercase border border-primary/20 hover:border-primary/50 px-3 py-1.5 rounded-lg hover:bg-primary/10">
+                                CLEAR ALL
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Price -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-tag text-primary text-sm"></i>
+                                <span class="text-[15px] font-black text-white uppercase tracking-widest">Price</span>
+                            </div>
+                            <i class="fas fa-chevron-up text-[10px] text-white/30"></i>
+                        </div>
+                        <div class="px-1">
+                            <input id="price-range" type="range" min="0" max="0" value="0" step="1"
+                                class="w-full h-[4px] bg-white/10 rounded-full cursor-pointer accent-primary"
+                                oninput="filterTours()" />
+                            <div class="flex justify-between text-[12px] font-bold text-white/40 mt-3">
+                                <span>$0</span>
+                                <span>$0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Duration -->
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-clock text-primary text-sm"></i>
+                                <span
+                                    class="text-[15px] font-black text-white uppercase tracking-widest">Duration</span>
+                            </div>
+                            <i class="fas fa-chevron-up text-[10px] text-white/30"></i>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <button onclick="toggleDuration('3')" data-duration-btn="3" data-duration-val="3"
+                                class="duration-btn group flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-primary/10 border border-white/5 hover:border-primary/40 transition-all duration-200">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-primary/20 flex items-center justify-center transition-all shrink-0">
+                                    <i
+                                        class="fas fa-moon text-[11px] text-white/40 group-hover:text-primary transition-colors"></i>
+                                </span>
+                                <span
+                                    class="text-[14px] font-bold text-white/70 group-hover:text-white transition-colors">2
+                                    Nights 3 Days</span>
+                            </button>
+                            <button onclick="toggleDuration('4')" data-duration-btn="4" data-duration-val="4"
+                                class="duration-btn group flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-primary/10 border border-white/5 hover:border-primary/40 transition-all duration-200">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-primary/20 flex items-center justify-center transition-all shrink-0">
+                                    <i
+                                        class="fas fa-moon text-[11px] text-white/40 group-hover:text-primary transition-colors"></i>
+                                </span>
+                                <span
+                                    class="text-[14px] font-bold text-white/70 group-hover:text-white transition-colors">3
+                                    Nights 4 Days</span>
+                            </button>
+                            <button onclick="toggleDuration('5')" data-duration-btn="5" data-duration-val="5"
+                                class="duration-btn group flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-primary/10 border border-white/5 hover:border-primary/40 transition-all duration-200">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-primary/20 flex items-center justify-center transition-all shrink-0">
+                                    <i
+                                        class="fas fa-moon text-[11px] text-white/40 group-hover:text-primary transition-colors"></i>
+                                </span>
+                                <span
+                                    class="text-[14px] font-bold text-white/70 group-hover:text-white transition-colors">4
+                                    Nights 5 Days</span>
+                            </button>
+                            <button onclick="toggleDuration('7')" data-duration-btn="7" data-duration-val="7"
+                                class="duration-btn group flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-primary/10 border border-white/5 hover:border-primary/40 transition-all duration-200">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-primary/20 flex items-center justify-center transition-all shrink-0">
+                                    <i
+                                        class="fas fa-moon text-[11px] text-white/40 group-hover:text-primary transition-colors"></i>
+                                </span>
+                                <span
+                                    class="text-[14px] font-bold text-white/70 group-hover:text-white transition-colors">6
+                                    Nights 7 Days</span>
+                            </button>
+                            <button onclick="toggleDuration('8')" data-duration-btn="8" data-duration-val="8"
+                                class="duration-btn group flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-primary/10 border border-white/5 hover:border-primary/40 transition-all duration-200">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-primary/20 flex items-center justify-center transition-all shrink-0">
+                                    <i
+                                        class="fas fa-moon text-[11px] text-white/40 group-hover:text-primary transition-colors"></i>
+                                </span>
+                                <span
+                                    class="text-[14px] font-bold text-white/70 group-hover:text-white transition-colors">7
+                                    Nights 8 Days</span>
+                            </button>
+                            <button onclick="toggleDuration('10')" data-duration-btn="10" data-duration-val="10"
+                                class="duration-btn group flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-primary/10 border border-white/5 hover:border-primary/40 transition-all duration-200">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-primary/20 flex items-center justify-center transition-all shrink-0">
+                                    <i
+                                        class="fas fa-moon text-[11px] text-white/40 group-hover:text-primary transition-colors"></i>
+                                </span>
+                                <span
+                                    class="text-[14px] font-bold text-white/70 group-hover:text-white transition-colors">9
+                                    Nights 10 Days</span>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+                <!-- MAIN CONTENT -->
+                <section class="flex-1">
+                    <!-- SLIM TOP ACTIONS -->
+                    <div class="flex items-center gap-3 mb-10 pt-2 w-full justify-between">
+                        <!-- Right Section: Search, Sort, Views -->
+                        <div class="relative flex-1 w-full">
+                            <input type="text" id="tour-search" placeholder="Search tours..." oninput="filterTours()"
+                                onkeyup="filterTours()"
+                                class="w-full bg-[#171c26] border border-white/5 rounded-xl px-5 py-3 text-sm text-white/90 focus:outline-none focus:border-white/20 transition-all placeholder:text-white/40" />
+                        </div>
+                        <div class="relative min-w-[220px]">
+                            <select
+                                class="w-full bg-[#171c26] border border-white/5 rounded-xl px-5 py-3 text-[13px] text-white/90 appearance-none focus:outline-none cursor-pointer">
+                                <option>Sort (Recently Added)</option>
+                                <option>Price (Low to High)</option>
+                                <option>Price (High to Low)</option>
+                            </select>
+                            <i
+                                class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-[10px] text-white/30 pointer-events-none"></i>
+                        </div>
+                        <div class="flex bg-[#171c26] border border-white/5 rounded-xl p-1 shrink-0 h-[46px]">
+                            <button
+                                class="w-10 h-full bg-primary text-white rounded-[10px] flex items-center justify-center transition-all">
+                                <i class="fas fa-th-large text-sm"></i>
+                            </button>
+                            <button
+                                class="w-10 h-full text-white/30 hover:text-white flex items-center justify-center transition-colors">
+                                <i class="fas fa-list text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- TOURS GRID -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="tours-grid">
+                        <!-- Card 1: Grand Sri Lanka Trip -->
+                        <div class="glass-dark rounded-3xl overflow-hidden group border-2 border-primary flex flex-col h-full"
+                            data-destination="colombo" data-type="tour" data-duration="3">
+                            <div
+                                class="relative h-64 overflow-hidden bg-white/5 animate-pulse transition-all duration-500">
+                                <img src="images/New folder/Card 1.png" alt="Sri Lanka Tour" loading="lazy"
+                                    decoding="async"
+                                    onload="this.style.opacity='1'; this.parentElement.classList.remove('animate-pulse', 'bg-white/5');"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-0 transition-opacity duration-500" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                                <button onclick="toggleWishlist(this)"
+                                    class="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center text-white/50 hover:text-red-500 transition-all">
+                                    <i class="far fa-heart"></i>
+                                </button>
+
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col bg-[#0f172a]">
+                                <h3 class="text-2xl font-bold mb-3 uppercase leading-tight">2 Nights 3 Days Sri Lanka
+                                    Holiday
+                                    Tour</h3>
+                                <p
+                                    class="text-white/60 text-[11px] font-medium leading-relaxed mb-6 italic border-l-2 border-primary/20 pl-4 py-1">
+                                    Pinnawala Elephant Orphanage – Sigiriya Rock fortress – Dambulla Cave Temple – Kandy
+                                    Temple of the Sacred Tooth Relic
+                                </p>
+                                <button onclick="openDetailModal('2 Nights 3 Days Sri Lanka Holiday Tour')"
+                                    class="w-full mt-auto bg-gray-200 text-black rounded-full py-4 font-bold hover:bg-gray-300 transition-all shadow-lg shadow-gray-200/10">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 3: Pinnawala Elephant Experience -->
+                        <div class="glass-dark rounded-3xl overflow-hidden group border-2 border-primary flex flex-col h-full"
+                            data-destination="kegalle" data-type="tour" data-duration="4">
+                            <div
+                                class="relative h-64 overflow-hidden bg-white/5 animate-pulse transition-all duration-500">
+                                <img src="images/New folder/Card 2.png" alt="Pinewala" loading="lazy" decoding="async"
+                                    onload="this.style.opacity='1'; this.parentElement.classList.remove('animate-pulse', 'bg-white/5');"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-0 transition-opacity duration-500" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                                <button onclick="toggleWishlist(this)"
+                                    class="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center text-white/50 hover:text-red-500 transition-all">
+                                    <i class="far fa-heart"></i>
+                                </button>
+
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col bg-[#0f172a]">
+                                <h3 class="text-2xl font-bold mb-3 uppercase leading-tight">3 Nights 4 Days Sri Lanka
+                                    Holiday
+                                    Tour</h3>
+                                <p
+                                    class="text-white/60 text-[11px] font-medium leading-relaxed mb-6 italic border-l-2 border-primary/20 pl-4 py-1">
+                                    Pinnawala Elephant Orphanage – Sigiriya Rock fortress – Dambulla Cave Temple – Kandy
+                                    Temple of the Sacred Tooth Relic – Nuwara Eliya
+                                </p>
+                                <button onclick="openDetailModal('3 Nights 4 Days Sri Lanka Holiday Tour')"
+                                    class="w-full mt-auto bg-gray-200 text-black rounded-full py-4 font-bold hover:bg-gray-300 transition-all shadow-lg shadow-gray-200/10">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 4: Nuwara Eliya (Customized) -->
+                        <div class="glass-dark rounded-3xl overflow-hidden group group/card relative border-2 border-primary flex flex-col h-full"
+                            id="nuwara-eliya-card" data-destination="nuwaraeliya" data-type="vacation"
+                            data-duration="5">
+                            <div
+                                class="relative h-64 overflow-hidden bg-white/5 animate-pulse transition-all duration-500">
+                                <img src="images/New folder/Card 3.png" alt="Nuwara Eliya" loading="lazy"
+                                    decoding="async"
+                                    onload="this.style.opacity='1'; this.parentElement.classList.remove('animate-pulse', 'bg-white/5');"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-0 transition-opacity duration-500" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                                <button onclick="toggleWishlist(this)"
+                                    class="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center text-white/50 hover:text-red-500 transition-all z-10">
+                                    <i class="far fa-heart"></i>
+                                </button>
+
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col bg-[#0f172a]">
+                                <h3 class="text-2xl font-bold mb-3 uppercase leading-tight">4 Nights 5 Days Sri Lanka
+                                    Holiday
+                                    Tour</h3>
+                                <p
+                                    class="text-white/60 text-[11px] font-medium leading-relaxed mb-6 italic border-l-2 border-primary/20 pl-4 py-1">
+                                    Pinnawala Elephant Orphanage – Sigiriya Rock fortress – Dambulla Cave Temple – Kandy
+                                    Temple of the Sacred Tooth Relic – Ramboda Water Fall & Tea Factory – Nuwara Eliya
+                                </p>
+                                <button onclick="openDetailModal('4 Nights 5 Days Sri Lanka Holiday Tour')"
+                                    class="w-full bg-gray-200 text-black rounded-full py-4 font-bold hover:bg-gray-300 transition-all shadow-lg shadow-gray-200/10">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 5: Kandy -->
+                        <div class="glass-dark rounded-3xl overflow-hidden group border-2 border-primary flex flex-col h-full"
+                            data-destination="kandy" data-type="vacation" data-duration="7">
+                            <div
+                                class="relative h-64 overflow-hidden bg-white/5 animate-pulse transition-all duration-500">
+                                <img src="images/New folder/Card 4.png" alt="Kandy" loading="lazy" decoding="async"
+                                    onload="this.style.opacity='1'; this.parentElement.classList.remove('animate-pulse', 'bg-white/5');"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-0 transition-opacity duration-500" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                                <button onclick="toggleWishlist(this)"
+                                    class="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center text-white/50 hover:text-red-500 transition-all">
+                                    <i class="far fa-heart"></i>
+                                </button>
+
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col bg-[#0f172a]">
+                                <h3 class="text-2xl font-bold mb-3 uppercase leading-tight">6 Nights 7 Days Sri Lanka
+                                    Holiday
+                                    Tour</h3>
+                                <p
+                                    class="text-white/60 text-[11px] font-medium leading-relaxed mb-6 italic border-l-2 border-primary/20 pl-4 py-1">
+                                    Negambo Beach – Pinnawala Elephant Orphanage – Sigiriya Rock fortress – Dambulla
+                                    Cave
+                                    Temple – Kandy Temple of the Sacred Tooth Relic – Ramboda Water Fall & Tea Factory –
+                                    Nuwara Eliya – Hikkaduwa – Colombo
+                                </p>
+                                <button onclick="openDetailModal('6 Nights 7 Days Sri Lanka Holiday Tour')"
+                                    class="w-full mt-auto bg-gray-200 text-black rounded-full py-4 font-bold hover:bg-gray-300 transition-all shadow-lg shadow-gray-200/10">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 6: Dambulla Cave – Kandy Temple -->
+                        <div class="glass-dark rounded-3xl overflow-hidden group border-2 border-primary flex flex-col h-full"
+                            data-destination="kandy" data-type="tour vacation" data-duration="8">
+                            <div
+                                class="relative h-64 overflow-hidden bg-white/5 animate-pulse transition-all duration-500">
+                                <img src="images/New folder/Card 5.png" loading="lazy" decoding="async"
+                                    onload="this.style.opacity='1'; this.parentElement.classList.remove('animate-pulse', 'bg-white/5');"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-0 transition-opacity duration-500"
+                                    alt="Leeza Travels" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                                <button onclick="toggleWishlist(this)"
+                                    class="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center text-white/50 hover:text-red-500 transition-all">
+                                    <i class="far fa-heart"></i>
+                                </button>
+
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col bg-[#0f172a]">
+                                <h3 class="text-2xl font-bold mb-3 uppercase leading-tight">7 Nights 8 Days Sri Lanka
+                                    Holiday
+                                    Tour</h3>
+                                <p
+                                    class="text-white/60 text-[11px] font-medium leading-relaxed mb-6 italic border-l-2 border-primary/20 pl-4 py-1">
+                                    Negombo – Pinnawala Elephant Orphanage – Sigiriya Rock fortress – Dambulla Cave
+                                    Temple –
+                                    Kandy Temple of the Sacred Tooth Relic – Ramboda Water Fall & Tea Factory – Nuwara
+                                    Eliya
+                                    – Bentota – Colombo
+                                </p>
+                                <button onclick="openDetailModal('7 Nights 8 Days Sri Lanka Holiday Tour')"
+                                    class="w-full mt-auto bg-gray-200 text-black rounded-full py-4 font-bold hover:bg-gray-300 transition-all shadow-lg shadow-gray-200/10">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 7: Bentota – Colombo (Premium) -->
+                        <div class="glass-dark rounded-3xl overflow-hidden group border-2 border-primary flex flex-col h-full"
+                            data-destination="colombo" data-type="tour" data-duration="10">
+                            <div
+                                class="relative h-64 overflow-hidden bg-white/5 animate-pulse transition-all duration-500">
+                                <img src="images/New folder/Card 6.png" alt="Bentota Premium" loading="lazy"
+                                    decoding="async"
+                                    onload="this.style.opacity='1'; this.parentElement.classList.remove('animate-pulse', 'bg-white/5');"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-0 transition-opacity duration-500" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                                <button onclick="toggleWishlist(this)"
+                                    class="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center text-white/50 hover:text-red-500 transition-all">
+                                    <i class="far fa-heart"></i>
+                                </button>
+
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col bg-[#0f172a]">
+                                <h3 class="text-2xl font-bold mb-3 uppercase leading-tight">9 Nights 10 Days Sri Lanka
+                                    Holiday Tour</h3>
+                                <p
+                                    class="text-white/60 text-[11px] font-medium leading-relaxed mb-6 italic border-l-2 border-primary/20 pl-4 py-1">
+                                    Negombo – Pinnawala Elephant Orphanage – Sigiriya Rock fortress – Dambulla Cave
+                                    Temple –
+                                    Kandy Temple of the Sacred Tooth Relic – Ramboda Water Fall & Tea Factory – Nuwara
+                                    Eliya
+                                    – Ella & Rawana Water Fall – Yala National Park – Galle Dutch fort – Turtal hachery
+                                    –
+                                    Bentota – Colombo
+                                </p>
+                                <button onclick="openDetailModal('9 Nights 10 Days Sri Lanka Holiday Tour')"
+                                    class="w-full mt-auto bg-gray-200 text-black rounded-full py-4 font-bold hover:bg-gray-300 transition-all shadow-lg shadow-gray-200/10">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div> <!-- End of tours-grid -->
+                </section>
+            </div>
+        </main>
+        <!-- FLOATING SOCIAL SIDEBAR -->
+        <div class="social-sidebar">
+            <!-- Call - phone rotated to point right -->
+            <a href="tel:0779741834" class="social-link social-call">
+                <i class="fas fa-phone" style="transform: rotate(0deg);"></i>
+                <span>Call Us</span>
+            </a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/94779741834" target="_blank" class="social-link social-whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+            <!-- Message -->
+            <a href="sms:0779741834" target="_blank" class="social-link social-message">
+                <i class="far fa-comment-dots"></i>
+                <span>Message</span>
+            </a>
+            <!-- Facebook -->
+            <a href="https://web.facebook.com/share/r/18SjNMG5PM/" target="_blank" class="social-link social-facebook">
+                <i class="fab fa-facebook-f"></i>
+                <span>Facebook</span>
+            </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/leezatravelssrilanka?igsh=MWFja3F3NGpyZ2Q3aA==" target="_blank"
+                class="social-link social-instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@leeza_travels?_r=1&_d=f2l0ab20gee10i&sec_uid=MS4wLjABAAAAee91_zFo1AWjcWAt37lITpgCS8ZKKEiK-hGlpz4azUF2KxvFIvG6IMR9qsklV5Bh&share_author_id=7624058210085782545&sharer_language=en&source=h5_m&u_code=f2kf36j90158hf&timestamp=1775717726&user_id=7624058210085782545&sec_user_id=MS4wLjABAAAAee91_zFo1AWjcWAt37lITpgCS8ZKKEiK-hGlpz4azUF2KxvFIvG6IMR9qsklV5Bh&item_author_type=1&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7624405161733048081&share_link_id=dcab7481-1766-48dd-9a5e-8114416f60d9&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb7360&social_share_type=5&enable_checksum=1"
+                target="_blank" class="social-link social-tiktok">
+                <i class="fab fa-tiktok"></i>
+                <span>TikTok</span>
+            </a>
+        </div>
+        <script>
+            // Make functions global immediately
+            window.selectedDurations = new Set();
+
+            window.toggleDuration = function (val) {
+                const v = String(val);
+                if (window.selectedDurations.has(v)) {
+                    window.selectedDurations.clear();
+                } else {
+                    window.selectedDurations.clear();
+                    window.selectedDurations.add(v);
+                }
+                updateDurationButtons();
+                filterTours();
+            };
+
+            window.clearAllFilters = function () {
+                const input = document.getElementById('tour-search');
+                if (input) input.value = '';
+                window.selectedDurations.clear();
+                updateDurationButtons();
+                filterTours();
+            };
+
+            window.updateDurationButtons = function () {
+                document.querySelectorAll('[data-duration-val]').forEach(btn => {
+                    const val = btn.getAttribute('data-duration-val');
+                    const icon = btn.querySelector('span:first-child');
+                    const label = btn.querySelector('span:last-child');
+                    if (window.selectedDurations.has(val)) {
+                        btn.style.background = 'rgba(255,107,53,0.15)';
+                        btn.style.borderColor = 'rgba(255,107,53,0.6)';
+                        btn.style.boxShadow = '0 0 0 1px rgba(255,107,53,0.2)';
+                        if (icon) { icon.style.background = 'rgba(255,107,53,0.25)'; }
+                        if (label) { label.style.color = '#FF6B35'; }
+                    } else {
+                        btn.style.background = '';
+                        btn.style.borderColor = '';
+                        btn.style.boxShadow = '';
+                        if (icon) { icon.style.background = ''; }
+                        if (label) { label.style.color = ''; }
+                    }
+                });
+            };
+
+            window.filterTours = function () {
+                const rawVal = (document.getElementById('tour-search')?.value || '').trim();
+                const searchVal = rawVal.toLowerCase();
+                const grid = document.getElementById('tours-grid');
+                if (!grid) return;
+
+                // Check if user typed any letter a-z
+                const hasLetters = /[a-z]/i.test(searchVal);
+
+                const cards = grid.querySelectorAll(':scope > div');
+                cards.forEach(card => {
+                    const duration = card.getAttribute('data-duration');
+                    const titleText = (card.querySelector('h3')?.textContent || '').toLowerCase();
+
+                    const durationOk = window.selectedDurations.size === 0 || window.selectedDurations.has(duration);
+                    let searchOk = true;
+
+                    if (searchVal) {
+                        if (hasLetters) {
+                            // If letters are typed, hide the card as requested
+                            searchOk = false;
+                        } else {
+                            // If only numbers are typed, search within the title to match the days/nights numbers
+                            searchOk = titleText.includes(searchVal);
+                        }
+                    }
+
+                    if (durationOk && searchOk) {
+                        card.style.display = 'flex';
+                        card.style.opacity = '1';
+                        card.style.visibility = 'visible';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            };
+
+            // Initialize on load
+            document.addEventListener('DOMContentLoaded', filterTours);
+
+            // ── INFO MODAL (Team / Careers / Privacy / FAQs) ──────────────────────
+            const infoContent = {
+                about: {
+                    title: 'About Leeza Travels',
+                    tag: 'Our Story',
+                    html: `<p>Leeza Travels was born from a passion for the untamed beauty of Sri Lanka. We believe travel is more than just visiting places; it's about the stories you bring home. From the misty highlands of Ella to the historic ramparts of Galle, we curate experiences that connect you with the soul of our island.</p>
+               <p>Our mission is to provide sustainable, responsible, and deeply personal travel experiences while supporting local communities across Sri Lanka.</p>`
+                },
+                team: {
+                    title: 'Meet Our Experts',
+                    tag: 'Expertise',
+                    html: `<div class="grid grid-cols-1 gap-4 max-w-sm mx-auto">
+                  <div class="glass p-6 pt-16 rounded-3xl text-center border border-white/5 shadow-lg mt-16 relative">
+                    <div class="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden absolute -top-14 left-1/2 -translate-x-1/2 border-4 border-[#0f172a] shadow-2xl shadow-black/60 bg-[#0f172a]">
+                      <img src="images/Kumara.jpg" alt="Mr. Kumara Perera" class="w-full h-full object-cover" style="object-position: center; object-fit: cover;" />
+                    </div>
+                    <div class="font-bold text-white text-xl mb-1">Mr. Kumara Perera</div>
+                    <div class="text-xs text-primary font-black uppercase tracking-widest mb-3">Founder & Lead Explorer</div>
+                    <p class="text-sm text-white/50 leading-relaxed px-4">Mr. Kumara Perera, the visionary founder of Leeza Travels, brings over 15 years of distinguished expertise in Sri Lankan tourism. His journey began with a simple love for the island's hidden trails and has evolved into a mission to share these authentic experiences with the world. Under his leadership, Leeza Travels emphasizes personalized service and a commitment to sustainable travel excellence.</p>
+                    <div class="mt-6 flex justify-center gap-4">
+                      <a href="https://www.facebook.com/share/1CSxCPAnHR/" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-white/30 hover:text-primary border border-white/10 transition-all hover:scale-110"><i class="fab fa-facebook-f"></i></a>
+                      <a href="https://www.instagram.com" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-white/30 hover:text-primary border border-white/10 transition-all hover:scale-110"><i class="fab fa-instagram"></i></a>
+                    </div>
+                  </div>
+               </div>`
+                },
+                explore: {
+                    title: 'Explore Our World',
+                    tag: 'Wanderlust',
+                    html: `<div class="mb-6">
+                 <h4 class="text-xs font-black uppercase tracking-widest text-primary mb-3">Sri Lanka</h4>
+                 <p class="text-[11px] text-white/50 mb-4">Discover the pear of the Indian Ocean, where ancient history meets tropical paradise.</p>
+                 <ul class="space-y-2">
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-certificate text-primary mt-0.5"></i> <span><strong>Ancient Cities:</strong> Explore the ruins of Sigiriya and Anuradhapura.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-certificate text-primary mt-0.5"></i> <span><strong>Misty Highlands:</strong> Experience the tea estates and waterfalls of Ella.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-certificate text-primary mt-0.5"></i> <span><strong>Golden Coast:</strong> Relax on the pristine beaches of Mirissa and Galle.</span></li>
+                 </ul>
+               </div>
+               <div>
+                 <h4 class="text-xs font-black uppercase tracking-widest text-primary mb-3">Global Adventures</h4>
+                 <p class="text-[11px] text-white/50 mb-4">Embark on a journey beyond shores to our handpicked international gems.</p>
+                 <ul class="space-y-2">
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-globe-americas text-primary mt-0.5"></i> <span><strong>Europe:</strong> Experience the romance of France and the majesty of the Swiss Alps.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-globe-asia text-primary mt-0.5"></i> <span><strong>Asia:</strong> Dive into the vibrant culture of Japan and the tropical beauty of Indonesia.</span></li>
+                   <li class="flex items-start gap-2 text-[10px] text-white/70"><i class="fas fa-globe-europe text-primary mt-0.5"></i> <span><strong>Middle East:</strong> Witness the historic cross-roads and stunning landscapes of Turkey.</span></li>
+                 </ul>
+               </div>`
+                },
+                careers: {
+                    title: 'Join Our Journey',
+                    tag: 'Careers',
+                    html: `<div class="text-center py-10">
+                  <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-briefcase text-2xl text-primary"></i>
+                  </div>
+                  <h4 class="text-white text-xl font-bold mb-4">Grow With Leeza Travels</h4>
+                  <p class="text-white/50 text-sm mb-6 leading-relaxed max-w-md mx-auto">
+                    We're not just a team; we're a family of explorers. While we may not have an immediate opening listed today, we are always searching for passionate Sri Lankan travel experts and guides who want to make a difference.
+                  </p>
+                  <p class="text-white/40 text-xs mb-8 italic">
+                    If you have a heart for hospitality and a deep knowledge of our beautiful island, we'd love to hear from you.
+                  </p>
+                  <div class="pt-6 border-t border-white/5">
+                    <p class="text-[10px] text-white/30 uppercase tracking-widest font-black mb-1">Send your portfolio to</p>
+                    <p class="text-primary font-bold text-lg">Leezatravelslk@gmail.com</p>
+                  </div>
+               </div>`
+                },
+                privacy: {
+                    title: 'Privacy Policy',
+                    tag: 'Security',
+                    html: `<p>Your privacy is paramount. At Leeza Travels, we use your data strictly to manage your bookings and enhance your experience. We do not sell your personal information to third parties.</p>
+               <p>We use industry standard encryption to protect your data stored in our local databases and secure transmission for booking and contact forms.</p>`
+                },
+                faqs: {
+                    title: 'Frequently Asked Questions',
+                    tag: 'Support',
+                    html: `<div class="space-y-6">
+                 <div>
+                   <div class="font-bold text-white text-sm mb-1">How do I book a customized tour?</div>
+                   <div class="text-xs text-white/50">Simply use our contact form or the "Other" option in the booking menu, and our experts will call you.</div>
+                 </div>
+                 <div>
+                   <div class="font-bold text-white text-sm mb-1">What is the cancellation policy?</div>
+                   <div class="text-xs text-white/50">Free cancellation up to 48 hours before the tour starts for most packages.</div>
+                 </div>
+                 <div>
+                   <div class="font-bold text-white text-sm mb-1">Are airport transfers included?</div>
+                   <div class="text-xs text-white/50">Yes, most of our comprehensive packages include luxury airport pick-up and drop-off.</div>
+                 </div>
+               </div>`
+                },
+                cancellation: {
+                    title: 'Cancellation Policy',
+                    tag: 'Flexibility',
+                    html: `<p class="mb-6">We understand that plans change. Our goal is to provide maximum flexibility.</p>
+               <ul class="space-y-4">
+                 <li class="bg-white/5 p-5 rounded-2xl border border-white/10 shadow-xl">
+                   <div class="font-bold text-primary mb-1">48 Hours Notice</div>
+                   <div class="text-white/50 text-xs text-left leading-relaxed">Full refund minus minor processing fees for most standard tours.</div>
+                 </li>
+                 <li class="bg-white/5 p-5 rounded-2xl border border-white/10 shadow-xl">
+                   <div class="font-bold text-accent mb-1">Less than 24 Hours</div>
+                   <div class="text-white/50 text-xs text-left leading-relaxed">A 50% cancellation fee may apply depending on the booking type.</div>
+                 </li>
+               </ul>`
+                }
+            };
+
+            window.showInfoModal = function (key) {
+                const data = infoContent[key];
+                if (!data) return;
+                document.getElementById('info-title').textContent = data.title;
+                document.getElementById('info-tag').textContent = data.tag;
+                document.getElementById('info-content').innerHTML = data.html;
+                const m = document.getElementById('info-modal');
+                m.style.display = 'flex'; m.classList.remove('hidden');
+            };
+            window.closeInfoModal = function () {
+                const m = document.getElementById('info-modal');
+                m.style.display = 'none'; m.classList.add('hidden');
+            };
+        </script>
+        <!-- FOOTER -->
+        <footer id="main-footer"
+            class="border-t border-white/10 pt-16 pb-10 px-6 bg-[#080808] relative z-[100] pointer-events-auto block w-full">
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="grid md:grid-cols-4 gap-10 mb-10">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="images/1.png" alt="Leeza Travels Logo" class="w-14 h-14 object-contain" />
+                            <span class="text-lg font-bold gtext">Leeza<span class="text-white font-light">
+                                    Travels</span></span>
+                        </div>
+                        <p class="text-white/80 text-sm mb-5 font-medium">Crafting unforgettable journeys. Your
+                            adventure
+                            begins with
+                            a
+                            single step.</p>
+                        <div class="flex gap-4">
+                            <a href="https://web.facebook.com/share/r/18SjNMG5PM/" target="_blank"
+                                class="w-10 h-10 rounded-full bg-[#1877F2] border border-[#1877F2] flex items-center justify-center text-white transition-all group shadow-[0_4px_12px_rgba(24,119,242,0.3)]">
+                                <i class="fab fa-facebook-f group-hover:scale-110 transition-transform"></i>
+                            </a>
+                            <a href="https://www.instagram.com/leezatravelssrilanka?igsh=MWFja3F3NGpyZ2Q3aA=="
+                                target="_blank"
+                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center text-white border-none transition-all group shadow-lg shadow-pink-500/20 hover:scale-110">
+                                <i class="fab fa-instagram transition-transform"></i>
+                            </a>
+                            <a href="#" target="_blank"
+                                class="w-10 h-10 rounded-full bg-black border border-white/20 flex items-center justify-center text-white transition-all group shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                                <i class="fab fa-x-twitter group-hover:scale-110 transition-transform"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@leeza_travels?_r=1&_d=f2l0ab20gee10i&sec_uid=MS4wLjABAAAAee91_zFo1AWjcWAt37lITpgCS8ZKKEiK-hGlpz4azUF2KxvFIvG6IMR9qsklV5Bh&share_author_id=7624058210085782545&sharer_language=en&source=h5_m&u_code=f2kf36j90158hf&timestamp=1775717726&user_id=7624058210085782545&sec_user_id=MS4wLjABAAAAee91_zFo1AWjcWAt37lITpgCS8ZKKEiK-hGlpz4azUF2KxvFIvG6IMR9qsklV5Bh&item_author_type=1&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7624405161733048081&share_link_id=dcab7481-1766-48dd-9a5e-8114416f60d9&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb7360&social_share_type=5&enable_checksum=1"
+                                target="_blank"
+                                class="w-10 h-10 rounded-full bg-black border border-white/20 flex items-center justify-center text-white transition-all group hover:scale-110 shadow-[0_4px_12_rgba(0,0,0,0.5)]">
+                                <i class="fab fa-tiktok transition-transform group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,1)]"
+                                    style="filter: drop-shadow(2px 2px 0px #FE2C55) drop-shadow(0 0 4px #FE2C55);"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4 text-xs uppercase tracking-widest text-white/90">Destinations</h4>
+                        <ul class="space-y-2 text-sm text-white/70 font-medium">
+                            <li><a href="javascript:void(0)" onclick="openDestInfoModal('colombo')"
+                                    class="hover:text-primary transition-colors">Colombo</a></li>
+                            <li><a href="javascript:void(0)" onclick="openDestInfoModal('kandy')"
+                                    class="hover:text-primary transition-colors">Kandy</a></li>
+                            <li><a href="javascript:void(0)" onclick="openDestInfoModal('dambulla')"
+                                    class="hover:text-primary transition-colors">Dambulla</a></li>
+                            <li><a href="javascript:void(0)" onclick="openDestInfoModal('nuwaraeliya')"
+                                    class="hover:text-primary transition-colors">Nuwara Eliya</a></li>
+                            <li><a href="javascript:void(0)" onclick="openDestInfoModal('galle')"
+                                    class="hover:text-primary transition-colors">Galle</a></li>
+                            <li><a href="javascript:void(0)" onclick="openDestInfoModal('mirissa')"
+                                    class="hover:text-primary transition-colors">Mirissa</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4 text-xs uppercase tracking-widest text-white/90">Company</h4>
+                        <ul class="space-y-2 text-sm text-white/70 font-medium">
+                            <li><a href="index.html#about" class="hover:text-primary transition-colors">About Us</a>
+                            </li>
+                            <li><a href="javascript:void(0)" onclick="showInfoModal('team')"
+                                    class="hover:text-primary transition-colors">Our Team</a></li>
+                            <li><a href="explore.html" class="hover:text-primary transition-colors">Explore</a></li>
+                            <li><a href="javascript:void(0)" onclick="showInfoModal('careers')"
+                                    class="hover:text-primary transition-colors">Careers</a></li>
+                            <li><a href="javascript:void(0)" onclick="showInfoModal('privacy')"
+                                    class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4 text-xs uppercase tracking-widest text-white/90">Support</h4>
+                        <ul class="space-y-2 text-sm text-white/70 font-medium">
+                            <li><a href="javascript:void(0)" onclick="showInfoModal('faqs')"
+                                    class="hover:text-primary transition-colors">FAQs</a></li>
+                            <li><a href="index.html#contact" class="hover:text-primary transition-colors">Contact Us</a>
+                            </li>
+                            <li><a href="javascript:void(0)" onclick="showTrackModal()"
+                                    class="hover:text-primary transition-colors">Track Booking</a></li>
+                            <li><a href="javascript:void(0)" onclick="showInfoModal('cancellation')"
+                                    class="hover:text-primary transition-colors">Cancellation Policy</a></li>
+                        </ul>
+                        <div id="db-badge" onclick="showDBViewer()"
+                            class="hidden mt-5 text-xs text-white/25 flex items-center gap-1.5 cursor-pointer hover:text-emerald-400 transition-colors group"
+                            title="Click to view stored data">
+                            <span
+                                class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block group-hover:animate-pulse"></span>IndexedDB
+                            connected <i
+                                class="fas fa-table ml-1 opacity-0 group-hover:opacity-100 transition-opacity text-[9px]"></i>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="border-t border-white/10 pt-7 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/60 w-full">
+                    <span>&copy; 2026 Leezatravels. All rights reserved.</span>
+                    <span>Website by C Tech Solution</span>
+                </div>
+            </div>
+        </footer>
+    </div><!-- /#page-scroll-wrap -->
+    <!-- DETAIL MODAL -->
+    <div id="detail-modal" class="fixed inset-0 z-[210] grid place-items-center p-4 md:p-8 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeDetailModal()"></div>
+        <div
+            class="relative glass-dark rounded-[2.5rem] md:rounded-[3.5rem] w-full max-w-7xl h-[90vh] overflow-hidden z-10 animate-modalZoom flex flex-col border border-white/10 shadow-3xl mx-auto">
+            <!-- Close button -->
+            <button onclick="closeDetailModal()"
+                class="absolute top-8 right-8 w-16 h-14 rounded-full glass flex items-center justify-center text-white/50 hover:text-white text-2xl z-30 transition-all hover:rotate-90">
+                <i class="fas fa-times"></i>
+            </button>
+            <!-- Main Content Container (No Sidebar) -->
+            <div class="flex-1 flex flex-col h-full min-h-0 bg-[#0a0a0a]">
+                <!-- Modal Top Header Section -->
+                <div class="relative h-64 md:h-80 shrink-0">
+                    <img id="d-img" src="" class="w-full h-full object-cover" alt="Detail" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                    <div
+                        class="absolute bottom-8 left-10 right-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                        <div>
+                            <span id="d-loc"
+                                class="text-[10px] bg-primary/30 text-primary rounded-full px-4 py-1.5 block w-fit mb-3 font-black uppercase tracking-widest">District</span>
+                            <h2 id="d-title" class="text-[24px] font-bold leading-tight text-white">
+                                Destination Name</h2>
+                        </div>
+                        <!-- Info Badges -->
+                        <div class="flex gap-4">
+                            <div
+                                class="glass-dark px-6 py-3 rounded-2xl text-center border border-white/10 min-w-[100px] backdrop-blur-xl">
+                                <span id="d-days" class="block text-[18px] text-primary leading-none">0</span>
+                                <span class="text-[10px] uppercase tracking-widest text-white/40">Days</span>
+                            </div>
+                            <div
+                                class="glass-dark px-6 py-3 rounded-2xl text-center border border-white/10 min-w-[100px] backdrop-blur-xl">
+                                <span id="d-nights" class="block text-[18px] text-primary leading-none">0</span>
+                                <span class="text-[10px] uppercase tracking-widest text-white/40">Nights</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tabs Header -->
+                <div class="flex border-b border-white/5 px-8 pt-2 gap-6 mb-1">
+                    <button onclick="switchTab('overview')" id="tab-btn-overview"
+                        class="pb-4 text-[18px] border-b-2 border-primary text-primary hover:text-white transition-all flex items-center gap-2">
+                        <i class="fas fa-eye text-[10px]"></i> Overview
+                    </button>
+                    <button onclick="switchTab('itinerary')" id="tab-btn-itinerary"
+                        class="pb-4 text-[18px] border-b-2 border-transparent text-white/30 hover:text-white transition-all flex items-center gap-2">
+                        <i class="fas fa-route text-[10px]"></i> Itinerary
+                    </button>
+                    <button onclick="switchTab('map')" id="tab-btn-map"
+                        class="pb-4 text-[18px] border-b-2 border-transparent text-white/30 hover:text-white transition-all flex items-center gap-2">
+                        <i class="fas fa-map-marked-alt text-[10px]"></i> Map
+                    </button>
+                </div>
+                <!-- Tabs Content -->
+                <div class="flex-1 overflow-y-auto min-h-0 pt-2 pb-2 px-8 md:px-12 custom-scrollbar">
+                    <div id="tab-overview" class="tab-content animate-fadeIn space-y-2">
+                        <div class="grid lg:grid-cols-2 gap-12 items-start">
+                            <div class="space-y-3">
+                                <div>
+                                    <h4 id="d-about-heading"
+                                        class="text-primary text-[20px] font-bold uppercase tracking-widest mb-2">
+                                        About
+                                        The Tour</h4>
+
+                                    <p id="d-long-desc" class="text-white/60 text-[16px] leading-relaxed">
+                                        Description...
+                                    </p>
+                                </div>
+                                <!-- Highlights section -->
+                                <div id="highlights-wrapper" class="space-y-4">
+                                    <!-- Dynamic highlights here -->
+                                </div>
+                                <!-- Tour Gallery (formerly in sidebar) -->
+                                <div class="space-y-4 pt-2 mt-0 border-t border-white/5">
+                                    <h4
+                                        class="text-sm font-black uppercase tracking-widest text-white/30 flex items-center gap-2">
+                                        <i class="fas fa-images text-primary"></i> Tour Gallery
+                                    </h4>
+                                    <div id="side-gallery" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <!-- Images dynamically loaded -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass-dark border border-white/10 rounded-[1.5rem] p-6 shadow-2xl sticky top-0">
+                                <h4 class="text-[17px] font-bold mb-1.5 text-white">Plan Your Journey</h4>
+                                <p class="text-white/40 text-[12px] mb-5">Send us an enquiry for: <span
+                                        id="enquiry-trip-name"
+                                        class="text-primary uppercase tracking-wider text-[12px]">Nuwara
+                                        Eliya</span>
+                                </p>
+                                <form id="enquiry-form" onsubmit="sendMsg(event)" class="space-y-4">
+                                    <input type="text" name="_honey" style="display:none">
+                                    <input type="hidden" name="_subject" value="New Message from Leeza Travels!">
+                                    <input type="hidden" name="_template" value="table">
+                                    <input type="hidden" name="_captcha" value="false">
+                                    <input id="c-name" name="name" type="text" placeholder="Your Name" required
+                                        class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+                                    <input id="c-email" name="email" type="email" placeholder="Your Email" required
+                                        class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+                                    <input id="c-phone" name="phone" type="tel" placeholder="Your Phone Number"
+                                        class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+                                    <input list="dest-options" id="c-dest" name="interest" type="text"
+                                        placeholder="Select or Type Tour Package"
+                                        class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+                                    <datalist id="dest-options">
+                                        <option value="2 Nights 3 Days Sri Lanka Holiday Tour"></option>
+                                        <option value="3 Nights 4 Days Sri Lanka Holiday Tour"></option>
+                                        <option value="4 Nights 5 Days Sri Lanka Holiday Tour"></option>
+                                        <option value="6 Nights 7 Days Sri Lanka Holiday Tour"></option>
+                                        <option value="7 Nights 8 Days Sri Lanka Holiday Tour"></option>
+                                        <option value="9 Nights 10 Days Sri Lanka Holiday Tour"></option>
+                                    </datalist>
+                                    <textarea id="c-msg" name="message" rows="4"
+                                        placeholder="Tell us about your dream trip..."
+                                        class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary resize-none"></textarea>
+                                    <button type="submit" id="c-btn"
+                                        class="w-full bg-primary text-black font-black py-2.5 rounded-lg hover:opacity-90 transition-all text-[13px] shadow-lg shadow-primary/20">
+                                        <span id="c-btn-text">Submit Enquiry</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- flex-1 container remains open so other tabs scroll inside it -->
+                    <!-- Itinerary Tab -->
+                    <div id="tab-itinerary" class="tab-content hidden animate-fadeIn pt-0">
+
+                        <div id="itinerary-list" class="flex flex-col gap-2 pb-10">
+                            <!-- Day items dynamically loaded -->
+                        </div>
+                    </div>
+                    <!-- Map Tab -->
+                    <div id="tab-map" class="tab-content hidden animate-fadeIn pb-10 pt-4">
+                        <div id="map-content" class="w-full flex justify-center items-center">
+                            <img src="images/3.webp" alt="Tour Route Map"
+                                class="w-full max-w-[900px] h-auto object-contain block border border-white/10 rounded-2xl">
+                        </div> <!-- End of map-content -->
+                    </div> <!-- End of tab-map -->
+                </div> <!-- End of flex-1 overflow-y-auto tabs container -->
+            </div> <!-- End of Main Content flex-1 -->
+        </div> <!-- End of glass-dark modal wrapper -->
+    </div> <!-- End of detail-modal -->
+    <!-- BOOKING MODAL (Placeholder for clean version below) -->
+    <!-- PROFILE MODAL -->
+    <div id="profile-modal" class="fixed inset-0 z-[1100] items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="toggleProfileModal()"></div>
+        <div class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10"
+            style="max-height:90vh;overflow-y:auto;">
+            <div class="relative h-32 bg-gradient-to-r from-primary/20 to-accent/20">
+                <button onclick="toggleProfileModal()"
+                    class="absolute top-6 right-6 text-white/50 hover:text-white text-xl z-20 transition-all hover:rotate-90">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="px-8 pb-8 -mt-12 relative z-10 flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full border-4 border-[#0a0a0a] bg-gradient-to-br from-primary to-accent flex items-center justify-center text-3xl font-bold text-white mb-4 shadow-2xl"
+                    id="profile-avatar">U</div>
+                <h2 class="text-2xl font-bold text-white mb-1" id="profile-name">User Name</h2>
+                <p class="text-white/40 text-xs mb-6 tracking-widest uppercase font-black" id="profile-email">
+                    email@example.com</p>
+                <!-- Phone Info -->
+                <div class="w-full bg-white/5 rounded-2xl p-4 mb-4 border border-white/5 flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-black uppercase tracking-widest text-white/30">Phone Number</p>
+                        <p class="text-sm font-bold text-white" id="profile-phone">Not Provided</p>
+                    </div>
+                </div>
+                <!-- Travel History -->
+                <div class="w-full bg-white/5 rounded-3xl p-6 mb-4 border border-white/5">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xs font-black uppercase tracking-widest text-white/50">My Travel History</h3>
+                        <span class="bg-primary/10 text-primary text-[10px] font-black px-2 py-0.5 rounded-full"
+                            id="profile-booking-count">0 Bookings</span>
+                    </div>
+                    <div id="profile-booking-list" class="space-y-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                        <!-- JS Populated -->
+                    </div>
+                    <div class="mt-4 text-center">
+                        <span class="text-[10px] text-white/30 uppercase font-black tracking-widest">Scroll to view
+                            all</span>
+                    </div>
+                </div>
+
+                <button onclick="logout()"
+                    class="w-full glass py-4 rounded-2xl font-bold text-rose-500 hover:bg-rose-500/10 transition-all text-xs uppercase tracking-widest border border-rose-500/20">Logout
+                    from Session</button>
+            </div>
+        </div>
+    </div>
+    <!-- TRACK BOOKING MODAL -->
+    <div id="track-modal" class="fixed inset-0 z-[1100] items-center justify-center p-4 hidden" style="display:none">
+        <div class="absolute inset-0 bg-black/85 backdrop-blur-lg" onclick="closeTrackModal()"></div>
+        <div
+            class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10 shadow-2xl">
+            <div class="p-8 md:p-10">
+                <button onclick="closeTrackModal()"
+                    class="absolute top-6 right-6 text-white/50 hover:text-white text-xl"><i
+                        class="fas fa-times"></i></button>
+                <div class="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-search-location text-primary text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold font-playfair mb-2 text-white text-center">Track Your <em
+                        class="gtext">Booking</em></h2>
+                <p class="text-white/40 text-xs text-center mb-8">Enter your Email to view all your adventure history.
+                </p>
+                <div class="space-y-4 mb-8">
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-white/20"></i>
+                        <input type="email" id="track-email" placeholder="Enter Your Email"
+                            class="w-full bg-white/5 border border-white/10 rounded-2xl pl-11 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all">
+                    </div>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-white/20"></i>
+                        <input type="password" id="track-password" placeholder="Enter Your Password"
+                            class="w-full bg-white/5 border border-white/10 rounded-2xl pl-11 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all">
+                    </div>
+                    <button onclick="trackBookings()"
+                        class="w-full bg-gradient-to-r from-primary to-accent py-4 rounded-2xl font-bold hover:scale-[1.02] transition-all shadow-lg shadow-primary/20">Find
+                        My Bookings</button>
+                </div>
+                <div id="track-results" class="space-y-4 max-h-64 overflow-y-auto pr-2 custom-scrollbar hidden">
+                    <!-- Results injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- DB VIEWER MODAL -->
+    <div id="db-modal" class="fixed inset-0 z-[1100] items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-2xl" onclick="closeDBViewer()"></div>
+        <div
+            class="relative glass-dark rounded-[2.5rem] w-full max-w-6xl h-[90vh] overflow-hidden z-10 animate-fadeUp flex flex-col border border-white/10 shadow-3xl">
+            <div class="p-8 md:p-10 shrink-0 border-b border-white/5">
+                <button onclick="closeDBViewer()"
+                    class="absolute top-8 right-8 w-12 h-12 rounded-full glass hover:bg-white/10 flex items-center justify-center text-white/50 hover:text-white text-xl transition-all"><i
+                        class="fas fa-times"></i></button>
+                <span class="text-emerald-400 text-[10px] font-black uppercase tracking-[0.3em] mb-2 block"><i
+                        class="fas fa-database mr-2"></i>Admin Intelligence System</span>
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-4xl font-bold font-playfair text-white leading-none">Local Database <em
+                            class="text-emerald-400">Control Panel</em></h2>
+                    <div class="flex items-center gap-3">
+                        <button id="db-delete-all-btn" onclick="deleteAllActiveStore()" style="display:none;"
+                            class="bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white text-[10px] px-3 py-1.5 rounded-lg font-bold uppercase tracking-widest transition-all"><i
+                                class="fas fa-trash-alt mr-1"></i>Delete All</button>
+                        <span
+                            class="text-[10px] text-white/30 uppercase font-black tracking-widest hidden md:block">Scroll
+                            to view all</span>
+                    </div>
+                </div>
+                <div class="flex gap-2 flex-wrap" id="db-tab-btns">
+                    <button onclick="loadDBStore('bookings', this)"
+                        class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative">
+                        <i class="fas fa-calendar-check text-white/50"></i>Bookings
+                        <span id="db-tab-count-bookings"
+                            class="ml-2 bg-primary text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+                    </button>
+                    <button onclick="loadDBStore('messages', this)"
+                        class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+                        <i class="fas fa-envelope text-white/40"></i>Messages
+                        <span id="db-tab-count-messages"
+                            class="ml-2 bg-sky-500 text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+                    </button>
+                    <button onclick="loadDBStore('users', this)"
+                        class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+                        <i class="fas fa-users text-white/40"></i>Users
+                        <span id="db-tab-count-users"
+                            class="ml-2 bg-purple-500 text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+                    </button>
+                    <button onclick="loadDBStore('newsletter', this)"
+                        class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+                        <i class="fas fa-newspaper text-white/40"></i>Newsletter
+                        <span id="db-tab-count-newsletter"
+                            class="ml-2 bg-emerald-500 text-white text-[9px] px-2 py-0.5 rounded-full hidden">0</span>
+                    </button>
+                    <button onclick="loadDBStore('admin_activity', this)"
+                        class="db-tab px-6 py-3 rounded-xl text-xs font-bold border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2 relative text-white/60">
+                        <i class="fas fa-clipboard-list text-white/40"></i>System Logs
+                    </button>
+                    <div class="flex-1"></div>
+                    <button onclick="toast('System Diagnostics: Normal', 'success')"
+                        class="px-6 py-3 rounded-xl text-xs font-bold bg-white/5 border border-white/5 hover:bg-white/10 transition-all flex items-center gap-2">
+                        <i class="fas fa-shield-halved text-emerald-400"></i>Self-Check
+                    </button>
+                </div>
+            </div>
+            <div id="db-viewer-content" class="flex-1 overflow-y-auto p-8 md:p-10 custom-scrollbar bg-black/20">
+                <div class="text-center py-20 text-white/10 transition-opacity">
+                    <i class="fas fa-database text-6xl mb-4 block"></i>
+                    <p class="text-sm font-bold tracking-widest uppercase">Select a node to begin inspection</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Broken modal removed -->
+    <!-- BROADCAST MODAL -->
+    <div id="broadcast-modal" class="fixed inset-0 z-[1100] flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeBroadcastModal()"></div>
+        <div class="glass-dark border border-white/10 rounded-2xl p-8 relative z-10 w-full max-w-lg shadow-2xl">
+            <button type="button" onclick="closeBroadcastModal()"
+                class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fas fa-times"></i></button>
+            <h3 class="text-xl font-bold mb-4">Broadcast Email</h3>
+            <p class="text-sm text-white/50 mb-4">Send an email broadcast to ALL newsletter subscribers.</p>
+            <textarea id="broadcast-msg"
+                class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white text-sm focus:outline-none focus:border-primary min-h-[120px]"
+                placeholder="Type your broadcast message..."></textarea>
+            <button onclick="sendBroadcast()" id="broadcast-btn"
+                class="w-full bg-primary text-black font-bold py-3 rounded-xl mt-4 hover:opacity-90 transition-all">Send
+                Broadcast</button>
+        </div>
+    </div>
+    <!-- BOOKING MODAL (Standardized from index.html) -->
+    <div id="booking-modal" class="fixed inset-0 z-[99999] flex items-center justify-center p-4 hidden"
+        style="background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);">
+        <div id="booking-modal-box"
+            class="relative w-full max-w-2xl glass-dark rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden animate-modalZoom custom-scrollbar"
+            style="max-height:90vh;overflow-y:auto;">
+            <!-- Header -->
+            <div class="px-8 pt-8 pb-6 border-b border-white/10 flex items-center justify-between">
+                <div>
+                    <div class="text-xs font-black uppercase tracking-widest text-primary mb-1">
+                        <i class="fas fa-calendar-check mr-2"></i>Book Your Journey
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Reserve Your Tour</h2>
+                    <p class="text-white/40 text-sm mt-1">Fill in your details and we'll get back to you within 24
+                        hours.</p>
+                </div>
+                <button onclick="closeModal()"
+                    class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/60 hover:text-white transition-all flex-shrink-0 ml-4">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <!-- Form -->
+            <form id="booking-form" onsubmit="submitBooking(event)" class="px-8 py-6 space-y-5">
+                <!-- Name + Email -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+                            <i class="fas fa-user text-primary mr-1"></i> Full Name *
+                        </label>
+                        <input type="text" id="bk-name" required placeholder="Your full name"
+                            class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-primary/60 transition-all" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+                            <i class="fas fa-envelope text-primary mr-1"></i> Email *
+                        </label>
+                        <input type="email" id="bk-email" required placeholder="your@email.com"
+                            class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-primary/60 transition-all" />
+                    </div>
+                </div>
+                <!-- Phone + Guests -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+                            <i class="fas fa-phone text-primary mr-1"></i> Phone Number *
+                        </label>
+                        <input type="tel" id="bk-phone" required placeholder="+94 77 XXX XXXX"
+                            class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-primary/60 transition-all" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+                            <i class="fas fa-users text-primary mr-1"></i> No. of Guests *
+                        </label>
+                        <input type="number" id="bk-guests" required min="1" max="100" placeholder="e.g. 4"
+                            class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-primary/60 transition-all" />
+                    </div>
+                </div>
+                <!-- Tour Selection -->
+                <div class="mb-2">
+                    <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+                        <i class="fas fa-map-marker-alt text-primary mr-1"></i> SELECT YOUR DESTINATION *
+                    </label>
+                    <div class="relative">
+                        <select id="bk-destination" name="destination" required
+                            class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-primary/60 transition-all appearance-none cursor-pointer pr-10">
+                            <option value="" disabled selected class="bg-dark">Select a Tour / Package</option>
+                            <option value="2 Nights 3 Days Sri Lanka Holiday Tour" class="bg-dark">2 Nights 3 Days Sri
+                                Lanka Holiday Tour</option>
+                            <option value="3 Nights 4 Days Sri Lanka Holiday Tour" class="bg-dark">3 Nights 4 Days Sri
+                                Lanka Holiday Tour</option>
+                            <option value="4 Nights 5 Days Sri Lanka Holiday Tour" class="bg-dark">4 Nights 5 Days Sri
+                                Lanka Holiday Tour</option>
+                            <option value="6 Nights 7 Days Sri Lanka Holiday Tour" class="bg-dark">6 Nights 7 Days Sri
+                                Lanka Holiday Tour</option>
+                            <option value="7 Nights 8 Days Sri Lanka Holiday Tour" class="bg-dark">7 Nights 8 Days Sri
+                                Lanka Holiday Tour</option>
+                            <option value="9 Nights 10 Days Sri Lanka Holiday Tour" class="bg-dark">9 Nights 10 Days Sri
+                                Lanka Holiday Tour</option>
+                            <option value="Other / Custom Trip" class="bg-dark">Other / Custom Trip</option>
+                        </select>
+                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Arrival + Departure -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+                            <i class="fas fa-plane-arrival text-primary mr-1"></i> Arrival Date *
+                        </label>
+                        <input type="date" id="bk-arrival" required
+                            class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-primary/60 transition-all" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+                            <i class="fas fa-plane-departure text-primary mr-1"></i> Departure Date *
+                        </label>
+                        <input type="date" id="bk-departure" required
+                            class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-primary/60 transition-all" />
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-3">
+                        <i class="fas fa-car text-primary mr-1"></i> SELECT VEHICLE
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"
+                        id="vehicle-selection-bk">
+                        <div onclick="selectVehicle('bk-vehicle', '4 pax with 3 luggage', this)"
+                            class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+                            <div class="relative h-28 overflow-hidden rounded-xl">
+                                <img src="images/Vehicles/4 pax with 3 luggage.jpeg" alt="4 pax with 3 luggage"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+                            </div>
+                            <span
+                                class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">4
+                                pax with 3 luggage</span>
+                        </div>
+                        <div onclick="selectVehicle('bk-vehicle', 'Honda shuttle (4pax with 4 baggage)', this)"
+                            class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+                            <div class="relative h-28 overflow-hidden rounded-xl">
+                                <img src="images/Vehicles/Honda shuttle (4pax with 4 baggage).jpg"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                    alt="Leeza Travels">
+                            </div>
+                            <span
+                                class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">Honda
+                                shuttle (4pax with 4 baggage)</span>
+                        </div>
+                        <div onclick="selectVehicle('bk-vehicle', 'Honda shuttle (4 pax with 6 suitcase)', this)"
+                            class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+                            <div class="relative h-28 overflow-hidden rounded-xl">
+                                <img src="images/Vehicles/Honda shuttle (4 pax with 6 suitcase.jpeg"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                    alt="Leeza Travels">
+                            </div>
+                            <span
+                                class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">Honda
+                                shuttle (4 pax with 6 suitcase)</span>
+                        </div>
+                        <div onclick="selectVehicle('bk-vehicle', 'Toyota KDH van (5 to 6 pax with luggage)', this)"
+                            class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+                            <div class="relative h-28 overflow-hidden rounded-xl">
+                                <img src="images/Vehicles/Toyota KDH van (5 to 6 pax with luggage).jpeg"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                    alt="Leeza Travels">
+                            </div>
+                            <span
+                                class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">Toyota
+                                KDH van (5 to 6 pax with luggage)</span>
+                        </div>
+                        <div onclick="selectVehicle('bk-vehicle', '10 pax with luggage', this)"
+                            class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+                            <div class="relative h-28 overflow-hidden rounded-xl">
+                                <img src="images/Vehicles/10 pax with luggage.jpeg"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                    alt="Leeza Travels">
+                            </div>
+                            <span
+                                class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">10
+                                pax with luggage</span>
+                        </div>
+                        <div onclick="selectVehicle('bk-vehicle', '16 pax with luggage', this)"
+                            class="vehicle-card group cursor-pointer relative overflow-hidden rounded-2xl border border-white/10 hover:border-primary/40 transition-all bg-white/5 p-3 flex flex-col gap-3">
+                            <div class="relative h-28 overflow-hidden rounded-xl">
+                                <img src="images/Vehicles/16 pax with luggage.jpeg"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                    alt="Leeza Travels">
+                            </div>
+                            <span
+                                class="text-[11px] font-black text-white/40 group-hover:text-white uppercase tracking-wider">16
+                                pax with luggage</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="bk-vehicle" value="">
+                </div>
+                <!-- Message -->
+                <div>
+                    <label class="block text-xs font-bold text-white/60 uppercase tracking-widest mb-2">
+                        <i class="fas fa-comment text-primary mr-1"></i> Special Requests
+                    </label>
+                    <textarea id="bk-message" rows="3"
+                        placeholder="Any special requirements or destinations you'd like to visit..."
+                        class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-primary/60 transition-all resize-none"></textarea>
+                </div>
+                <!-- Submit -->
+                <button type="submit" id="bk-submit-btn"
+                    class="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-orange-500 text-white font-bold text-sm uppercase tracking-widest hover:opacity-90 hover:scale-[1.02] transition-all shadow-lg shadow-primary/30 flex items-center justify-center gap-2">
+                    <i class="fas fa-paper-plane"></i> Send Booking Request
+                </button>
+                <p class="text-center text-white/30 text-xs">
+                    <i class="fas fa-shield-alt text-primary mr-1"></i>
+                    Your information is 100% secure and will never be shared.
+                </p>
+            </form>
+        </div>
+    </div>
+    <!-- AUTH MODAL -->
+    <div id="auth-modal" class="fixed inset-0 z-[1100] items-center justify-center p-4 hidden" style="display:none">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-2xl" onclick="toggleAuthModal()"></div>
+        <div
+            class="relative glass-dark rounded-[2.5rem] w-full max-w-md overflow-hidden z-10 animate-modalZoom border border-white/10 shadow-3xl">
+            <div class="p-8 md:p-10">
+                <button onclick="toggleAuthModal()"
+                    class="absolute top-8 right-8 text-white/40 hover:text-white text-xl transition-all hover:rotate-90"><i
+                        class="fas fa-times"></i></button>
+                <div class="flex gap-6 mb-8 border-b border-white/10">
+                    <button onclick="switchAuthTab('login')" id="tab-login"
+                        class="pb-3 text-sm font-bold border-b-2 border-primary text-white">Login</button>
+                    <button onclick="switchAuthTab('signup')" id="tab-signup"
+                        class="pb-3 text-sm font-bold border-b-2 border-transparent text-white/50 hover:text-white transition-all">Sign
+                        Up</button>
+                </div>
+                <form id="auth-form" onsubmit="handleAuth(event)" class="space-y-4" novalidate>
+                    <div id="signup-fields" class="hidden space-y-4">
+                        <input id="a-name" type="text" placeholder="Full Name"
+                            class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+                        <input id="a-phone" type="tel" placeholder="Phone Number"
+                            class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+                    </div>
+                    <input id="a-email" type="email" placeholder="Email Address" required
+                        class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+                    <div id="login-pass-container" class="space-y-4">
+                        <input id="a-pass" type="password" placeholder="Password" required
+                            class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+                        <div id="forgot-pass-container" class="w-full text-right mt-1">
+                            <a href="javascript:void(0)" onclick="handleForgotPass()"
+                                class="text-[10px] text-primary hover:underline font-bold">Forgot Password?</a>
+                        </div>
+                    </div>
+                    <!-- OTP & Reset Password Flow -->
+                    <div id="reset-step-1" class="hidden space-y-4">
+                        <p class="text-xs text-white/60 italic text-center">We've sent a 4-digit code to your email
+                            address.
+                        </p>
+                        <input id="a-otp" type="text" placeholder="Enter 4-digit OTP" maxlength="4"
+                            class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-center text-lg font-black tracking-[1em] text-primary placeholder-white/20 focus:outline-none focus:border-primary" />
+                        <button type="button" onclick="handleVerifyOTP()"
+                            class="w-full bg-white/10 border border-white/20 rounded-xl py-3 text-sm font-bold hover:bg-white/20 transition-all">Verify
+                            Code</button>
+                    </div>
+                    <div id="reset-step-2" class="hidden space-y-4">
+                        <input id="a-new-pass" type="password" placeholder="New Password"
+                            class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+                        <input id="a-confirm-pass" type="password" placeholder="Confirm New Password"
+                            class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-primary" />
+                        <button type="button" onclick="handleResetPassword()"
+                            class="w-full bg-gradient-to-r from-primary to-accent rounded-xl py-3.5 font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20">Reset
+                            Password</button>
+                    </div>
+                    <div id="reset-back-btn" class="hidden text-center">
+                        <a href="javascript:void(0)" onclick="cancelReset()"
+                            class="text-[10px] text-white/40 hover:text-white underline">Back to Login</a>
+                    </div>
+                    <button type="submit" id="auth-submit-btn"
+                        class="w-full bg-gradient-to-r from-primary to-accent rounded-xl py-3.5 font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20 mt-4">Login</button>
+                </form>
+                <p id="auth-switch-text" class="text-center text-xs text-white/40 mt-6">Don't have an account? <a
+                        href="javascript:void(0)" onclick="switchAuthTab('signup')"
+                        class="text-primary hover:underline">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- INFO MODAL -->
+    <div id="info-modal" class="fixed inset-0 z-[1100] items-center justify-center p-4 hidden" style="display:none">
+        <div class="absolute inset-0 bg-black/85 backdrop-blur-lg" onclick="closeInfoModal()"></div>
+        <div
+            class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10 shadow-2xl">
+            <div class="p-8 md:p-12">
+                <button onclick="closeInfoModal()"
+                    class="absolute top-6 right-6 text-white/50 hover:text-white text-xl"><i
+                        class="fas fa-times"></i></button>
+                <h2 id="info-title" class="text-3xl font-bold font-playfair mb-6 gtext">Page Title</h2>
+                <div id="info-content"
+                    class="text-white/60 text-sm leading-relaxed space-y-4 max-h-[60vh] overflow-y-auto pr-4 custom-scrollbar">
+                    <!-- Content injected via JS -->
+                </div>
+                <div class="mt-10">
+                    <button onclick="closeInfoModal()"
+                        class="w-full bg-gradient-to-r from-primary to-accent py-4 rounded-2xl font-bold hover:opacity-90 hover:scale-[1.02] transition-all text-sm shadow-lg shadow-primary/20">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dest-info-modal" class="fixed inset-0 z-[1100] hidden items-center justify-center p-4"
+        style="background:rgba(0,0,0,0.90);backdrop-filter:blur(16px);">
+        <div
+            class="relative max-w-2xl w-full glass-dark rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 animate-modalZoom flex flex-col max-h-[90vh]">
+            <!-- Close Button -->
+            <button onclick="closeDestInfoModal()"
+                class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-primary/30 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
+                <i class="fas fa-times text-white"></i>
+            </button>
+            <!-- Hero Image -->
+            <div class="h-64 overflow-hidden relative shrink-0">
+                <img id="di-img" src="" alt="" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0b14] via-[#0a0b14]/30 to-transparent"></div>
+                <div class="absolute bottom-4 left-6">
+                    <span id="di-tag"
+                        class="text-primary text-[9px] font-black uppercase tracking-[0.25em] bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-primary/30 block mb-1"></span>
+                    <h2 id="di-name" class="text-white text-3xl font-bold font-playfair"></h2>
+                    <p id="di-province"
+                        class="text-white/50 text-[10px] uppercase tracking-widest font-bold flex items-center gap-1 mt-0.5">
+                        <i class="fas fa-map-marker-alt text-primary text-[8px]"></i> <span></span>
+                    </p>
+                </div>
+            </div>
+            <!-- Scrollable Content -->
+            <div class="overflow-y-auto custom-scrollbar p-8 flex flex-col gap-6">
+                <!-- Description -->
+                <p id="di-desc" class="text-white/70 text-sm leading-relaxed"></p>
+                <!-- Stats Row -->
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/10 text-center">
+                        <i class="fas fa-sun text-primary text-lg mb-2 block"></i>
+                        <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Best Time</p>
+                        <p id="di-best-time" class="text-white text-[10px] font-bold leading-tight"></p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/10 text-center">
+                        <i class="fas fa-thermometer-half text-primary text-lg mb-2 block"></i>
+                        <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Climate</p>
+                        <p id="di-climate" class="text-white text-[10px] font-bold leading-tight"></p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/10 text-center">
+                        <i class="fas fa-tag text-primary text-lg mb-2 block"></i>
+                        <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Type</p>
+                        <p id="di-tag2" class="text-white text-[10px] font-bold leading-tight"></p>
+                    </div>
+                </div>
+                <!-- Highlights -->
+                <div>
+                    <h4
+                        class="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                        <i class="fas fa-star text-primary"></i> Top Attractions
+                    </h4>
+                    <ul id="di-highlights" class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6"></ul>
+                </div>
+                <!-- CTA Buttons -->
+                <div class="flex gap-3 pt-2">
+                    <button id="di-book-btn"
+                        class="flex-1 py-4 rounded-xl bg-gradient-to-r from-primary to-orange-500 text-white font-bold uppercase tracking-widest hover:opacity-90 hover:scale-[1.02] transition-all shadow-lg shadow-primary/30 flex items-center justify-center gap-2 text-sm">
+                        <i class="fas fa-paper-plane"></i> Book This Destination
+                    </button>
+                    <button onclick="closeDestInfoModal()"
+                        class="px-6 py-4 rounded-xl border border-white/15 text-white/60 hover:text-white hover:border-white/40 transition-all text-sm font-semibold">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FLOATING SOCIAL SIDEBAR -->
+    <div class="social-sidebar">
+        <a href="tel:0779741834" class="social-link social-call">
+            <i class="fas fa-phone"></i>
+            <span>Call Us</span>
+        </a>
+        <a href="https://wa.me/94779741834" target="_blank" class="social-link social-whatsapp">
+            <i class="fab fa-whatsapp"></i>
+            <span>WhatsApp</span>
+        </a>
+        <a href="sms:0779741834" target="_blank" class="social-link social-message">
+            <i class="far fa-comment-dots"></i>
+            <span>Message</span>
+        </a>
+        <a href="https://web.facebook.com/share/r/18SjNMG5PM/" target="_blank" class="social-link social-facebook">
+            <i class="fab fa-facebook-f"></i>
+            <span>Facebook</span>
+        </a>
+        <a href="https://www.instagram.com/leezatravelssrilanka?igsh=MWFja3F3NGpyZ2Q3aA==" target="_blank"
+            class="social-link social-instagram">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+        </a>
+        <a href="https://www.tiktok.com/@leeza_travels?_r=1" target="_blank" class="social-link social-tiktok">
+            <i class="fab fa-tiktok"></i>
+            <span>TikTok</span>
+        </a>
+    </div>
+    <!-- LARGE TRIPADVISOR REVIEW BADGE -->
+    <a href="https://www.tripadvisor.com.sg/Attraction_Review-g297897-d20931273-Reviews-Leeza_travel-Negombo_Western_Province.html"
+        target="_blank" class="ta-badge" title="VISIT our TripAdvisor page">
+        <img src="images/4267x4267.png" alt="TripAdvisor" class="ta-badge-logo" />
+        <div class="brand-name">TripAdvisor</div>
+        <div class="flex gap-0.5 mb-0.5">
+            <i class="fas fa-star text-[10px] text-[#FFD700]"></i>
+            <i class="fas fa-star text-[10px] text-[#FFD700]"></i>
+            <i class="fas fa-star text-[10px] text-[#FFD700]"></i>
+            <i class="fas fa-star text-[10px] text-[#FFD700]"></i>
+            <i class="fas fa-star text-[10px] star-90"></i>
+        </div>
+        <div class="text-[10px] font-black text-white mb-1.5 drop-shadow-md">4.9 / 5.0</div>
+        <div class="ta-badge-label">VISIT</div>
+    </a>
+    <!-- Google Translate initialized once in <head> only -->
+    <script src="js/main.js"></script>
+    <script>
+        // Force language sync after full page load (GT needs extra time)
+        window.addEventListener('load', function () {
+            // First attempt: 800ms — catches most cases
+            setTimeout(function () {
+                if (typeof syncLanguageUI === 'function') syncLanguageUI();
+            }, 800);
+            // Safety net: retry at 3s in case GT loaded slowly
+            setTimeout(function () {
+                var lang = localStorage.getItem('googtrans_lang');
+                if (lang && lang !== 'en') {
+                    var sel = document.querySelector('.goog-te-combo');
+                    if (sel) {
+                        sel.value = lang;
+                        sel.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+                    }
+                }
+            }, 3000);
+        });
+    </script>
+    <script src="js/main.js"></script>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mob"
+        class="lg:hidden fixed inset-0 z-[100000] flex flex-col items-start justify-start pt-24 px-8"
+        style="background:rgba(10,11,20,0.98);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px); visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.4s ease;">
+
+        <ul class="flex flex-col gap-6 w-full max-w-sm">
+            <li class="mob-nav-item" style="transition-delay: 50ms;">
+                <a href="index.html" onclick="toggleMobMenu()" class="mob-nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="mob-nav-item" style="transition-delay: 100ms;">
+                <a href="index.html#about" onclick="toggleMobMenu()" class="mob-nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About Us</span>
+                </a>
+            </li>
+            <li class="mob-nav-item" style="transition-delay: 150ms;">
+                <a href="trips.html" onclick="toggleMobMenu()" class="mob-nav-link active">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Tours</span>
+                </a>
+            </li>
+            <li class="mob-nav-item" style="transition-delay: 200ms;">
+                <a href="index.html#gallery" onclick="toggleMobMenu()" class="mob-nav-link">
+                    <i class="fas fa-images"></i>
+                    <span>Gallery</span>
+                </a>
+            </li>
+            <li class="mob-nav-item" style="transition-delay: 250ms;">
+                <a href="explore.html" onclick="toggleMobMenu()" class="mob-nav-link">
+                    <i class="fas fa-compass"></i>
+                    <span>Explore</span>
+                </a>
+            </li>
+            <li class="mob-nav-item" style="transition-delay: 300ms;">
+                <a href="index.html#contact" onclick="toggleMobMenu()" class="mob-nav-link">
+                    <i class="fas fa-phone"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
+
+            <div class="h-px bg-white/10 my-4 mob-nav-item" style="transition-delay: 350ms;"></div>
+
+            <!-- Action Buttons -->
+            <li class="mob-nav-item flex flex-col gap-3 w-full" style="transition-delay: 400ms;">
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="toggleAuthModal(); toggleMobMenu();"
+                        class="border border-white/20 py-3 rounded-xl text-[13px] font-bold bg-white/5">Sign In</button>
+                    <button onclick="openModal(); toggleMobMenu();"
+                        class="bg-gradient-to-r from-primary to-accent py-3 rounded-xl text-[13px] font-black uppercase tracking-wider">Book
+                        Now</button>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Footer Social -->
+        <div class="mt-auto pb-12 mob-nav-item" style="transition-delay: 500ms;">
+            <div class="flex gap-4 mb-4">
+                <a href="https://web.facebook.com/share/r/18SjNMG5PM/" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
+                    <i class="fab fa-facebook-f text-sm"></i>
+                </a>
+                <a href="https://www.instagram.com/leezatravelssrilanka?igsh=MWFja3F3NGpyZ2Q3aA==" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
+                    <i class="fab fa-instagram text-sm"></i>
+                </a>
+                <a href="https://wa.me/94779741834" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
+                    <i class="fab fa-whatsapp text-sm"></i>
+                </a>
+            </div>
+            <p class="text-[9px] text-white/20 font-bold uppercase tracking-widest">Leeza Travels &copy; 2026</p>
+        </div>
+    </div>
+</body>
+
+</html>
