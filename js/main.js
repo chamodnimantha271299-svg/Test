@@ -1752,8 +1752,11 @@ async function submitBooking(e) {
           to_email: 'chamodnimantha271299@gmail.com'
         };
 
-        // Send only to Admin
-        await emailjs.send('service_s7kzv5g', 'template_mhs62h1', emailParams, 'tRG6iOeYylZBAVmsa');
+        // Send notification to both Admins
+        const admins = ['chamodnimantha271299@gmail.com', 'leezatravelslk@gmail.com'];
+        for (const adminEmail of admins) {
+          await emailjs.send('service_s7kzv5g', 'template_mhs62h1', { ...emailParams, to_email: adminEmail }, 'tRG6iOeYylZBAVmsa');
+        }
       } catch (e) {
         console.warn('Background email notification failed:', e);
       }
@@ -2159,7 +2162,7 @@ async function sendMsg(e) {
     // RECIPIENT SETTINGS
     email: 'chamodnimantha271299@gmail.com',
     Email: 'chamodnimantha271299@gmail.com',
-    to_email: 'chamodnimantha271299@gmail.com',
+    to_email: 'chamodnimantha271299@gmail.com, leezatravelslk@gmail.com',
 
     // VISITOR INFO (for the email body)
     visitor_email: m.email,
@@ -2185,20 +2188,23 @@ async function sendMsg(e) {
   console.log('Sending email with params:', emailParams);
 
   try {
-    // Send Contact Form to Admin — using new IDs matching template variables
-    await emailjs.send('service_6e0y3nl', 'template_ftjto0p', {
-      // Exact template variable names
-      user_name: m.name,
-      user_email: m.email,
-      user_phone: m.phone,
-      destination: m.interest,
-      message: m.message,
-      // Extra fallbacks
-      to_email: 'chamodnimantha271299@gmail.com',
-      from_name: m.name,
-      reply_to: m.email,
-      timestamp: new Date().toLocaleString()
-    }, 'bwPmrwG-cTzEUhvkU');
+    // Send Contact Form to both Admins
+    const admins = ['chamodnimantha271299@gmail.com', 'leezatravelslk@gmail.com'];
+    for (const adminEmail of admins) {
+      await emailjs.send('service_6e0y3nl', 'template_ftjto0p', {
+        // Exact template variable names
+        user_name: m.name,
+        user_email: m.email,
+        user_phone: m.phone,
+        destination: m.interest,
+        message: m.message,
+        // Extra fallbacks
+        to_email: adminEmail,
+        from_name: m.name,
+        reply_to: m.email,
+        timestamp: new Date().toLocaleString()
+      }, 'bwPmrwG-cTzEUhvkU');
+    }
 
     toast('Message Sent! ✅', 'success');
     if (form) form.reset();
