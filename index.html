@@ -903,7 +903,7 @@
     </script>
 </head>
 
-<body class="bg-dark text-white overflow-hidden">
+<body class="bg-dark text-white">
     <!-- TOAST (body-level so it always appears above modals) -->
     <div id="toast" class="toast glass-dark">
         <div id="toast-icon"></div>
@@ -919,17 +919,17 @@
                         class="text-white font-light"> Travels</span></span>
             </a>
             <ul class="hidden lg:flex items-center gap-6 lg:gap-10 text-lg lg:text-[20px] font-bold whitespace-nowrap">
-                <li><a href="/" onclick="closeAllModals();"
+                <li><a href="index.html" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Home</a></li>
-                <li><a href="/#about" onclick="closeAllModals();"
+                <li><a href="index.html#about" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">About Us</a></li>
-                <li><a href="/trips" class="nl relative text-white/80 transition-colors hover:text-white">Tours</a>
+                <li><a href="trips.html" class="nl relative text-white/80 transition-colors hover:text-white">Tours</a>
                 </li>
-                <li><a href="/#gallery" onclick="closeAllModals();"
+                <li><a href="index.html#gallery" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Gallery</a></li>
                 <li><a href="explore.html"
                         class="nl relative text-white/80 transition-colors hover:text-white">Explore</a></li>
-                <li><a href="/#contact" onclick="closeAllModals();"
+                <li><a href="index.html#contact" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Contact Us</a></li>
             </ul>
             <div id="nav-actions" class="flex items-center gap-3 lg:gap-4 shrink-0">
@@ -3907,7 +3907,7 @@
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 100ms;">
-                <a href="#about" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="/#about" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-info-circle"></i>
                     <span>About Us</span>
                 </a>
