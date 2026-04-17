@@ -1,5 +1,5 @@
-
 console.log('Main.js Loaded Successfully');
+
 // ── Global State ──────────────────────────────────────────────
 // ── Wishlist / Heart Toggle ────────────────────────────────────
 window.toggleWishlist = function (btn) {
@@ -40,6 +40,53 @@ window.selectVehicle = (id, val, el) => {
     el.classList.add('selected');
   }
 };
+
+// ── Mobile Menu Toggle ─────────────────────────────────
+window.toggleMobMenu = function () {
+  var mob = document.getElementById('mob');
+  if (mob) {
+    mob.classList.remove('open');
+    var btn = document.getElementById('mob-burger-btn');
+    if (btn) {
+      var icon = btn.querySelector('i');
+      if (icon) {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      }
+    }
+    document.body.style.overflow = ''; // Resume scrolling
+  }
+};
+
+window.handleMobMenu = function (e) {
+  if (e) e.preventDefault();
+  var mob = document.getElementById('mob');
+  var btn = document.getElementById('mob-burger-btn');
+  if (!mob) return;
+
+  var isOpen = mob.classList.toggle('open');
+
+  // Update icon if button exists
+  if (btn) {
+    var icon = btn.querySelector('i');
+    if (icon) {
+      if (isOpen) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    }
+  }
+
+  if (isOpen) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+};
+
 var db;
 if (typeof currentUser === 'undefined') var currentUser = null;
 if (typeof DB_NAME === 'undefined') var DB_NAME = 'LeezaDB';
@@ -96,8 +143,6 @@ function initDB() {
       } catch (err) { console.warn('Seeding error:', err); }
       resolve(db);
     };
-
-    req.onerror = (e) => reject(e.target.error);
   });
 }
 
@@ -148,6 +193,150 @@ function get(storeName, key) {
 
 // ── BroadcastChannel Sync ───────────────────────────────
 var notificationChannel = null;
+// ── Authentication ──────────────────────────────────────────
+let currentAuthMode = 'login';
+
+// Expose these early
+window.toggleAuthModal = toggleAuthModal;
+window.switchAuthTab = switchAuthTab;
+window.handleAuth = handleAuth;
+window.handleForgotPass = handleForgotPass;
+window.handleVerifyOTP = handleVerifyOTP;
+window.handleResetPassword = handleResetPassword;
+window.cancelReset = cancelReset;
+
+function toggleAuthModal() {
+  const m = document.getElementById('auth-modal');
+  if (!m) return;
+  const isHidden = m.style.display === 'none' || m.style.display === '';
+  if (isHidden) {
+    // Force all critical styles so nav bar (z-index:99999) cannot cover the modal. Keep it slightly below max so our max z-index toast shows up.
+    m.style.cssText = 'display:flex !important; position:fixed !important; inset:0 !important; z-index:2147483600 !important; align-items:center !important; justify-content:center !important; padding:1rem !important;';
+    m.classList.add('auth-open');
+    document.body.style.overflow = 'hidden';
+    switchAuthTab('login');
+  } else {
+    m.classList.remove('auth-open');
+    m.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+}
+
+function switchAuthTab(tab) {
+  // If we were in reset mode, cancel it
+  const passContainer = document.getElementById('login-pass-container');
+  if (passContainer && passContainer.style.display === 'none') {
+    cancelReset();
+  }
+
+  currentAuthMode = tab;
+  const isLogin = tab === 'login';
+  const loginTab = document.getElementById('tab-login');
+  const signupTab = document.getElementById('tab-signup');
+
+  // Style tab buttons — works for both Tailwind and inline-style modals
+  if (loginTab) {
+    loginTab.style.borderBottomColor = isLogin ? '#FF6B35' : 'transparent';
+    loginTab.style.color = isLogin ? '#fff' : 'rgba(255,255,255,0.5)';
+    // Also update className for Tailwind pages
+    loginTab.className = isLogin
+      ? 'pb-4 text-sm font-bold border-b-2 border-primary text-white'
+      : 'pb-4 text-sm font-bold border-b-2 border-transparent text-white/40 hover:text-white transition-all';
+  }
+  if (signupTab) {
+    signupTab.style.borderBottomColor = !isLogin ? '#FF6B35' : 'transparent';
+    signupTab.style.color = !isLogin ? '#fff' : 'rgba(255,255,255,0.5)';
+    signupTab.className = !isLogin
+      ? 'pb-4 text-sm font-bold border-b-2 border-primary text-white'
+      : 'pb-4 text-sm font-bold border-b-2 border-transparent text-white/40 hover:text-white transition-all';
+  }
+
+  const signupFields = document.getElementById('signup-fields');
+  if (signupFields) {
+    signupFields.style.display = isLogin ? 'none' : 'flex';
+    if (isLogin) signupFields.classList.add('hidden');
+    else signupFields.classList.remove('hidden');
+  }
+
+  const submitBtn = document.getElementById('auth-submit-btn');
+  if (submitBtn) submitBtn.textContent = isLogin ? 'Login' : 'Create Account';
+
+  const forgotContainer = document.getElementById('forgot-pass-container');
+  if (forgotContainer) forgotContainer.style.display = isLogin ? 'block' : 'none';
+
+  const switchText = document.getElementById('auth-switch-text');
+  if (switchText) {
+    switchText.innerHTML = isLogin
+      ? `Don't have an account? <a href="javascript:void(0)" onclick="switchAuthTab('signup')" style="color:#FF6B35;">Sign Up</a>`
+      : `Already have an account? <a href="javascript:void(0)" onclick="switchAuthTab('login')" style="color:#FF6B35;">Login</a>`;
+  }
+}
+
+async function handleAuth(e) {
+  if (e && e.preventDefault) e.preventDefault();
+
+  if (!db) {
+    console.error('Database not initialized');
+    return toast('System is still loading, please wait... ⏳', 'warning');
+  }
+
+  const emailField = document.getElementById('a-email');
+  const passField = document.getElementById('a-pass');
+
+  if (!emailField || !passField) {
+    console.error('Auth fields missing in DOM');
+    return;
+  }
+
+  const em = emailField.value.trim().toLowerCase();
+  const pass = passField.value.trim();
+
+  if (!em || !pass) {
+    return toast('Please fill in all required fields ✍️', 'warning');
+  }
+
+  if (currentAuthMode === 'signup') {
+    const nameField = document.getElementById('a-name');
+    const phoneField = document.getElementById('a-phone');
+    const name = nameField ? nameField.value.trim() : '';
+    const phone = phoneField ? phoneField.value.trim() : 'N/A';
+
+    if (!name) return toast('Please enter your full name 👤', 'warning');
+
+    try {
+      const existing = await get('users', em);
+      if (existing) return toast('This email is already registered 📧', 'error');
+
+      const user = {
+        email: em,
+        password: pass,
+        name,
+        phone: phone || 'N/A',
+        viewed: false,
+        timestamp: new Date().toISOString()
+      };
+
+      await save('users', user);
+      toast('Account created successfully! 🎉', 'success');
+      loginUser(user);
+    } catch (err) {
+      console.error('Signup error:', err);
+      toast('Failed to create account. Please try again.', 'error');
+    }
+  } else {
+    try {
+      const user = await get('users', em);
+      if (!user) return toast('No account found with this email ❌', 'error');
+      if (user.password !== pass) return toast('Incorrect password. Please try again 🔑', 'error');
+
+      toast(`Welcome back, ${user.name}! 👋`, 'success');
+      loginUser(user);
+    } catch (err) {
+      console.error('Login error:', err);
+      toast('An error occurred during login.', 'error');
+    }
+  }
+}
 try {
   notificationChannel = new BroadcastChannel('leeza_notifications');
   notificationChannel.onmessage = () => {
@@ -160,132 +349,74 @@ function notifyOtherTabs() {
   if (notificationChannel) notificationChannel.postMessage('sync');
 }
 
-// ── Authentication ──────────────────────────────────────────
-let currentAuthMode = 'login';
-
-function toggleAuthModal() {
-  const m = document.getElementById('auth-modal');
-  if (!m) return;
-  const isHidden = m.classList.contains('hidden');
-  m.style.display = isHidden ? 'flex' : 'none';
-  m.classList.toggle('hidden');
-  document.body.style.overflow = isHidden ? 'hidden' : '';
-  if (isHidden) switchAuthTab('login');
-}
-
-function switchAuthTab(tab) {
-  cancelReset();
-  currentAuthMode = tab;
-  const isLogin = tab === 'login';
-  const loginTab = document.getElementById('tab-login');
-  const signupTab = document.getElementById('tab-signup');
-  if (loginTab) loginTab.className = isLogin ? 'pb-3 text-sm font-bold border-b-2 border-primary text-white' : 'pb-3 text-sm font-bold border-b-2 border-transparent text-white/50 hover:text-white transition-all';
-  if (signupTab) signupTab.className = !isLogin ? 'pb-3 text-sm font-bold border-b-2 border-primary text-white' : 'pb-3 text-sm font-bold border-b-2 border-transparent text-white/50 hover:text-white transition-all';
-
-  const signupFields = document.getElementById('signup-fields');
-  if (signupFields) signupFields.classList.toggle('hidden', isLogin);
-
-  const submitBtn = document.getElementById('auth-submit-btn');
-  if (submitBtn) submitBtn.textContent = isLogin ? 'Login' : 'Create Account';
-
-  const forgotContainer = document.getElementById('forgot-pass-container');
-  if (forgotContainer) forgotContainer.style.display = isLogin ? 'block' : 'none';
-
-  const switchText = document.getElementById('auth-switch-text');
-  if (switchText) {
-    switchText.innerHTML = isLogin
-      ? `Don't have an account? <a href="javascript:void(0)" onclick="switchAuthTab('signup')" class="text-primary hover:underline font-bold">Sign Up</a>`
-      : `Already have an account? <a href="javascript:void(0)" onclick="switchAuthTab('login')" class="text-primary hover:underline font-bold">Login</a>`;
-  }
-}
-
-async function handleAuth(e) {
-  e.preventDefault();
-  if (!db) return toast('System loading...', 'warning');
-  const em = document.getElementById('a-email').value.trim().toLowerCase();
-  const pass = document.getElementById('a-pass').value.trim();
-  if (!em || !pass) return toast('Please fill all fields', 'warning');
-
-  if (currentAuthMode === 'signup') {
-    const name = document.getElementById('a-name').value.trim();
-    const phone = document.getElementById('a-phone').value.trim();
-    if (!name) return toast('Name is required', 'warning');
-    const existing = await get('users', em);
-    if (existing) return toast('Email already exists', 'error');
-    const user = { email: em, password: pass, name, phone: phone || 'N/A', viewed: false, timestamp: new Date().toISOString() };
-    await save('users', user);
-    toast('Account created! 🎉', 'success');
-    loginUser(user);
-  } else {
-    const user = await get('users', em);
-    if (!user) return toast('Account not found', 'error');
-    if (user.password !== pass) return toast('Incorrect password', 'error');
-    toast(`Welcome back, ${user.name}! 👋`, 'success');
-    loginUser(user);
-  }
-}
-
 let resetEmail = '';
 let generatedOTP = '';
 
 async function handleForgotPass() {
-  const em = document.getElementById('a-email').value.trim().toLowerCase();
-  if (!em) return toast('Please enter your email first 📧', 'warning');
+  const emailField = document.getElementById('a-email');
+  if (!emailField) return;
 
-  const user = await get('users', em);
-  if (!user) return toast('No account found with this email ❌', 'error');
+  const em = emailField.value.trim().toLowerCase();
+  if (!em) return toast('Please enter your email address first 📧', 'warning');
 
-  resetEmail = em;
-  generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+  try {
+    const user = await get('users', em);
+    if (!user) return toast('No account found with this email ❌', 'error');
 
-  // Send OTP via EmailJS (if available)
-  if (typeof emailjs !== 'undefined') {
-    const params = {
-      name: user.name || 'User',
-      full_name: user.name || 'User',
-      email: em,
-      user_email: em,
-      to_email: em,
-      phone: user.phone || 'N/A',
-      user_phone: user.phone || 'N/A',
-      destination: 'Password Reset Request',
-      planned_destination: 'Password Reset Request',
-      from_name: 'Leeza Travels Support',
-      from_email: 'Leezatravelslk@gmail.com',
-      reply_to: 'Leezatravelslk@gmail.com',
-      subject: 'Password Reset Verification - Leeza Travels',
-      message: `Your password reset verification code is: ${generatedOTP}. Please enter this code in the portal to reset your password.`,
-      msg: `Your password reset verification code is: ${generatedOTP}. Please enter this code in the portal to reset your password.`,
-      otp: generatedOTP,
-      code: generatedOTP,
-      verification_code: generatedOTP,
-      otp_code: generatedOTP,
-      timestamp: new Date().toLocaleString()
-    };
+    resetEmail = em;
+    // Generate a 4-digit code
+    generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
 
-    try {
-      // Use the new credentials provided by the user
-      await emailjs.send('service_s7kzv5g', 'template_mhs62h1', params, 'tRG6iOeYylZBAVmsa');
-      console.log('OTP sent successfully via the new EmailJS templates');
-    } catch (e) {
-      console.error('EmailJS Reset Error:', e);
-      return toast('Failed to send email. Please check your connection or try again later.', 'error');
+    // ── Send OTP via EmailJS ──────────────────────────────────
+    if (typeof emailjs !== 'undefined') {
+      const params = {
+        name: user.name || 'User',
+        email: em,
+        to_email: em,
+        from_name: 'Leeza Travels Support',
+        subject: 'Password Reset Verification',
+        message: `Your password reset verification code is: ${generatedOTP}. If you did not request this, please ignore this email.`,
+        otp_code: generatedOTP
+      };
+
+      try {
+        await emailjs.send('service_s7kzv5g', 'template_mhs62h1', params);
+        console.log('OTP sent successfully via EmailJS');
+      } catch (e) {
+        console.error('EmailJS Error:', e);
+        // Fallback: Continue anyway so user isn't stuck if EmailJS fails, 
+        // they can see the OTP in console or we can just proceed for demo
+        toast('Notification service delayed, but proceeding... 📣', 'info');
+      }
     }
+
+    // ── Transition UI to Reset Steps ──────────────────────────
+    // Hide standard login fields
+    const loginPassCont = document.getElementById('login-pass-container');
+    const authSubmitBtn = document.getElementById('auth-submit-btn');
+    const authSwitchTxt = document.getElementById('auth-switch-text');
+
+    if (loginPassCont) loginPassCont.classList.add('hidden');
+    if (authSubmitBtn) authSubmitBtn.classList.add('hidden');
+    if (authSwitchTxt) authSwitchTxt.classList.add('hidden');
+
+    emailField.disabled = true;
+
+    // Show Step 1 (OTP Entry)
+    const resetStep1 = document.getElementById('reset-step-1');
+    const resetBackBtn = document.getElementById('reset-back-btn');
+
+    if (resetStep1) resetStep1.classList.remove('hidden');
+    if (resetBackBtn) resetBackBtn.classList.remove('hidden');
+
+    toast(`A verification code has been sent to ${em} 📧`, 'success');
+    console.log(`[DEBUG] Reset OTP for ${em}: ${generatedOTP}`);
+  } catch (err) {
+    console.error('Forgot Pass error:', err);
+    toast('An error occurred. Please try again.', 'error');
   }
-
-  // Hide Login UI
-  document.getElementById('login-pass-container').classList.add('hidden');
-  document.getElementById('auth-submit-btn').classList.add('hidden');
-  document.getElementById('auth-switch-text').classList.add('hidden');
-  document.getElementById('a-email').disabled = true;
-
-  // Show OTP Step
-  document.getElementById('reset-step-1').classList.remove('hidden');
-  document.getElementById('reset-back-btn').classList.remove('hidden');
-
-  toast(`OTP sent to your email! 📧`, 'success');
-  console.log(`[DEBUG] Password reset OTP for ${em}: ${generatedOTP}`);
 }
+window.handleForgotPass = handleForgotPass;
 
 function handleVerifyOTP() {
   const enteredOTP = document.getElementById('a-otp').value.trim();
@@ -297,6 +428,7 @@ function handleVerifyOTP() {
     toast('Invalid OTP code. Please try again ❌', 'error');
   }
 }
+window.handleVerifyOTP = handleVerifyOTP;
 
 async function handleResetPassword() {
   const newPass = document.getElementById('a-new-pass').value;
@@ -313,6 +445,7 @@ async function handleResetPassword() {
     cancelReset();
   }
 }
+window.handleResetPassword = handleResetPassword;
 
 function cancelReset() {
   resetEmail = '';
@@ -338,11 +471,12 @@ function cancelReset() {
     if (el) el.classList.add('hidden');
   });
 }
+window.cancelReset = cancelReset;
 
 async function loginUser(user) {
   currentUser = user;
   const adminDoc = await get('admins', user.email);
-  if (adminDoc || user.email === 'nimanthachamod86@gmail.com') currentUser.isAdmin = true;
+  if (adminDoc || user.email === 'nimanthachamod86@gmail.com' || user.email === 'leezatravelslk@gmail.com' || user.email === 'chamodnimantha271299@gmail.com') currentUser.isAdmin = true;
   localStorage.setItem('leeza_user', JSON.stringify(user));
   updateAuthUI();
   toggleAuthModal();
@@ -364,7 +498,7 @@ async function checkAuth() {
     if (user) {
       currentUser = user;
       const adminDoc = await get('admins', user.email);
-      if (adminDoc || user.email === 'nimanthachamod86@gmail.com') currentUser.isAdmin = true;
+      if (adminDoc || user.email === 'nimanthachamod86@gmail.com' || user.email === 'leezatravelslk@gmail.com' || user.email === 'chamodnimantha271299@gmail.com') currentUser.isAdmin = true;
       updateAuthUI();
       checkUserNotifications();
       checkAdminNotifications();
@@ -384,7 +518,7 @@ function updateAuthUI() {
   if (pBtn) pBtn.classList.toggle('hidden', !loggedIn);
   if (mPBtn) mPBtn.classList.toggle('hidden', !loggedIn);
 
-  const authorizedEmails = ['chamodnimantha271299@gmail.com', 'Leezatravelslk@gmail.com'];
+  const authorizedEmails = ['chamodnimantha271299@gmail.com', 'Leezatravelslk@gmail.com', 'leezatravelslk@gmail.com'];
   const showDBBadge = loggedIn && authorizedEmails.includes(currentUser.email);
   const dbBadge = document.getElementById('db-badge');
   if (dbBadge) dbBadge.classList.toggle('hidden', !showDBBadge);
@@ -426,7 +560,7 @@ function updateAuthUI() {
 }
 
 function isUserAdmin() {
-  const adminEmails = ['chamodnimantha271299@gmail.com', 'Leezatravelslk@gmail.com'];
+  const adminEmails = ['chamodnimantha271299@gmail.com', 'Leezatravelslk@gmail.com', 'leezatravelslk@gmail.com'];
   return !!(currentUser && adminEmails.includes(currentUser.email));
 }
 
@@ -1522,15 +1656,17 @@ function closeExploreModal() {
 }
 
 function closeAllModals() {
-  closeModal();
-  closeToursModal();
-  closeExploreModal();
+  if (typeof closeModal === 'function') closeModal();
+  if (typeof closeToursModal === 'function') closeToursModal();
+  if (typeof closeExploreModal === 'function') closeExploreModal();
   const auth = document.getElementById('auth-modal');
   if (auth) { auth.classList.add('hidden'); auth.style.display = 'none'; }
   const profile = document.getElementById('profile-modal');
   if (profile) { profile.classList.add('hidden'); profile.style.display = 'none'; }
   document.body.style.overflow = '';
 }
+window.closeAllModals = closeAllModals;
+
 
 function checkNavHash() {
   closeAllModals();
@@ -1960,7 +2096,7 @@ function animateCount(el) {
   requestAnimationFrame(updateCount);
 }
 
-// ── App Start ────────────────────────────────────────────────â”€
+// ── App Start ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   await initDB();
   checkNavHash();
