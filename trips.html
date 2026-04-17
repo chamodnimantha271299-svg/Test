@@ -690,6 +690,46 @@
     </script>
     <script type="text/javascript"
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+        // ── Mobile Menu Core Logic (Available Immediately) ──
+        window.handleMobMenu = function (e) {
+            if (e) e.preventDefault();
+            const mob = document.getElementById('mob');
+            const btn = document.getElementById('mob-burger-btn');
+            if (!mob) return;
+
+            const isOpen = mob.classList.toggle('open');
+
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    if (isOpen) {
+                        icon.classList.replace('fa-bars', 'fa-times');
+                    } else {
+                        icon.classList.replace('fa-times', 'fa-bars');
+                    }
+                }
+            }
+
+            if (isOpen) {
+                mob.style.visibility = 'visible';
+                mob.style.opacity = '1';
+                mob.style.pointerEvents = 'auto';
+                mob.style.transform = 'translateY(0)';
+                document.body.style.overflow = 'hidden';
+            } else {
+                mob.style.visibility = 'hidden';
+                mob.style.opacity = '0';
+                mob.style.pointerEvents = 'none';
+                mob.style.transform = 'translateY(-20px)';
+                document.body.style.overflow = '';
+            }
+        };
+
+        window.toggleMobMenu = function () {
+            handleMobMenu();
+        };
+    </script>
 </head>
 
 <body class="bg-dark text-white overflow-hidden">
