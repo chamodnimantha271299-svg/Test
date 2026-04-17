@@ -536,7 +536,7 @@
             top: 2rem;
             left: 50%;
             transform: translate(-50%, -5rem);
-            z-index: 100000;
+            z-index: 2147483647 !important;
             padding: 1rem 2rem;
             border-radius: 99px;
             color: #fff;
@@ -742,24 +742,24 @@
     <nav id="nav"
         class="fixed top-0 inset-x-0 z-[150] bg-[#1b2a41] backdrop-blur-xl border-b border-white/5 transition-all duration-300">
         <div class="max-w-[90rem] mx-auto px-4 lg:px-8 py-3 lg:py-4 flex items-center justify-between">
-            <a href="/" onclick="closeAllModals();" class="flex items-center gap-3 shrink-0">
+            <a href="index.html" onclick="closeAllModals();" class="flex items-center gap-3 shrink-0">
                 <img src="images/1.png" alt="Leeza Travels Logo" class="w-12 h-12 lg:w-16 lg:h-16 object-contain" />
                 <span class="text-xl lg:text-[1.7rem] font-bold gtext whitespace-nowrap">Leeza<span
                         class="text-white font-light"> Travels</span></span>
             </a>
             <ul class="hidden lg:flex items-center gap-6 lg:gap-10 text-lg lg:text-[20px] font-bold whitespace-nowrap">
-                <li><a href="/" onclick="closeAllModals();"
+                <li><a href="index.html" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Home</a></li>
-                <li><a href="/#about" onclick="closeAllModals();"
+                <li><a href="index.html#about" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">About Us</a></li>
-                <li><a href="/trips"
+                <li><a href="trips.html"
                         class="nl relative text-white/80 transition-colors hover:text-white active-nav">Tours</a>
                 </li>
-                <li><a href="/#gallery" onclick="closeAllModals();"
+                <li><a href="index.html#gallery" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Gallery</a></li>
-                <li><a href="/explore"
+                <li><a href="explore.html"
                         class="nl relative text-white/80 transition-colors hover:text-white">Explore</a></li>
-                <li><a href="/#contact" onclick="closeAllModals();"
+                <li><a href="index.html#contact" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Contact Us</a></li>
             </ul>
             <div id="nav-actions" class="flex items-center gap-3 lg:gap-4 shrink-0">
@@ -1735,7 +1735,7 @@
     </div> <!-- End of detail-modal -->
     <!-- BOOKING MODAL (Placeholder for clean version below) -->
     <!-- PROFILE MODAL -->
-    <div id="profile-modal" class="fixed inset-0 z-[1100] items-center justify-center p-4 hidden">
+    <div id="profile-modal" class="fixed inset-0 z-[1100] items-center justify-center p-4" style="display:none">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="toggleProfileModal()"></div>
         <div class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10"
             style="max-height:90vh;overflow-y:auto;">
@@ -2102,7 +2102,7 @@
         </div>
     </div>
     <!-- AUTH MODAL -->
-    <div id="auth-modal" class="fixed inset-0 z-[1100] items-center justify-center p-4 hidden" style="display:none">
+    <div id="auth-modal" class="fixed inset-0 z-[200] items-center justify-center p-4 hidden" style="display:none">
         <div class="absolute inset-0 bg-black/95 backdrop-blur-2xl" onclick="toggleAuthModal()"></div>
         <div
             class="relative glass-dark rounded-[2.5rem] w-full max-w-md overflow-hidden z-10 animate-modalZoom border border-white/10 shadow-3xl">
@@ -2329,37 +2329,37 @@
 
         <ul class="flex flex-col gap-6 w-full max-w-sm">
             <li class="mob-nav-item" style="transition-delay: 50ms;">
-                <a href="/" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="index.html" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-home"></i>
                     <span>Home</span>
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 100ms;">
-                <a href="/#about" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="index.html#about" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-info-circle"></i>
                     <span>About Us</span>
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 150ms;">
-                <a href="/trips" onclick="toggleMobMenu()" class="mob-nav-link active">
+                <a href="trips.html" onclick="toggleMobMenu()" class="mob-nav-link active">
                     <i class="fas fa-map-marked-alt"></i>
                     <span>Tours</span>
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 200ms;">
-                <a href="/#gallery" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="index.html#gallery" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-images"></i>
                     <span>Gallery</span>
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 250ms;">
-                <a href="/explore" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="explore.html" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-compass"></i>
                     <span>Explore</span>
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 300ms;">
-                <a href="/#contact" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="index.html#contact" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-phone"></i>
                     <span>Contact</span>
                 </a>
