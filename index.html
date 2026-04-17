@@ -797,7 +797,45 @@
 
         #mob.open .mob-nav-item {
             opacity: 1;
-            transform: translateX(0);
+        transform: translateX(0);
+        }
+
+        /* ── Toasts / Notifications ────────────────────────── */
+        .toast {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translate(-50%, -5rem);
+            z-index: 2147483647 !important;
+            padding: 1rem 2rem;
+            border-radius: 99px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.875rem;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            min-width: 320px;
+            max-width: 90vw;
+            justify-content: center;
+            backdrop-filter: blur(16px);
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+        }
+
+        #toast-msg {
+            white-space: normal !important;
+            line-height: 1.4 !important;
+            text-align: center;
         }
     </style>
     <!-- Google Translate -->
@@ -865,8 +903,12 @@
     </script>
 </head>
 
-<body class="bg-dark text-white">
-
+<body class="bg-dark text-white overflow-hidden">
+    <!-- TOAST (body-level so it always appears above modals) -->
+    <div id="toast" class="toast glass-dark">
+        <div id="toast-icon"></div>
+        <div id="toast-msg"></div>
+    </div>
     <!-- NAV -->
     <nav id="nav"
         class="fixed top-0 inset-x-0 z-[99999] bg-[#1b2a41] backdrop-blur-xl border-b border-white/5 transition-all duration-300">
@@ -2682,7 +2724,7 @@
         </div>
     </div>
     <!-- PROFILE MODAL -->
-    <div id="profile-modal" class="fixed inset-0 z-[210] items-center justify-center p-4 hidden">
+    <div id="profile-modal" class="fixed inset-0 z-[999999] items-center justify-center p-4" style="display:none">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="toggleProfileModal()"></div>
         <div
             class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10">
