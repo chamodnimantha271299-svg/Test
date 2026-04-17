@@ -79,7 +79,7 @@ function initDB() {
         const admins = tx.objectStore('admins');
         const users = tx.objectStore('users');
 
-        const adminEmails = ['chamodnimantha271299@gmail.com', 'nimanthachamod86@gmail.com'];
+        const adminEmails = ['chamodnimantha271299@gmail.com', 'nimanthachamod86@gmail.com', 'leezatravelslk@gmail.com];
         adminEmails.forEach(email => {
           admins.put({ email, role: 'superadmin', addedAt: new Date().toISOString() });
         });
