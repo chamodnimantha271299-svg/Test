@@ -583,7 +583,12 @@
 
         /* ── Mobile Nav Cleanup ─────────────────────────────── */
         @media (max-width: 1023px) {
-            #signin-btn, #profile-btn, .mob-book-hidden { display: none !important; }
+
+            #signin-btn,
+            #profile-btn,
+            .mob-book-hidden {
+                display: none !important;
+            }
         }
 
         #mob {
@@ -703,18 +708,18 @@
                         class="text-white font-light"> Travels</span></span>
             </a>
             <ul class="hidden lg:flex items-center gap-6 lg:gap-10 text-lg lg:text-[20px] font-bold whitespace-nowrap">
-                <li><a href="/" onclick="closeAllModals();"
+                <li><a href="index.html" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Home</a></li>
-                <li><a href="/#about" onclick="closeAllModals();"
+                <li><a href="index.html#about" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">About Us</a></li>
-                <li><a href="/trips"
+                <li><a href="trips.html"
                         class="nl relative text-white/80 transition-colors hover:text-white active-nav">Tours</a>
                 </li>
-                <li><a href="/#gallery" onclick="closeAllModals();"
+                <li><a href="index.html#gallery" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Gallery</a></li>
-                <li><a href="/explore"
+                <li><a href="explore.html"
                         class="nl relative text-white/80 transition-colors hover:text-white">Explore</a></li>
-                <li><a href="/#contact" onclick="closeAllModals();"
+                <li><a href="index.html#contact" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Contact Us</a></li>
             </ul>
             <div id="nav-actions" class="flex items-center gap-3 lg:gap-4 shrink-0">
@@ -2279,43 +2284,42 @@
     <script src="js/main.js"></script>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mob"
-        class="lg:hidden fixed inset-0 z-[100000] flex flex-col items-start justify-start pt-24 px-8"
+    <div id="mob" class="lg:hidden fixed inset-0 z-[100000] flex flex-col items-start justify-start pt-24 px-8"
         style="background:rgba(10,11,20,0.98);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px); visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.4s ease;">
 
         <ul class="flex flex-col gap-6 w-full max-w-sm">
             <li class="mob-nav-item" style="transition-delay: 50ms;">
-                <a href="/" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="index.html" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-home"></i>
                     <span>Home</span>
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 100ms;">
-                <a href="/#about" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="index.html#about" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-info-circle"></i>
                     <span>About Us</span>
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 150ms;">
-                <a href="/trips" onclick="toggleMobMenu()" class="mob-nav-link active">
+                <a href="trips.html" onclick="toggleMobMenu()" class="mob-nav-link active">
                     <i class="fas fa-map-marked-alt"></i>
                     <span>Tours</span>
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 200ms;">
-                <a href="/#gallery" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="index.html#gallery" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-images"></i>
                     <span>Gallery</span>
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 250ms;">
-                <a href="/explore" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="explore.html" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-compass"></i>
                     <span>Explore</span>
                 </a>
             </li>
             <li class="mob-nav-item" style="transition-delay: 300ms;">
-                <a href="/#contact" onclick="toggleMobMenu()" class="mob-nav-link">
+                <a href="index.html#contact" onclick="toggleMobMenu()" class="mob-nav-link">
                     <i class="fas fa-phone"></i>
                     <span>Contact</span>
                 </a>
@@ -2337,16 +2341,10 @@
 
         <!-- Footer Social -->
         <div class="mt-auto pb-12 mob-nav-item" style="transition-delay: 500ms;">
-            <div class="flex gap-4 mb-4">
-                <a href="https://web.facebook.com/share/r/18SjNMG5PM/" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
-                    <i class="fab fa-facebook-f text-sm"></i>
-                </a>
-                <a href="https://www.instagram.com/leezatravelssrilanka?igsh=MWFja3F3NGpyZ2Q3aA==" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
-                    <i class="fab fa-instagram text-sm"></i>
-                </a>
-                <a href="https://wa.me/94779741834" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
-                    <i class="fab fa-whatsapp text-sm"></i>
-                </a>
+            <div class="flex gap-6 mb-4">
+                <i class="fab fa-facebook-f text-white/40 text-lg"></i>
+                <i class="fab fa-instagram text-white/40 text-lg"></i>
+                <i class="fab fa-whatsapp text-white/40 text-lg"></i>
             </div>
             <p class="text-[9px] text-white/20 font-bold uppercase tracking-widest">Leeza Travels &copy; 2026</p>
         </div>
