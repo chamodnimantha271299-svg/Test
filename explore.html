@@ -408,58 +408,63 @@
 
     /* ── Mobile Nav Cleanup ─────────────────────────────── */
     @media (max-width: 1023px) {
-        #signin-btn, #profile-btn, .mob-book-hidden { display: none !important; }
+
+      #signin-btn,
+      #profile-btn,
+      .mob-book-hidden {
+        display: none !important;
+      }
     }
 
     #mob {
-        visibility: hidden;
-        opacity: 0;
-        transform: translateY(-20px);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        pointer-events: none;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
     }
 
     #mob.open {
-        visibility: visible !important;
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-        pointer-events: auto !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      pointer-events: auto !important;
     }
 
     .mob-nav-link {
-        position: relative;
-        font-size: 1.1rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        transition: all 0.3s ease;
-        color: rgba(255, 255, 255, 0.6);
-        display: flex;
-        align-items: center;
-        gap: 12px;
+      position: relative;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+      color: rgba(255, 255, 255, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .mob-nav-link:hover,
     .mob-nav-link.active {
-        color: white;
-        padding-left: 8px;
+      color: white;
+      padding-left: 8px;
     }
 
     .mob-nav-link i {
-        font-size: 0.9rem;
-        color: #FF6B35;
-        opacity: 0.5;
+      font-size: 0.9rem;
+      color: #FF6B35;
+      opacity: 0.5;
     }
 
     .mob-nav-item {
-        opacity: 0;
-        transform: translateX(-10px);
-        transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.4s ease;
     }
 
     #mob.open .mob-nav-item {
-        opacity: 1;
-        transform: translateX(0);
+      opacity: 1;
+      transform: translateX(0);
     }
   </style>
   <style>
@@ -644,6 +649,44 @@
         width: 62px;
       }
     }
+
+    /* ── Toasts / Notifications ────────────────────────── */
+    .toast {
+      position: fixed;
+      top: 2rem;
+      left: 50%;
+      transform: translate(-50%, -5rem);
+      z-index: 2147483647 !important;
+      padding: 1rem 2rem;
+      border-radius: 99px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      min-width: 320px;
+      max-width: 90vw;
+      justify-content: center;
+      backdrop-filter: blur(16px);
+    }
+
+    .toast.show {
+      transform: translate(-50%, 0) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+    }
+
+    #toast-msg {
+      white-space: normal !important;
+      line-height: 1.4 !important;
+      text-align: center;
+    }
   </style>
   <script>
     tailwind.config = {
@@ -657,42 +700,42 @@
   </script>
   <script>
     // ── Mobile Menu Core Logic (Available Immediately) ──
-    window.handleMobMenu = function(e) {
-        if (e) e.preventDefault();
-        const mob = document.getElementById('mob');
-        const btn = document.getElementById('mob-burger-btn');
-        if (!mob) return;
+    window.handleMobMenu = function (e) {
+      if (e) e.preventDefault();
+      const mob = document.getElementById('mob');
+      const btn = document.getElementById('mob-burger-btn');
+      if (!mob) return;
 
-        const isOpen = mob.classList.toggle('open');
-        
-        if (btn) {
-            const icon = btn.querySelector('i');
-            if (icon) {
-                if (isOpen) {
-                    icon.classList.replace('fa-bars', 'fa-times');
-                } else {
-                    icon.classList.replace('fa-times', 'fa-bars');
-                }
-            }
-        }
+      const isOpen = mob.classList.toggle('open');
 
-        if (isOpen) {
-            mob.style.visibility = 'visible';
-            mob.style.opacity = '1';
-            mob.style.pointerEvents = 'auto';
-            mob.style.transform = 'translateY(0)';
-            document.body.style.overflow = 'hidden';
-        } else {
-            mob.style.visibility = 'hidden';
-            mob.style.opacity = '0';
-            mob.style.pointerEvents = 'none';
-            mob.style.transform = 'translateY(-20px)';
-            document.body.style.overflow = '';
+      if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) {
+          if (isOpen) {
+            icon.classList.replace('fa-bars', 'fa-times');
+          } else {
+            icon.classList.replace('fa-times', 'fa-bars');
+          }
         }
+      }
+
+      if (isOpen) {
+        mob.style.visibility = 'visible';
+        mob.style.opacity = '1';
+        mob.style.pointerEvents = 'auto';
+        mob.style.transform = 'translateY(0)';
+        document.body.style.overflow = 'hidden';
+      } else {
+        mob.style.visibility = 'hidden';
+        mob.style.opacity = '0';
+        mob.style.pointerEvents = 'none';
+        mob.style.transform = 'translateY(-20px)';
+        document.body.style.overflow = '';
+      }
     };
 
-    window.toggleMobMenu = function() {
-        handleMobMenu();
+    window.toggleMobMenu = function () {
+      handleMobMenu();
     };
   </script>
 </head>
@@ -900,17 +943,17 @@
             class="text-white font-light"> Travels</span></span>
       </a>
       <ul class="hidden lg:flex items-center gap-6 lg:gap-10 text-lg lg:text-[20px] font-bold whitespace-nowrap">
-        <li><a href="/" onclick="closeAllModals();"
+        <li><a href="index.html" onclick="closeAllModals();"
             class="nl relative text-white/80 transition-colors hover:text-white">Home</a></li>
-        <li><a href="/#about" onclick="closeAllModals();"
+        <li><a href="index.html#about" onclick="closeAllModals();"
             class="nl relative text-white/80 transition-colors hover:text-white">About Us</a></li>
-        <li><a href="/trips" class="nl relative text-white/80 transition-colors hover:text-white">Tours</a>
+        <li><a href="trips.html" class="nl relative text-white/80 transition-colors hover:text-white">Tours</a>
         </li>
-        <li><a href="/#gallery" onclick="closeAllModals();"
+        <li><a href="index.html#gallery" onclick="closeAllModals();"
             class="nl relative text-white/80 transition-colors hover:text-white">Gallery</a></li>
-        <li><a href="/explore" class="nl relative text-white/80 transition-colors hover:text-white">Explore</a>
+        <li><a href="explore.html" class="nl relative text-white/80 transition-colors hover:text-white">Explore</a>
         </li>
-        <li><a href="/#contact" onclick="closeAllModals();"
+        <li><a href="index.html#contact" onclick="closeAllModals();"
             class="nl relative text-white/80 transition-colors hover:text-white">Contact Us</a></li>
       </ul>
       <div id="nav-actions" class="flex items-center gap-3 lg:gap-4 shrink-0">
@@ -1039,7 +1082,8 @@
           </div>
         </div>
       </div>
-      <button id="mob-burger-btn" onclick="handleMobMenu(event)" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all text-lg flex-shrink-0"><i
+      <button id="mob-burger-btn" onclick="handleMobMenu(event)"
+        class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all text-lg flex-shrink-0"><i
           class="fas fa-bars"></i></button>
     </div>
     </div>
@@ -1414,7 +1458,7 @@
     </div>
   </div>
   <!-- PROFILE MODAL -->
-  <div id="profile-modal" class="fixed inset-0 z-[210] items-center justify-center p-4 hidden">
+  <div id="profile-modal" class="fixed inset-0 z-[210] items-center justify-center p-4" style="display:none">
     <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="toggleProfileModal()"></div>
     <div
       class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10">
@@ -2433,43 +2477,42 @@
   <script src="js/main.js"></script>
 
   <!-- Mobile Menu Overlay -->
-  <div id="mob"
-    class="lg:hidden fixed inset-0 z-[100000] flex flex-col items-start justify-start pt-24 px-8"
+  <div id="mob" class="lg:hidden fixed inset-0 z-[100000] flex flex-col items-start justify-start pt-24 px-8"
     style="background:rgba(10,11,20,0.98);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px); visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.4s ease;">
 
     <ul class="flex flex-col gap-6 w-full max-w-sm">
       <li class="mob-nav-item" style="transition-delay: 50ms;">
-        <a href="/" onclick="toggleMobMenu()" class="mob-nav-link">
+        <a href="index.html" onclick="toggleMobMenu()" class="mob-nav-link">
           <i class="fas fa-home"></i>
           <span>Home</span>
         </a>
       </li>
       <li class="mob-nav-item" style="transition-delay: 100ms;">
-        <a href="/#about" onclick="toggleMobMenu()" class="mob-nav-link">
+        <a href="index.html#about" onclick="toggleMobMenu()" class="mob-nav-link">
           <i class="fas fa-info-circle"></i>
           <span>About Us</span>
         </a>
       </li>
       <li class="mob-nav-item" style="transition-delay: 150ms;">
-        <a href="/trips" onclick="toggleMobMenu()" class="mob-nav-link">
+        <a href="trips.html" onclick="toggleMobMenu()" class="mob-nav-link">
           <i class="fas fa-map-marked-alt"></i>
           <span>Tours</span>
         </a>
       </li>
       <li class="mob-nav-item" style="transition-delay: 200ms;">
-        <a href="/#gallery" onclick="toggleMobMenu()" class="mob-nav-link">
+        <a href="index.html#gallery" onclick="toggleMobMenu()" class="mob-nav-link">
           <i class="fas fa-images"></i>
           <span>Gallery</span>
         </a>
       </li>
       <li class="mob-nav-item" style="transition-delay: 250ms;">
-        <a href="/explore" onclick="toggleMobMenu()" class="mob-nav-link active">
+        <a href="explore.html" onclick="toggleMobMenu()" class="mob-nav-link active">
           <i class="fas fa-compass"></i>
           <span>Explore</span>
         </a>
       </li>
       <li class="mob-nav-item" style="transition-delay: 300ms;">
-        <a href="/#contact" onclick="toggleMobMenu()" class="mob-nav-link">
+        <a href="index.html#contact" onclick="toggleMobMenu()" class="mob-nav-link">
           <i class="fas fa-phone"></i>
           <span>Contact</span>
         </a>
@@ -2492,13 +2535,16 @@
     <!-- Footer Social -->
     <div class="mt-auto pb-12 mob-nav-item" style="transition-delay: 500ms;">
       <div class="flex gap-4 mb-4">
-        <a href="https://web.facebook.com/share/r/18SjNMG5PM/" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
+        <a href="https://web.facebook.com/share/r/18SjNMG5PM/" target="_blank"
+          class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
           <i class="fab fa-facebook-f text-sm"></i>
         </a>
-        <a href="https://www.instagram.com/leezatravelssrilanka?igsh=MWFja3F3NGpyZ2Q3aA==" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
+        <a href="https://www.instagram.com/leezatravelssrilanka?igsh=MWFja3F3NGpyZ2Q3aA==" target="_blank"
+          class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
           <i class="fab fa-instagram text-sm"></i>
         </a>
-        <a href="https://wa.me/94779741834" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
+        <a href="https://wa.me/94779741834" target="_blank"
+          class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/40 hover:text-primary hover:bg-white/10 hover:scale-110 transition-all">
           <i class="fab fa-whatsapp text-sm"></i>
         </a>
       </div>
@@ -2506,16 +2552,16 @@
     </div>
   </div>
 </body>
-  <script>
-    (function () {
-      function forceSync() {
-        if (typeof syncLanguageUI === 'function') syncLanguageUI();
-        else setTimeout(forceSync, 200);
-      }
-      window.addEventListener('load', forceSync);
-      setTimeout(forceSync, 500);
-    })();
-  </script>
+<script>
+  (function () {
+    function forceSync() {
+      if (typeof syncLanguageUI === 'function') syncLanguageUI();
+      else setTimeout(forceSync, 200);
+    }
+    window.addEventListener('load', forceSync);
+    setTimeout(forceSync, 500);
+  })();
+</script>
 </body>
 
 </html>
