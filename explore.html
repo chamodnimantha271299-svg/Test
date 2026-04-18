@@ -968,26 +968,26 @@
     <nav id="nav"
         class="fixed top-0 inset-x-0 z-[150] bg-[#1b2a41] backdrop-blur-xl border-b border-white/5 transition-all duration-300">
         <div class="max-w-[90rem] mx-auto px-4 lg:px-8 py-3 lg:py-4 flex items-center justify-between">
-            <a href="#" onclick="closeAllModals();" class="flex items-center gap-3 shrink-0">
-                <img src="images/1.png" alt="Leeza Travels Logo" class="w-12 h-12 lg:w-16 lg:h-16 object-contain" />
-                <span class="text-xl lg:text-[1.7rem] font-bold gtext whitespace-nowrap">Leeza<span
+            <a href="#" onclick="closeAllModals();" class="flex items-center gap-1.5 lg:gap-3 shrink-0">
+                <img src="images/1.png" alt="Leeza Travels Logo" class="w-10 h-10 lg:w-16 lg:h-16 object-contain" />
+                <span class="text-sm sm:text-xl lg:text-[1.7rem] font-bold gtext whitespace-nowrap">Leeza<span
                         class="text-white font-light"> Travels</span></span>
             </a>
             <ul class="hidden lg:flex items-center gap-6 lg:gap-10 text-lg lg:text-[20px] font-bold whitespace-nowrap">
-                <li><a href="/" onclick="closeAllModals();"
+                <li><a href="index.html" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Home</a></li>
-                <li><a href="/#about" onclick="closeAllModals();"
+                <li><a href="index.html#about" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">About Us</a></li>
-                <li><a href="/trips" class="nl relative text-white/80 transition-colors hover:text-white">Tours</a>
+                <li><a href="trips.html" class="nl relative text-white/80 transition-colors hover:text-white">Tours</a>
                 </li>
-                <li><a href="/#gallery" onclick="closeAllModals();"
+                <li><a href="index.html#gallery" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Gallery</a></li>
-                <li><a href="/explore" class="nl relative text-white/80 transition-colors hover:text-white">Explore</a>
-                </li>
-                <li><a href="/#contact" onclick="closeAllModals();"
+                <li><a href="explore.html"
+                        class="nl relative text-white/80 transition-colors hover:text-white">Explore</a></li>
+                <li><a href="index.html#contact" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Contact Us</a></li>
             </ul>
-            <div id="nav-actions" class="flex items-center gap-3 lg:gap-4 shrink-0 mini-gap">
+            <div id="nav-actions" class="flex items-center gap-2 lg:gap-4 shrink-0 mini-gap">
                 <button id="signin-btn" onclick="toggleAuthModal()"
                     class="border border-white/20 px-5 py-2.5 rounded-full text-[15px] font-semibold hover:border-primary transition-all whitespace-nowrap">Sign
                     In</button>
@@ -1119,7 +1119,6 @@
             <button id="mob-burger-btn" onclick="handleMobMenu(event)"
                 class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all text-lg flex-shrink-0"><i
                     class="fas fa-bars"></i></button>
-        </div>
         </div>
     </nav>
     <!-- HERO SECTION -->
