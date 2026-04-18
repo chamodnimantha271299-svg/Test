@@ -2321,11 +2321,11 @@ function selectLang(langCode, flag, label, el) {
   if (btn) btn.classList.remove('open');
   if (dd) dd.classList.remove('open');
 
-  // Persistence: Update LocalStorage FIRST as source of truth
+  // Persistence: Update SessionStorage FIRST as source of truth
   try {
-    localStorage.setItem('googtrans_lang', langCode);
-    localStorage.setItem('googtrans_flag', flag);
-    localStorage.setItem('googtrans_label', label);
+    sessionStorage.setItem('googtrans_lang', langCode);
+    sessionStorage.setItem('googtrans_flag', flag);
+    sessionStorage.setItem('googtrans_label', label);
   } catch (e) { }
 
   // Aggressively set cookies on multiple levels to ensure it sticks
@@ -2361,13 +2361,13 @@ function syncLanguageUI() {
   let flag = '🇺🇸';
   let label = 'English';
 
-  // ALWAYS Prioritize LocalStorage as the ultimate source of truth
+  // ALWAYS Prioritize SessionStorage as the ultimate source of truth
   try {
-    const savedLang = localStorage.getItem('googtrans_lang');
+    const savedLang = sessionStorage.getItem('googtrans_lang');
     if (savedLang) {
       langCode = savedLang;
-      flag = localStorage.getItem('googtrans_flag') || '🇺🇸';
-      label = localStorage.getItem('googtrans_label') || 'English';
+      flag = sessionStorage.getItem('googtrans_flag') || '🇺🇸';
+      label = sessionStorage.getItem('googtrans_label') || 'English';
     }
   } catch (e) { }
 
