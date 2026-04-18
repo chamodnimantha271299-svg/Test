@@ -525,7 +525,10 @@ function updateAuthUI() {
 
   if (loggedIn) {
     const dn = document.getElementById('user-display-name');
-    if (dn) dn.textContent = currentUser.name.split(' ')[0];
+    const mdn = document.getElementById('mob-user-display-name');
+    const nameToShow = (currentUser.name || 'Profile').split(' ')[0];
+    if (dn) dn.textContent = nameToShow;
+    if (mdn) mdn.textContent = nameToShow;
 
     // Standard IDs
     const pName = document.getElementById('profile-name') || document.getElementById('p-name');
