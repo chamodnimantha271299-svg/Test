@@ -408,11 +408,19 @@
 
         /* ── Mobile Nav Cleanup ─────────────────────────────── */
         @media (max-width: 1023px) {
-
-            #signin-btn,
-            #profile-btn,
             .mob-book-hidden {
                 display: none !important;
+            }
+
+            #signin-btn,
+            #profile-btn {
+                padding: 5px 10px;
+                font-size: 12px;
+                gap: 5px;
+            }
+
+            .mini-gap {
+                gap: 6px !important;
             }
         }
 
@@ -979,7 +987,7 @@
                 <li><a href="/#contact" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Contact Us</a></li>
             </ul>
-            <div id="nav-actions" class="flex items-center gap-3 lg:gap-4 shrink-0">
+            <div id="nav-actions" class="flex items-center gap-3 lg:gap-4 shrink-0 mini-gap">
                 <button id="signin-btn" onclick="toggleAuthModal()"
                     class="border border-white/20 px-5 py-2.5 rounded-full text-[15px] font-semibold hover:border-primary transition-all whitespace-nowrap">Sign
                     In</button>
@@ -1136,6 +1144,19 @@
                 the Indian
                 Ocean through our lens.
             </p>
+
+            <!-- HOME-STYLE WELCOME BADGE -->
+            <div
+                class="glass-dark rounded-full px-6 py-2.5 max-w-fit mx-auto mt-12 border border-white/10 shadow-2xl flex items-center gap-3 backdrop-blur-md hover:scale-105 transition-all group">
+                <i class="fas fa-map-marked-alt text-primary text-sm group-hover:rotate-12 transition-transform"></i>
+                <span class="text-xs font-black uppercase tracking-[0.3em] text-white">Welcome to <span
+                        class="gtext">Sri Lanka</span></span>
+            </div>
+            <div class="flex items-center justify-center gap-8 mt-8 text-xs text-white/50">
+                <span><i class="fas fa-shield-alt text-primary mr-1"></i>100% Safe</span>
+                <span><i class="fas fa-star text-accent mr-1"></i>5-Star Rated</span>
+                <span><i class="fas fa-headset text-primary mr-1"></i>24/7 Support</span>
+            </div>
         </div>
     </section>
     <!-- TOUR PHOTOS GALLERY -->
