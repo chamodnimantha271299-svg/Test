@@ -1219,21 +1219,21 @@ function showReplyModal(id, encName, encEmail, encMsg) {
 
   const modal = document.createElement('div');
   modal.id = 'admin-reply-modal';
-  modal.className = 'fixed inset-0 z-[300] flex items-center justify-center p-4';
+  modal.className = 'fixed inset-0 z-[1200] flex items-center justify-center p-4';
   modal.innerHTML = `
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="document.getElementById('admin-reply-modal').remove()"></div>
-    <div class="relative glass-dark border border-white/10 rounded-2xl p-8 w-full max-w-lg z-10 shadow-2xl">
-      <button onclick="document.getElementById('admin-reply-modal').remove()" class="absolute top-4 right-4 text-white/40 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="document.getElementById('admin-reply-modal').remove()"></div>
+    <div class="relative glass-dark border border-white/10 rounded-[2rem] p-8 w-full max-w-lg z-10 shadow-2xl animate-fadeUp">
+      <button onclick="document.getElementById('admin-reply-modal').remove()" class="absolute top-6 right-6 text-white/40 hover:text-white text-xl transition-all hover:rotate-90"><i class="fas fa-times"></i></button>
       <span class="text-primary text-[10px] font-black uppercase tracking-widest mb-1 block"><i class="fas fa-reply mr-1"></i>Reply to Message</span>
       <h3 class="text-xl font-bold text-white mb-1">${name}</h3>
       <p class="text-xs text-white/40 mb-4">${email}</p>
-      <div class="bg-white/5 rounded-xl p-3 mb-4 text-xs text-white/50 italic max-h-24 overflow-y-auto">"${originalMsg}"</div>
+      <div class="bg-white/5 rounded-xl p-3 mb-4 text-xs text-white/50 italic max-h-24 overflow-y-auto border border-white/5">"${originalMsg}"</div>
       <textarea id="admin-reply-text" rows="4" placeholder="Type your reply here..." class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-white placeholder-white/20 focus:outline-none focus:border-primary resize-none mb-3"></textarea>
       <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2 mb-4">
         <i class="fas fa-image text-primary text-sm flex-shrink-0"></i>
         <input id="admin-reply-image-url" type="url" placeholder="Image URL (optional)" class="flex-1 bg-transparent text-sm text-white placeholder-white/30 focus:outline-none">
       </div>
-      <button onclick="submitAdminReply(${id}, '${email.replace(/'/g, "\\'")}')" class="w-full bg-primary text-black font-black py-3 rounded-xl hover:opacity-90 transition-all text-sm"><i class="fas fa-paper-plane mr-2"></i>Send Reply</button>
+      <button onclick="submitAdminReply(${id}, '${email.replace(/'/g, "\\'")}')" class="w-full bg-primary text-black font-black py-3 rounded-xl hover:opacity-90 transition-all text-sm shadow-lg shadow-primary/20"><i class="fas fa-paper-plane mr-2"></i>Send Reply</button>
     </div>`;
   document.body.appendChild(modal);
 }
@@ -1292,11 +1292,11 @@ function showAddUserModal() {
   if (existing) existing.remove();
   const modal = document.createElement('div');
   modal.id = 'admin-add-user-modal';
-  modal.className = 'fixed inset-0 z-[300] flex items-center justify-center p-4';
+  modal.className = 'fixed inset-0 z-[1200] flex items-center justify-center p-4';
   modal.innerHTML = `
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="document.getElementById('admin-add-user-modal').remove()"></div>
-    <div class="relative glass-dark border border-white/10 rounded-2xl p-8 w-full max-w-md z-10 shadow-2xl">
-      <button onclick="document.getElementById('admin-add-user-modal').remove()" class="absolute top-4 right-4 text-white/40 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="document.getElementById('admin-add-user-modal').remove()"></div>
+    <div class="relative glass-dark border border-white/10 rounded-[2rem] p-8 w-full max-w-md z-10 shadow-2xl animate-fadeUp">
+      <button onclick="document.getElementById('admin-add-user-modal').remove()" class="absolute top-6 right-6 text-white/40 hover:text-white text-xl transition-all hover:rotate-90"><i class="fas fa-times"></i></button>
       <span class="text-primary text-[10px] font-black uppercase tracking-widest mb-1 block"><i class="fas fa-user-plus mr-1"></i>Add New User</span>
       <h3 class="text-xl font-bold text-white mb-5">Create Account</h3>
       <div class="space-y-3">
@@ -1306,7 +1306,7 @@ function showAddUserModal() {
         <input id="au-pass" type="password" placeholder="Password *" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-primary">
         <label class="flex items-center gap-2 text-xs text-white/50 cursor-pointer"><input id="au-admin" type="checkbox" class="accent-primary"> Make this user an Admin</label>
       </div>
-      <button onclick="submitAddUser()" class="w-full bg-primary text-black font-black py-3 rounded-xl hover:opacity-90 transition-all text-sm mt-5"><i class="fas fa-plus mr-2"></i>Create User</button>
+      <button onclick="submitAddUser()" class="w-full bg-primary text-black font-black py-3 rounded-xl hover:opacity-90 transition-all text-sm mt-5 shadow-lg shadow-primary/20"><i class="fas fa-plus mr-2"></i>Create User</button>
     </div>`;
   document.body.appendChild(modal);
 }
@@ -1337,11 +1337,11 @@ function showEditUserModal(email, name, phone, pass) {
   if (existing) existing.remove();
   const modal = document.createElement('div');
   modal.id = 'admin-edit-user-modal';
-  modal.className = 'fixed inset-0 z-[300] flex items-center justify-center p-4';
+  modal.className = 'fixed inset-0 z-[1200] flex items-center justify-center p-4';
   modal.innerHTML = `
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="document.getElementById('admin-edit-user-modal').remove()"></div>
-    <div class="relative glass-dark border border-white/10 rounded-2xl p-8 w-full max-w-md z-10 shadow-2xl">
-      <button onclick="document.getElementById('admin-edit-user-modal').remove()" class="absolute top-4 right-4 text-white/40 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="document.getElementById('admin-edit-user-modal').remove()"></div>
+    <div class="relative glass-dark border border-white/10 rounded-[2rem] p-8 w-full max-w-md z-10 shadow-2xl animate-fadeUp">
+      <button onclick="document.getElementById('admin-edit-user-modal').remove()" class="absolute top-6 right-6 text-white/40 hover:text-white text-xl transition-all hover:rotate-90"><i class="fas fa-times"></i></button>
       <span class="text-sky-400 text-[10px] font-black uppercase tracking-widest mb-1 block"><i class="fas fa-edit mr-1"></i>Edit User</span>
       <h3 class="text-xl font-bold text-white mb-5">${email}</h3>
       <div class="space-y-3">
@@ -1349,7 +1349,7 @@ function showEditUserModal(email, name, phone, pass) {
         <input id="eu-phone" type="text" value="${phone}" placeholder="Phone" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-primary">
         <input id="eu-pass" type="password" value="${pass}" placeholder="New Password (leave blank to keep)" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-primary">
       </div>
-      <button onclick="submitEditUser('${email}')" class="w-full bg-sky-500 text-white font-black py-3 rounded-xl hover:opacity-90 transition-all text-sm mt-5"><i class="fas fa-save mr-2"></i>Save Changes</button>
+      <button onclick="submitEditUser('${email}')" class="w-full bg-sky-500 text-white font-black py-3 rounded-xl hover:opacity-90 transition-all text-sm mt-5 shadow-lg shadow-sky-500/20"><i class="fas fa-save mr-2"></i>Save Changes</button>
     </div>`;
   document.body.appendChild(modal);
 }
@@ -1420,15 +1420,20 @@ function showAddNewsletterModal() {
   if (existing) existing.remove();
   const modal = document.createElement('div');
   modal.id = 'admin-add-nl-modal';
-  modal.className = 'fixed inset-0 z-[300] flex items-center justify-center p-4';
+  modal.className = 'fixed inset-0 z-[1200] flex items-center justify-center p-4';
   modal.innerHTML = `
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="document.getElementById('admin-add-nl-modal').remove()"></div>
-    <div class="relative glass-dark border border-white/10 rounded-2xl p-8 w-full max-w-md z-10 shadow-2xl">
-      <button onclick="document.getElementById('admin-add-nl-modal').remove()" class="absolute top-4 right-4 text-white/40 hover:text-white text-xl"><i class="fas fa-times"></i></button>
-      <span class="text-emerald-400 text-[10px] font-black uppercase tracking-widest mb-1 block"><i class="fas fa-newspaper mr-1"></i>Add Subscriber</span>
-      <h3 class="text-xl font-bold text-white mb-5">Newsletter</h3>
-      <input id="admin-nl-email" type="email" placeholder="Email Address *" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-primary mb-4">
-      <button onclick="submitAddNewsletter()" class="w-full bg-emerald-500 text-white font-black py-3 rounded-xl hover:opacity-90 transition-all text-sm"><i class="fas fa-plus mr-2"></i>Add Subscriber</button>
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="document.getElementById('admin-add-nl-modal').remove()"></div>
+    <div class="relative glass-dark border border-white/10 rounded-[2rem] p-8 w-full max-w-md z-10 shadow-2xl animate-fadeUp">
+      <button onclick="document.getElementById('admin-add-nl-modal').remove()" class="absolute top-6 right-6 text-white/40 hover:text-white text-xl transition-all hover:rotate-90"><i class="fas fa-times"></i></button>
+      <div class="flex items-center gap-2 mb-2">
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-sm">
+          <i class="fas fa-newspaper"></i>
+        </div>
+        <span class="text-emerald-400 text-[10px] font-black uppercase tracking-widest block">Add Subscriber</span>
+      </div>
+      <h3 class="text-2xl font-bold text-white mb-6">Newsletter</h3>
+      <input id="admin-nl-email" type="email" placeholder="Email Address *" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-sm text-white placeholder-white/20 focus:outline-none focus:border-emerald-500/50 mb-6 transition-all">
+      <button onclick="submitAddNewsletter()" class="w-full bg-emerald-500 text-white font-black py-4 rounded-xl hover:opacity-90 transition-all text-sm shadow-lg shadow-emerald-500/20"><i class="fas fa-plus mr-2"></i>Add Subscriber</button>
     </div>`;
   document.body.appendChild(modal);
 }
@@ -1459,20 +1464,27 @@ function showBroadcastNewsletterModal() {
   if (existing) existing.remove();
   const modal = document.createElement('div');
   modal.id = 'admin-broadcast-nl-modal';
-  modal.className = 'fixed inset-0 z-[300] flex items-center justify-center p-4';
+  modal.className = 'fixed inset-0 z-[1200] flex items-center justify-center p-4';
   modal.innerHTML = `
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="document.getElementById('admin-broadcast-nl-modal').remove()"></div>
-    <div class="relative glass-dark border border-white/10 rounded-2xl p-8 w-full max-w-lg z-10 shadow-2xl">
-      <button onclick="document.getElementById('admin-broadcast-nl-modal').remove()" class="absolute top-4 right-4 text-white/40 hover:text-white text-xl"><i class="fas fa-times"></i></button>
-      <span class="text-blue-400 text-[10px] font-black uppercase tracking-widest mb-1 block"><i class="fas fa-paper-plane mr-1"></i>Broadcast Message</span>
-      <h3 class="text-xl font-bold text-white mb-5">Email All Subscribers</h3>
-      <input id="bn-subject" type="text" placeholder="Subject" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-primary mb-4">
-      <textarea id="bn-message" rows="5" placeholder="Type your message here..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-primary mb-3 resize-none"></textarea>
-      <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2 mb-4">
-        <i class="fas fa-image text-primary text-sm flex-shrink-0"></i>
-        <input id="bn-image-url" type="url" placeholder="Image URL (optional)" class="flex-1 bg-transparent text-sm text-white placeholder-white/30 focus:outline-none">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="document.getElementById('admin-broadcast-nl-modal').remove()"></div>
+    <div class="relative glass-dark border border-white/10 rounded-[2rem] p-8 w-full max-w-lg z-10 shadow-2xl animate-fadeUp">
+      <button onclick="document.getElementById('admin-broadcast-nl-modal').remove()" class="absolute top-6 right-6 text-white/40 hover:text-white text-xl transition-all hover:rotate-90"><i class="fas fa-times"></i></button>
+      <div class="flex items-center gap-2 mb-2">
+        <div class="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 text-sm">
+          <i class="fas fa-paper-plane"></i>
+        </div>
+        <span class="text-blue-400 text-[10px] font-black uppercase tracking-widest block">Broadcast Message</span>
       </div>
-      <button onclick="submitBroadcastNewsletter()" id="bn-submit-btn" class="w-full bg-blue-500 text-white font-black py-3 rounded-xl hover:opacity-90 transition-all text-sm"><i class="fas fa-paper-plane mr-2"></i>Send Broadcast</button>
+      <h3 class="text-2xl font-bold text-white mb-6">Email All Subscribers</h3>
+      <div class="space-y-4">
+        <input id="bn-subject" type="text" placeholder="Subject" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-sm text-white placeholder-white/20 focus:outline-none focus:border-blue-500/50 transition-all">
+        <textarea id="bn-message" rows="5" placeholder="Type your message here..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-sm text-white placeholder-white/20 focus:outline-none focus:border-blue-500/50 resize-none transition-all"></textarea>
+        <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+          <i class="fas fa-image text-primary text-sm flex-shrink-0"></i>
+          <input id="bn-image-url" type="url" placeholder="Image URL (optional)" class="flex-1 bg-transparent text-sm text-white placeholder-white/30 focus:outline-none">
+        </div>
+      </div>
+      <button onclick="submitBroadcastNewsletter()" id="bn-submit-btn" class="w-full bg-blue-500 text-white font-black py-4 rounded-xl hover:opacity-90 transition-all text-sm mt-6 shadow-lg shadow-blue-500/20"><i class="fas fa-paper-plane mr-2"></i>Send Broadcast</button>
     </div>`;
   document.body.appendChild(modal);
 }
