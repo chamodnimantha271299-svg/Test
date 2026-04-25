@@ -380,7 +380,16 @@ async function handleForgotPass() {
       };
 
       try {
-        await emailjs.send('service_s7kzv5g', 'template_mhs62h1', params);
+        await emailjs.send('service_cqv30sa', 'template_asf8jxv', {
+          to_email: em,
+          from_name: 'Leeza Travels Support',
+          from_email: 'leezatravelslk@gmail.com',
+          user_name: user.name || 'User',
+          user_email: em,
+          subject: 'Password Reset Verification',
+          message: `Your password reset verification code is: ${generatedOTP}. If you did not request this, please ignore this email.`,
+          otp_code: generatedOTP
+        }, 'tRG6iOeYylZBAVmsa');
         console.log('OTP sent successfully via EmailJS');
       } catch (e) {
         console.error('EmailJS Error:', e);
@@ -476,7 +485,7 @@ window.cancelReset = cancelReset;
 async function loginUser(user) {
   currentUser = user;
   const adminDoc = await get('admins', user.email);
-  if (adminDoc || user.email === 'nimanthachamod86@gmail.com' || user.email === 'leezatravelslk@gmail.com' || user.email === 'chamodnimantha271299@gmail.com') currentUser.isAdmin = true;
+  if (adminDoc || user.email === 'chamodnimantha271299@gmail.com' || user.email === 'leezatravelslk@gmail.com') currentUser.isAdmin = true;
   localStorage.setItem('leeza_user', JSON.stringify(user));
   updateAuthUI();
   toggleAuthModal();
@@ -498,7 +507,7 @@ async function checkAuth() {
     if (user) {
       currentUser = user;
       const adminDoc = await get('admins', user.email);
-      if (adminDoc || user.email === 'nimanthachamod86@gmail.com' || user.email === 'leezatravelslk@gmail.com' || user.email === 'chamodnimantha271299@gmail.com') currentUser.isAdmin = true;
+      if (adminDoc || user.email === 'chamodnimantha271299@gmail.com' || user.email === 'leezatravelslk@gmail.com') currentUser.isAdmin = true;
       updateAuthUI();
       checkUserNotifications();
       checkAdminNotifications();
@@ -568,7 +577,7 @@ function isUserAdmin() {
 }
 
 function isOwner() {
-  return currentUser && currentUser.email === 'chamodnimantha271299@gmail.com';
+  return currentUser && currentUser.email === 'leezatravelslk@gmail.com';
 }
 
 // ── Notifications Logic ──────────────────────────────────────â”€
@@ -1268,7 +1277,16 @@ async function submitAdminReply(id, email) {
         user_name: 'Valued Customer'
       };
       console.log('📧 Sending reply email to:', email, emailParams);
-      const result = await emailjs.send('service_cqv30sa', 'template_mhs62hl', emailParams, 'tRG6iOeYylZBAVmsa');
+      const result = await emailjs.send('service_cqv30sa', 'template_asf8jxv', {
+        from_name: 'Leeza Travels',
+        from_email: 'leezatravelslk@gmail.com',
+        to_email: email,
+        user_name: 'Valued Customer',
+        user_email: email,
+        subject: 'Reply from Leeza Travels',
+        message: replyText,
+        image_url: replyImage
+      }, 'tRG6iOeYylZBAVmsa');
       console.log('✅ Reply email sent successfully:', result);
       toast('Reply sent to ' + email + ' ✅', 'success');
     } catch (e) {
@@ -1539,8 +1557,18 @@ async function submitBroadcastNewsletter() {
           timestamp: new Date().toLocaleString()
         };
 
-        // Use template_mhs62hl which has {{broadcast_subject}} and {{broadcast_message}}
-        return emailjs.send('service_cqv30sa', 'template_mhs62hl', params, 'tRG6iOeYylZBAVmsa')
+        // Use template_asf8jxv for broadcast
+        return emailjs.send('service_cqv30sa', 'template_asf8jxv', {
+          from_name: 'Leeza Travels',
+          from_email: fromEmail,
+          to_email: sub.email,
+          user_name: 'Subscriber',
+          user_email: sub.email,
+          subject: subject,
+          message: message,
+          image_url: imageUrl,
+          timestamp: new Date().toLocaleString()
+        }, 'tRG6iOeYylZBAVmsa')
           .then(res => {
             console.log(`✅ Sent to ${sub.email}:`, res);
             sentCount++;
@@ -1764,14 +1792,35 @@ async function submitBooking(e) {
           selected_vehicle: vehicle || 'Not Specified',
           message: message || 'None',
           reply_to: email,
-          to_email: 'chamodnimantha271299@gmail.com'
+          to_email: 'leezatravelslk@gmail.com'
         };
 
-        // Send notification to both Admins
-        const admins = ['chamodnimantha271299@gmail.com', 'leezatravelslk@gmail.com'];
-        for (const adminEmail of admins) {
-          await emailjs.send('service_s7kzv5g', 'template_mhs62h1', { ...emailParams, to_email: adminEmail }, 'tRG6iOeYylZBAVmsa');
-        }
+        // Send notification to Admin (Matching EXACT template keys from screenshot)
+        await emailjs.send('service_cqv30sa', 'template_asf8jxv', {
+          full_name: name,
+          from_email: email,
+          phone_number: phone,
+          guests: guests,
+          destination: destination || 'Sri Lanka Tour',
+          arrival_date: arrival,
+          departure_date: depart,
+          vehicle: vehicle || 'Not Specified',
+          special_requests: message || 'None',
+          
+          // Fallbacks for safety
+          user_name: name,
+          name: name,
+          email: email,
+          user_email: email,
+          user_phone: phone,
+          no_of_guests: guests,
+          selected_vehicle: vehicle || 'Not Specified',
+          message: message || 'None',
+          to_email: 'leezatravelslk@gmail.com',
+          from_name: name,
+          reply_to: email,
+          timestamp: new Date().toLocaleString()
+        }, 'tRG6iOeYylZBAVmsa');
       } catch (e) {
         console.warn('Background email notification failed:', e);
       }
@@ -2175,9 +2224,9 @@ async function sendMsg(e) {
     Full_Name: m.name,
 
     // RECIPIENT SETTINGS
-    email: 'chamodnimantha271299@gmail.com',
-    Email: 'chamodnimantha271299@gmail.com',
-    to_email: 'chamodnimantha271299@gmail.com, leezatravelslk@gmail.com',
+    email: 'leezatravelslk@gmail.com',
+    Email: 'leezatravelslk@gmail.com',
+    to_email: 'leezatravelslk@gmail.com',
 
     // VISITOR INFO (for the email body)
     visitor_email: m.email,
@@ -2202,24 +2251,29 @@ async function sendMsg(e) {
 
   console.log('Sending email with params:', emailParams);
 
-  try {
-    // Send Contact Form to both Admins
-    const admins = ['chamodnimantha271299@gmail.com', 'leezatravelslk@gmail.com'];
-    for (const adminEmail of admins) {
-      await emailjs.send('service_6e0y3nl', 'template_ftjto0p', {
-        // Exact template variable names
+    try {
+      // Send Contact Form to Admin (Standardized credentials)
+      await emailjs.send('service_cqv30sa', 'template_asf8jxv', {
+        full_name: m.name,
+        from_email: m.email,
+        phone_number: m.phone,
+        message: m.message,
+        destination: m.interest,
+        
+        // Template placeholders for shared template compatibility
+        guests: 'N/A',
+        arrival_date: 'N/A',
+        departure_date: 'N/A',
+        vehicle: 'N/A',
+        special_requests: m.message,
+
+        // Additional fields
         user_name: m.name,
         user_email: m.email,
         user_phone: m.phone,
-        destination: m.interest,
-        message: m.message,
-        // Extra fallbacks
-        to_email: adminEmail,
-        from_name: m.name,
-        reply_to: m.email,
+        to_email: 'leezatravelslk@gmail.com',
         timestamp: new Date().toLocaleString()
-      }, 'bwPmrwG-cTzEUhvkU');
-    }
+      }, 'tRG6iOeYylZBAVmsa');
 
     toast('Message Sent! ✅', 'success');
     if (form) form.reset();
@@ -2279,11 +2333,11 @@ async function subscribeNL(e) {
       };
 
       // --- DOUBLE TRY FALLBACK ---
-      emailjs.send('service_s7kzv5g', 'template_mhs62h1', nlParams, 'tRG6iOeYylZBAVmsa')
+      emailjs.send('service_cqv30sa', 'template_asf8jxv', nlParams, 'tRG6iOeYylZBAVmsa')
         .then(res => console.log(`✅ Subscription auto-reply sent:`, res))
         .catch(err => {
           console.warn(`âš ï¸ Template h1 failed for subscription, trying fallback hl...`, err);
-          emailjs.send('service_s7kzv5g', 'template_mhs62h1', nlParams, 'tRG6iOeYylZBAVmsa')
+          emailjs.send('service_cqv30sa', 'template_asf8jxv', nlParams, 'tRG6iOeYylZBAVmsa')
             .then(res => console.log(`✅ Subscription auto-reply sent (Fallback):`, res))
             .catch(err2 => console.error(`âŒ BOTH templates failed for subscription:`, err2));
         });
