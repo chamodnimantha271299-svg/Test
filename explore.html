@@ -989,8 +989,8 @@
                         class="nl relative text-white/80 transition-colors hover:text-white">tours</a></li>
                 <li><a href="/#gallery" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Gallery</a></li>
-                <li><a href="/explore"
-                        class="nl relative text-white/80 transition-colors hover:text-white">Explore</a></li>
+                <li><a href="/explore" class="nl relative text-white/80 transition-colors hover:text-white">Explore</a>
+                </li>
                 <li><a href="/#contact" onclick="closeAllModals();"
                         class="nl relative text-white/80 transition-colors hover:text-white">Contact Us</a></li>
             </ul>
@@ -1427,7 +1427,7 @@
     <div id="detail-modal" class="fixed inset-0 z-[1000] grid place-items-center p-4 md:p-8 hidden">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeDetailModal()"></div>
         <div
-            class="relative glass-dark rounded-[2.5rem] md:rounded-[3.5rem] w-full max-w-7xl h-[90vh] overflow-hidden z-10 animate-modalZoom flex flex-col border border-white/10 shadow-3xl mx-auto">
+            class="relative glass-dark rounded-[2.5rem] md:rounded-[3.5rem] w-full max-w-7xl h-[90vh] overflow-hidden z-10 animate-fadeUp flex flex-col border border-white/10 shadow-3xl mx-auto">
             <button onclick="closeDetailModal()"
                 class="absolute top-8 right-8 w-14 h-14 rounded-full glass bg-black/20 hover:bg-black/40 flex items-center justify-center text-white/50 hover:text-white text-2xl z-20 transition-all hover:rotate-90"><i
                     class="fas fa-times"></i></button>
@@ -1626,10 +1626,10 @@
         </div>
     </div>
     <!-- BOOKING MODAL -->
-    <div id="booking-modal" class="fixed inset-0 z-[99999] flex items-center justify-center p-4 hidden"
-        style="background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);">
+    <div id="booking-modal" class="fixed inset-0 z-[99999] flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeModal()"></div>
         <div id="booking-modal-box"
-            class="relative w-full max-w-2xl glass-dark rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden animate-modalZoom custom-scrollbar"
+            class="relative w-full max-w-2xl glass-dark rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden animate-fadeUp custom-scrollbar z-10"
             style="max-height:90vh;overflow-y:auto;">
             <!-- Header -->
             <div class="px-8 pt-8 pb-6 border-b border-white/10 flex items-center justify-between">
@@ -1819,64 +1819,68 @@
     </div>
     </div>
     <!-- BROADCAST MODAL -->
-    <div id="broadcast-modal" class="fixed inset-0 z-[210] flex items-center justify-center p-4 hidden">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeBroadcastModal()"></div>
-        <div class="glass-dark border border-white/10 rounded-2xl p-8 relative z-10 w-full max-w-lg shadow-2xl">
+    <div id="broadcast-modal" class="fixed inset-0 z-[1200] flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeBroadcastModal()"></div>
+        <div class="glass-dark border border-white/10 rounded-[2rem] p-8 relative z-10 w-full max-w-lg shadow-2xl animate-fadeUp">
             <button type="button" onclick="closeBroadcastModal()"
-                class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fas fa-times"></i></button>
-            <h3 class="text-xl font-bold mb-4">Broadcast Email</h3>
-            <p class="text-sm text-white/50 mb-4">Send an email broadcast to ALL newsletter subscribers.</p>
+                class="absolute top-6 right-6 text-white/50 hover:text-white text-xl transition-all hover:rotate-90"><i class="fas fa-times"></i></button>
+            <div class="flex items-center gap-2 mb-2">
+                <div class="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 text-sm">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <span class="text-blue-400 text-[10px] font-black uppercase tracking-widest block">Broadcast Message</span>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-6">Email All Subscribers</h3>
             <textarea id="broadcast-msg"
-                class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white text-sm focus:outline-none focus:border-primary min-h-[120px]"
+                class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white text-sm focus:outline-none focus:border-blue-500/50 min-h-[150px] resize-none transition-all mb-4"
                 placeholder="Type your broadcast message..."></textarea>
             <button onclick="sendBroadcast()" id="broadcast-btn"
-                class="w-full bg-primary text-black font-bold py-3 rounded-xl mt-4 hover:opacity-90 transition-all">Send
-                Broadcast</button>
+                class="w-full bg-blue-500 text-white font-bold py-4 rounded-xl hover:opacity-90 transition-all shadow-lg shadow-blue-500/20"><i class="fas fa-paper-plane mr-2"></i>Send Broadcast</button>
         </div>
     </div>
     <!-- BLOG MODAL -->
     <div id="blogModal"
-        class="fixed inset-0 z-[210] hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeBlog()"></div>
+        class="fixed inset-0 z-[1000] hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeBlog()"></div>
         <div
-            class="relative glass-dark w-full max-w-5xl h-[85vh] rounded-[2rem] overflow-hidden z-10 flex flex-col border border-white/10">
+            class="relative glass-dark w-full max-w-5xl h-[85vh] rounded-[2.5rem] overflow-hidden z-10 flex flex-col border border-white/10 animate-fadeUp">
             <div class="h-48 md:h-64 shrink-0 relative">
                 <img id="modalBlogImg" src="" class="w-full h-full object-cover" alt="Blog Image">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
                 <button onclick="closeBlog()"
-                    class="absolute top-4 right-4 w-9 h-9 rounded-full glass bg-black/20 hover:bg-black/40 flex items-center justify-center text-white/70 z-20"><i
-                        class="fas fa-times"></i></button>
-                <div class="absolute bottom-6 left-6">
+                    class="absolute top-6 right-6 w-12 h-12 rounded-full glass bg-black/20 hover:bg-black/40 flex items-center justify-center text-white/70 z-20 transition-all hover:rotate-90"><i
+                        class="fas fa-times text-xl"></i></button>
+                <div class="absolute bottom-8 left-8">
                     <span id="modalBlogTag"
-                        class="bg-primary/20 text-white text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded mb-1.5 inline-block">Category</span>
-                    <h2 id="modalBlogTitle" class="text-[24px] font-bold text-white">Title</h2>
+                        class="bg-primary/20 text-primary text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded mb-2 inline-block border border-primary/20">Category</span>
+                    <h2 id="modalBlogTitle" class="text-3xl font-bold text-white leading-tight">Title</h2>
                 </div>
             </div>
-            <div class="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar bg-[#0a0a0a]">
+            <div class="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar bg-[#0a0a0a]">
                 <div class="max-w-3xl mx-auto space-y-8">
                     <div id="modalBlogIntro"
-                        class="text-white/70 text-[18px] leading-relaxed font-light first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-3 first-letter:float-left">
+                        class="text-white/70 text-lg leading-relaxed font-light first-letter:text-6xl first-letter:font-bold first-letter:text-primary first-letter:mr-4 first-letter:float-left">
                         <!-- Intro text -->
                     </div>
                     <div class="space-y-6">
-                        <h4 class="text-primary text-[20px] font-black uppercase tracking-widest">Unforgettable
+                        <h4 class="text-primary text-xl font-black uppercase tracking-widest">Unforgettable
                             Highlights</h4>
-                        <ul id="modalPointsList" class="space-y-4 text-[18px] text-white/70 font-medium">
+                        <ul id="modalPointsList" class="space-y-4 text-lg text-white/70 font-medium">
                             <!-- Points injected via JS -->
                         </ul>
                     </div>
                     <div id="modalBlogOutro"
-                        class="text-white/70 text-[18px] leading-relaxed font-light border-l-4 border-primary/30 pl-8 italic">
+                        class="text-white/70 text-lg leading-relaxed font-light border-l-4 border-primary/30 pl-8 italic">
                         <!-- Outro text -->
                     </div>
                     <div class="pt-8 flex flex-wrap gap-4 border-t border-white/5">
                         <button onclick="closeBlog()"
-                            class="bg-white/10 text-white px-8 py-3.5 rounded-xl font-bold text-sm hover:bg-white/20 transition-all">Back
+                            class="bg-white/10 text-white px-10 py-4 rounded-2xl font-bold text-sm hover:bg-white/20 transition-all border border-white/5">Back
                             to Wonders</button>
                         <button
                             onclick="closeBlog(); openModal('Plan My Trip to ' + document.getElementById('modalBlogTitle').textContent.split(':')[0])"
-                            class="bg-primary text-white px-12 py-3.5 rounded-xl font-bold text-sm hover:scale-105 transition-all shadow-xl shadow-primary/20 flex items-center gap-2">
-                            <i class="fas fa-calendar-check text-[10px]"></i> Plan My Trip
+                            class="bg-primary text-white px-12 py-4 rounded-2xl font-bold text-sm hover:scale-105 transition-all shadow-xl shadow-primary/20 flex items-center gap-3">
+                            <i class="fas fa-calendar-check"></i> Plan My Trip
                         </button>
                     </div>
                 </div>
@@ -1884,124 +1888,28 @@
         </div>
     </div>
     <script>
-        // ── Database Viewer ──────────────────────────────────────────
+        // Administration logic is now centrally managed in main.js
         function showDBViewer(store = 'bookings') {
-            const m = document.getElementById('db-modal');
-            m.style.display = 'flex';
-            m.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            loadDBStore(store, document.querySelector(`[onclick^="loadDBStore('${store}'"]`));
+            if (typeof window.showDBViewer === 'function') {
+                window.showDBViewer(store);
+            } else {
+                const m = document.getElementById('db-modal');
+                if (m) {
+                    m.style.display = 'flex';
+                    m.classList.remove('hidden');
+                }
+            }
         }
         function closeDBViewer() {
-            const m = document.getElementById('db-modal');
-            m.style.display = 'none';
-            m.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        async function loadDBStore(store, btn) {
-            document.querySelectorAll('.db-tab').forEach(b => b.classList.add('text-white/60'));
-            if (btn) btn.classList.remove('text-white/60');
-            const content = document.getElementById('db-viewer-content');
-            content.innerHTML = `<div class="p-20 text-center text-white/20 italic">Scanning database node...</div>`;
-            try {
-                const data = await loadAll(store);
-                if (!data.length) {
-                    content.innerHTML = `<div class="p-20 text-center text-white/20 italic">No records in "${store}" node.</div>`;
-                    return;
+            if (typeof window.closeDBViewer === 'function') {
+                window.closeDBViewer();
+            } else {
+                const m = document.getElementById('db-modal');
+                if (m) {
+                    m.style.display = 'none';
+                    m.classList.add('hidden');
                 }
-
-                if (store === 'newsletter' && isUserAdmin()) {
-                    content.innerHTML = '<div class="flex justify-end mb-4"><button onclick="showBroadcastModal()" class="bg-primary hover:bg-white text-black transition-colors px-4 py-2 rounded-xl font-bold text-xs"><i class="fas fa-paper-plane mr-2"></i> Broadcast Email</button></div>' + content.innerHTML;
-                }
-                content.innerHTML += `<div class="space-y-4">` + data.reverse().map(i => `
-                <div class="glass-dark p-6 rounded-3xl border border-white/10 group relative">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-[10px] bg-white/5 px-2 py-0.5 rounded text-white/40 uppercase font-black">Record #${i.id}</span>
-                        <span class="text-[10px] text-white/30 font-bold">${new Date(i.timestamp || Date.now()).toLocaleString()}</span>
-                    </div>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
-                        ${Object.entries(i).map(([k, v]) => k !== 'id' && k !== 'timestamp' ? `<div><span class="block text-[10px] uppercase tracking-widest text-white/30 mb-1">${k}</span><span class="text-white/80 font-bold">${v}</span></div>` : '').join('')}
-                    </div>
-                </div>
-            `).join('') + `</div>`;
-            } catch (e) { content.innerHTML = `<div class="p-20 text-center text-white/20 italic">Error reading store.</div>`; }
-        }
-
-        // ── Broadcast Logic ──────────────────────────────────────────
-        function showBroadcastModal() {
-            const m = document.getElementById('broadcast-modal');
-            m.style.display = 'flex'; m.classList.remove('hidden');
-            document.getElementById('broadcast-msg').value = '';
-        }
-        function closeBroadcastModal() {
-            const m = document.getElementById('broadcast-modal');
-            m.style.display = 'none'; m.classList.add('hidden');
-        }
-        async function sendBroadcast() {
-            const msg = document.getElementById('broadcast-msg').value.trim();
-            if (!msg) { toast('Please enter a message', 'warning'); return; }
-            const btn = document.getElementById('broadcast-btn');
-            btn.disabled = true; btn.textContent = 'Sending...';
-
-            try {
-                const subs = await loadAll('newsletter');
-                if (!subs.length) { toast('No subscribers found.', 'error'); btn.disabled = false; btn.textContent = 'Send Broadcast'; return; }
-
-                console.group('--- Inline Newsletter Broadcast ---');
-                let sentCount = 0;
-                let failedCount = 0;
-                const promises = subs.map(sub => {
-                    if (sub.email) {
-                        // --- DOUBLE TRY FALLBACK ---
-                        const params = {
-                            name: 'Subscriber',
-                            user_name: 'Subscriber',
-                            from_name: 'Leeza Travels',
-                            from_email: 'Leezatravelslk@gmail.com',
-                            to_email: sub.email,
-                            email: sub.email,
-                            // Match exact template variable names
-                            broadcast_subject: 'Leeza Travels Update',
-                            broadcast_message: msg,
-                            // Fallback variables
-                            subject: 'Leeza Travels Update',
-                            title: 'Leeza Travels Update',
-                            message: msg,
-                            msg: msg,
-                            body: msg,
-                            content: msg,
-                            timestamp: new Date().toLocaleString()
-                        };
-
-                        return emailjs.send('service_cqv30sa', 'template_mhs62hl', params, 'tRG6iOeYylZBAVmsa')
-                            .then(res => {
-                                console.log(`✅ Sent to ${sub.email}:`, res);
-                                sentCount++;
-                            }).catch(e => {
-                                console.error(`❌ Failed for ${sub.email}:`, e);
-                                failedCount++;
-                            });
-                    }
-                });
-
-                await Promise.all(promises);
-                console.log(`Broadcast Finished! Sent: ${sentCount}, Failed: ${failedCount}`);
-                console.groupEnd();
-
-                if (sentCount > 0) {
-                    toast(`Broadcast finished! Sent: ${sentCount}, Failed: ${failedCount} 📧`, sentCount === subs.length ? 'success' : 'warning');
-                    closeBroadcastModal();
-                } else {
-                    toast(`Broadcast failed for all ${failedCount} subscribers.`, 'error');
-                    btn.disabled = false; btn.textContent = 'Send Broadcast';
-                }
-                toast(`Sent broadcast to ${sentCount} subscribers!`, 'success');
-                closeBroadcastModal();
-            } catch (e) {
-                toast('Failed to fetch subscribers.', 'error');
             }
-            btn.disabled = false; btn.textContent = 'Send Broadcast';
         }
 
         // ── Info Modal Logic ──────────────────────────────────────────
