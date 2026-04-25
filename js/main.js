@@ -2481,6 +2481,13 @@ function syncLanguageUI() {
     if (flagEl) flagEl.textContent = flag;
     if (labelEl) labelEl.textContent = label;
 
+    // Trigger Actual Translation automatically on page load
+    if (langCode !== 'en') {
+      setTimeout(() => {
+        selectLanguage(langCode, flag, label);
+      }, 1200);
+    }
+
     // Update active state in dropdown
     document.querySelectorAll('#lang-dropdown .lang-item').forEach(item => {
       item.classList.remove('active');
