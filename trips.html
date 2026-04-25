@@ -1598,13 +1598,13 @@
         </footer>
     </div><!-- /#page-scroll-wrap -->
     <!-- DETAIL MODAL -->
-    <div id="detail-modal" class="fixed inset-0 z-[210] grid place-items-center p-4 md:p-8 hidden">
-        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeDetailModal()"></div>
+    <div id="detail-modal" class="fixed inset-0 z-[1000] grid place-items-center p-4 md:p-8 hidden">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeDetailModal()"></div>
         <div
-            class="relative glass-dark rounded-[2.5rem] md:rounded-[3.5rem] w-full max-w-7xl h-[90vh] overflow-hidden z-10 animate-modalZoom flex flex-col border border-white/10 shadow-3xl mx-auto">
+            class="relative glass-dark rounded-[2.5rem] md:rounded-[3.5rem] w-full max-w-7xl h-[90vh] overflow-hidden z-10 animate-fadeUp flex flex-col border border-white/10 shadow-3xl mx-auto">
             <!-- Close button -->
             <button onclick="closeDetailModal()"
-                class="absolute top-8 right-8 w-16 h-14 rounded-full glass flex items-center justify-center text-white/50 hover:text-white text-2xl z-30 transition-all hover:rotate-90">
+                class="absolute top-8 right-8 w-14 h-14 rounded-full glass flex items-center justify-center text-white/50 hover:text-white text-2xl z-30 transition-all hover:rotate-90">
                 <i class="fas fa-times"></i>
             </button>
             <!-- Main Content Container (No Sidebar) -->
@@ -1792,33 +1792,32 @@
     </div>
     <!-- TRACK BOOKING MODAL -->
     <div id="track-modal" class="fixed inset-0 z-[1100] items-center justify-center p-4 hidden" style="display:none">
-        <div class="absolute inset-0 bg-black/85 backdrop-blur-lg" onclick="closeTrackModal()"></div>
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeTrackModal()"></div>
         <div
             class="relative glass-dark rounded-[2.5rem] w-full max-w-lg overflow-hidden z-10 animate-fadeUp border border-white/10 shadow-2xl">
             <div class="p-8 md:p-10">
                 <button onclick="closeTrackModal()"
-                    class="absolute top-6 right-6 text-white/50 hover:text-white text-xl"><i
+                    class="absolute top-8 right-8 text-white/40 hover:text-white text-xl transition-all hover:rotate-90"><i
                         class="fas fa-times"></i></button>
-                <div class="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center mb-4 mx-auto">
-                    <i class="fas fa-search-location text-primary text-xl"></i>
+                <div class="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <i class="fas fa-search-location text-primary text-2xl"></i>
                 </div>
-                <h2 class="text-2xl font-bold font-playfair mb-2 text-white text-center">Track Your <em
+                <h2 class="text-3xl font-bold font-playfair mb-2 text-white text-center italic">Track Your <em
                         class="gtext">Booking</em></h2>
-                <p class="text-white/40 text-xs text-center mb-8">Enter your Email to view all your adventure history.
-                </p>
+                <p class="text-white/40 text-xs text-center mb-8">Enter your credentials to view your journey history.</p>
                 <div class="space-y-4 mb-8">
                     <div class="relative">
                         <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-white/20"></i>
                         <input type="email" id="track-email" placeholder="Enter Your Email"
-                            class="w-full bg-white/5 border border-white/10 rounded-2xl pl-11 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all">
+                            class="w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all">
                     </div>
                     <div class="relative">
                         <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-white/20"></i>
                         <input type="password" id="track-password" placeholder="Enter Your Password"
-                            class="w-full bg-white/5 border border-white/10 rounded-2xl pl-11 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all">
+                            class="w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-all">
                     </div>
                     <button onclick="trackBookings()"
-                        class="w-full bg-gradient-to-r from-primary to-accent py-4 rounded-2xl font-bold hover:scale-[1.02] transition-all shadow-lg shadow-primary/20">Find
+                        class="w-full bg-gradient-to-r from-primary to-orange-500 py-4 rounded-2xl font-bold hover:scale-[1.02] transition-all shadow-lg shadow-primary/20">Find
                         My Bookings</button>
                 </div>
                 <div id="track-results" class="space-y-4 max-h-64 overflow-y-auto pr-2 custom-scrollbar hidden">
@@ -1896,26 +1895,35 @@
     </div>
     <!-- Broken modal removed -->
     <!-- BROADCAST MODAL -->
-    <div id="broadcast-modal" class="fixed inset-0 z-[1100] flex items-center justify-center p-4 hidden">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeBroadcastModal()"></div>
-        <div class="glass-dark border border-white/10 rounded-2xl p-8 relative z-10 w-full max-w-lg shadow-2xl">
+    <div id="broadcast-modal" class="fixed inset-0 z-[1200] flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeBroadcastModal()"></div>
+        <div class="glass-dark border border-white/10 rounded-[2.5rem] p-8 relative z-10 w-full max-w-lg shadow-2xl animate-fadeUp">
             <button type="button" onclick="closeBroadcastModal()"
-                class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fas fa-times"></i></button>
-            <h3 class="text-xl font-bold mb-4">Broadcast Email</h3>
-            <p class="text-sm text-white/50 mb-4">Send an email broadcast to ALL newsletter subscribers.</p>
+                class="absolute top-8 right-8 text-white/50 hover:text-white text-xl transition-all hover:rotate-90"><i class="fas fa-times"></i></button>
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-xl">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <div>
+                    <span class="text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] block">Admin Tools</span>
+                    <h3 class="text-2xl font-bold text-white">Broadcast Email</h3>
+                </div>
+            </div>
+            <p class="text-sm text-white/40 mb-6 italic leading-relaxed">Send an official broadcast message to all your newsletter subscribers instantly.</p>
             <textarea id="broadcast-msg"
-                class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white text-sm focus:outline-none focus:border-primary min-h-[120px]"
-                placeholder="Type your broadcast message..."></textarea>
+                class="w-full bg-white/5 border border-white/10 rounded-[1.5rem] p-5 text-white text-sm focus:outline-none focus:border-blue-500/50 min-h-[180px] resize-none transition-all mb-6 placeholder-white/20"
+                placeholder="Compose your broadcast message here..."></textarea>
             <button onclick="sendBroadcast()" id="broadcast-btn"
-                class="w-full bg-primary text-black font-bold py-3 rounded-xl mt-4 hover:opacity-90 transition-all">Send
-                Broadcast</button>
+                class="w-full bg-blue-500 text-white font-bold py-4 rounded-2xl hover:opacity-90 transition-all shadow-xl shadow-blue-500/20 flex items-center justify-center gap-2">
+                <i class="fas fa-paper-plane"></i> Send Broadcast
+            </button>
         </div>
     </div>
-    <!-- BOOKING MODAL (Standardized from index.html) -->
-    <div id="booking-modal" class="fixed inset-0 z-[99999] flex items-center justify-center p-4 hidden"
-        style="background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);">
+    <!-- BOOKING MODAL (Standardized) -->
+    <div id="booking-modal" class="fixed inset-0 z-[99999] flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeModal()"></div>
         <div id="booking-modal-box"
-            class="relative w-full max-w-2xl glass-dark rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden animate-modalZoom custom-scrollbar"
+            class="relative w-full max-w-2xl glass-dark rounded-[2.5rem] border border-white/10 shadow-3xl overflow-hidden animate-fadeUp custom-scrollbar z-10"
             style="max-height:90vh;overflow-y:auto;">
             <!-- Header -->
             <div class="px-8 pt-8 pb-6 border-b border-white/10 flex items-center justify-between">
@@ -2109,10 +2117,10 @@
         </div>
     </div>
     <!-- AUTH MODAL -->
-    <div id="auth-modal" class="fixed inset-0 z-[200] items-center justify-center p-4 hidden" style="display:none">
-        <div class="absolute inset-0 bg-black/95 backdrop-blur-2xl" onclick="toggleAuthModal()"></div>
+    <div id="auth-modal" class="fixed inset-0 z-[2000] items-center justify-center p-4 hidden" style="display:none">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="toggleAuthModal()"></div>
         <div
-            class="relative glass-dark rounded-[2.5rem] w-full max-w-md overflow-hidden z-10 animate-modalZoom border border-white/10 shadow-3xl">
+            class="relative glass-dark rounded-[2.5rem] w-full max-w-md overflow-hidden z-10 animate-fadeUp border border-white/10 shadow-3xl">
             <div class="p-8 md:p-10">
                 <button onclick="toggleAuthModal()"
                     class="absolute top-8 right-8 text-white/40 hover:text-white text-xl transition-all hover:rotate-90"><i
@@ -2346,7 +2354,8 @@
             }, 3000);
         });
     </script>
-    <script src="js/main.js"></script>
+</body>
+</html>
 
     <!-- Mobile Menu Overlay -->
     <div id="mob" class="lg:hidden fixed inset-0 z-[100000] flex flex-col items-start justify-start pt-24 px-8"
